@@ -1,3 +1,5 @@
+import { FaGithub } from "react-icons/fa";
+
 const Projects = () => {
     return (
         <section id="projects" className="relative py-32 px-16">
@@ -30,8 +32,31 @@ const Projects = () => {
                     </div>
                 </div>
                 <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
-                    <div className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300">↗</div>
+
+                    <div className="flex gap-3">
+
+                        <a
+                            href="https://github.com/mohanishp9/QKart_Backend"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                        >
+                            <FaGithub />
+                        </a>
+
+                        <a
+                            href="https://qkart-mohanish-pingales-projects.vercel.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                        >
+                            ↗
+                        </a>
+
+                    </div>
+
                     <span className="text-[0.55rem] tracking-[0.2em] text-dim">2024</span>
+
                 </div>
             </div>
 
@@ -55,8 +80,31 @@ const Projects = () => {
                     </div>
                 </div>
                 <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
-                    <div className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300">↗</div>
+
+                    <div className="flex gap-3">
+
+                        <a
+                            href="https://github.com/mohanishp9/News-Board"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                        >
+                            <FaGithub />
+                        </a>
+
+                        <a
+                            href="https://mboard-mohanish-pingales-projects.vercel.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                        >
+                            ↗
+                        </a>
+
+                    </div>
+
                     <span className="text-[0.55rem] tracking-[0.2em] text-dim">2024</span>
+
                 </div>
             </div>
 
@@ -80,8 +128,31 @@ const Projects = () => {
                     </div>
                 </div>
                 <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
-                    <div className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300">↗</div>
+
+                    <div className="flex gap-3">
+
+                        <a
+                            href="https://github.com/mohanishp9/MTripDynamic"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                        >
+                            <FaGithub />
+                        </a>
+
+                        <a
+                            href="https://mtripdynamic-mohanish-pingales-projects.vercel.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                        >
+                            ↗
+                        </a>
+
+                    </div>
+
                     <span className="text-[0.55rem] tracking-[0.2em] text-dim">2024</span>
+
                 </div>
             </div>
         </section>
