@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Mono, Playfair_Display, Cormorant_Garamond } from "next/font/google";
+import { Space_Mono, Playfair_Display, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const playfair = Playfair_Display({
     subsets: ["latin"],
@@ -35,7 +25,7 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: "Portfolio | Mohanish Pingale",
-  description: "Full Stack Developer",
+  description: "Editorial portfolio for Mohanish Pingale, a full stack developer building polished, high-performing digital products.",
 };
 
 export default function RootLayout({

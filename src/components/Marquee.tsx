@@ -1,57 +1,22 @@
-import React from 'react';
-
-const skills = [
-    "HTML",
-    "CSS",
-    "Javascript",
-    "TypeScript",
-    "Tailwind",
-    "Bootstrap",
-    "React",
-    "NextJS",
-    "Node.js",
-    "Express.js",
-    "MongoDB",
-    "Mongoose",
-    "Docker",
-    "HTTP",
-    "REST API",
-    "Git",
-    "Postman",
+const items = [
+    "Design systems with taste",
+    "Interfaces tuned for motion",
+    "Backend foundations that hold",
+    "Case-study thinking with build speed",
+    "Accessible, responsive product craft",
 ];
 
 const Marquee = () => {
     return (
-        <section
-            className="
-                border-y border-white/10
-                py-5
-                overflow-hidden
-                bg-white/[0.02]
-            "
-        >
-            <div
-                className="
-                    flex whitespace-nowrap
-                    animate-marquee
-                "
-            >
-                {[...skills, ...skills].map((skill, i) => (
-                    <span
-                        key={i}
-                        className="
-                            inline-flex items-center
-                            px-8
-                            text-[0.6rem]
-                            tracking-[0.3em]
-                            uppercase
-                            text-dim
-                        "
-                    >
-                        <span className="text-silver text-xl mr-4">·</span>
-                            {skill}
-                    </span>
-                ))}
+        <section className="border-y border-[var(--line)] bg-white/[0.02]">
+            <div className="mx-auto w-[min(100%,var(--page-max))] overflow-hidden px-[var(--section-pad-x)] py-5">
+                <div className="ticker-track">
+                    {[...items, ...items].map((item, index) => (
+                        <span key={`${item}-${index}`} className="ticker-item">
+                            {item}
+                        </span>
+                    ))}
+                </div>
             </div>
         </section>
     );

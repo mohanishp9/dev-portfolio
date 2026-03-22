@@ -1,79 +1,70 @@
+const capabilities = [
+    {
+        title: "Interface direction",
+        subtitle: "Building UIs that feel considered, responsive, and steady.",
+        items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux", "Responsive UI"],
+    },
+    {
+        title: "Application backbone",
+        subtitle: "Shaping APIs, auth flows, and service logic that can grow cleanly.",
+        items: ["Node.js", "Express.js", "REST APIs", "JWT auth", "Modular architecture"],
+    },
+    {
+        title: "Data and delivery",
+        subtitle: "Connecting products to reliable storage, deployment, and team workflows.",
+        items: ["MongoDB", "Mongoose", "Docker", "CI/CD", "GitHub", "Postman"],
+    },
+];
+
 const Skills = () => {
     return (
-        <section id="skills" className="relative py-32 px-16 bg-white/[0.01] border-t border-b border-white/5">
-            <div className="flex items-center gap-6 mb-20 text-[0.70rem] tracking-[0.4em] uppercase text-[var(--dim)]">
-                <span className="text-[0.7rem] italic font-[Playfair_Display] text-[var(--silver)]">
-                    02
-                </span>
-                Skills & Stack
-                <span className="flex-1 h-px bg-white/10 max-w-[200px]" />
+        <section id="skills" className="section-shell">
+            <div className="section-intro reveal reveal-up">
+                <span className="section-index">02</span>
+                Capabilities
+                <span className="section-line" />
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-[1px] bg-white/10">
-                <div className="skill-category reveal-scale">
-                    <span className="text-2xl mb-6 block">⬡</span>
-                    <div className="font-playfair text-[1.3rem] font-bold mb-[0.3rem]">Frontend</div>
-                    <div className="text-[0.55rem] tracking-[0.2em] uppercase text-dim mb-8">Interface Engineering</div>
-                    <div className="flex flex-wrap gap-2">
-                        <span className="skill-tag">React</span>
-                        <span className="skill-tag">Next.js</span>
-                        <span className="skill-tag">Javascript</span>
-                        <span className="skill-tag">Typescript</span>
-                        <span className="skill-tag">Redux</span>
-                        <span className="skill-tag">Tailwind</span>
-                        <span className="skill-tag">Bootstrap</span>
-                    </div>
+
+            <div className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+                <div className="reveal reveal-left">
+                    <h2 className="section-title">
+                        What I bring to
+                        <br />
+                        a product <em>team.</em>
+                    </h2>
                 </div>
-                <div className="skill-category reveal-scale">
-                    <span className="text-2xl mb-6 block">⬡</span>
-                    <div className="font-playfair text-[1.3rem] font-bold mb-[0.3rem]">Backend</div>
-                    <div className="text-[0.55rem] tracking-[0.2em] uppercase text-dim mb-8">Server & API Architecture</div>
-                    <div className="flex flex-wrap gap-2">
-                        <span className="skill-tag">Node.js</span>
-                        <span className="skill-tag">Express.js</span>
-                        <span className="skill-tag">REST APIs</span>
-                        <span className="skill-tag">Json Web Token</span>
-                    </div>
+                <div className="reveal reveal-right">
+                    <p className="section-copy max-w-[38rem]">
+                        Instead of treating skills as a long checklist, I think in terms of outcomes: shaping
+                        interface quality, strengthening the application core, and making delivery dependable from
+                        prototype to production.
+                    </p>
                 </div>
-                <div className="skill-category reveal-scale">
-                    <span className="text-2xl mb-6 block">⬡</span>
-                    <div className="font-playfair text-[1.3rem] font-bold mb-[0.3rem]">Data</div>
-                    <div className="text-[0.55rem] tracking-[0.2em] uppercase text-dim mb-8">Databases & Storage</div>
-                    <div className="flex flex-wrap gap-2">
-                        <span className="skill-tag">MongoDB</span>
-                        <span className="skill-tag">MongoDB Atlas</span>
-                        <span className="skill-tag">Mongoose ODM</span>
-                        <span className="skill-tag">MongoDB queries</span>
-                    </div>
-                </div>
-                <div className="skill-category reveal-scale">
-                    <span className="text-2xl mb-6 block">⬡</span>
-                    <div className="font-playfair text-[1.3rem] font-bold mb-[0.3rem]">DevOps</div>
-                    <div className="text-[0.55rem] tracking-[0.2em] uppercase text-dim mb-8">Cloud & Infrastructure</div>
-                    <div className="flex flex-wrap gap-2">
-                        <span className="skill-tag">Docker</span>
-                        <span className="skill-tag">CI/CD</span>
-                    </div>
-                </div>
-                <div className="skill-category reveal-scale">
-                    <span className="text-2xl mb-6 block">⬡</span>
-                    <div className="font-playfair text-[1.3rem] font-bold mb-[0.3rem]">Testing</div>
-                    <div className="text-[0.55rem] tracking-[0.2em] uppercase text-dim mb-8">Quality & Reliability</div>
-                    <div className="flex flex-wrap gap-2">
-                        <span className="skill-tag">Jest</span>
-                        <span className="skill-tag">Load Testing</span>
-                    </div>
-                </div>
-                <div className="skill-category reveal-scale">
-                    <span className="text-2xl mb-6 block">⬡</span>
-                    <div className="font-playfair text-[1.3rem] font-bold mb-[0.3rem]">Other</div>
-                    <div className="text-[0.55rem] tracking-[0.2em] uppercase text-dim mb-8">Tooling & Practices</div>
-                    <div className="flex flex-wrap gap-2">
-                        <span className="skill-tag">Git</span>
-                        <span className="skill-tag">GitHub</span>
-                        <span className="skill-tag">Postman</span>
-                        <span className="skill-tag">Figma</span>
-                    </div>
-                </div>
+            </div>
+
+            <div className="grid gap-5 lg:grid-cols-3">
+                {capabilities.map((capability, index) => (
+                    <article
+                        key={capability.title}
+                        className="skill-card reveal reveal-up rounded-[1.75rem] p-7"
+                        data-reveal-delay={index * 110}
+                    >
+                        <p className="micro-label mb-4">0{index + 1}</p>
+                        <h3 className="mb-3 font-playfair text-[1.8rem] font-semibold tracking-[-0.03em] text-[var(--paper)]">
+                            {capability.title}
+                        </h3>
+                        <p className="mb-6 font-cormorant text-[1.15rem] leading-[1.65] text-[var(--mist)]">
+                            {capability.subtitle}
+                        </p>
+                        <div className="flex flex-wrap gap-2.5">
+                            {capability.items.map((item) => (
+                                <span key={item} className="skill-pill">
+                                    {item}
+                                </span>
+                            ))}
+                        </div>
+                    </article>
+                ))}
             </div>
         </section>
     );

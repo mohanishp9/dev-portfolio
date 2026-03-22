@@ -1,89 +1,103 @@
 import Link from "next/link";
 
+const heroStats = [
+    { value: "6+", label: "Projects shipped end-to-end" },
+    { value: "2+", label: "Years refining product craft" },
+    { value: "100%", label: "Focus on polish and performance" },
+];
+
+const highlights = [
+    "Full-stack product engineering",
+    "Interface systems with restraint",
+    "Performance-minded interaction design",
+];
+
 const Hero = () => {
     return (
-        <section
-            className="
-                min-h-screen
-                flex flex-col justify-end
-                px-16 pb-24 pt-32
-                relative overflow-hidden
-            "
-        >
-            <div className="hero-bg-text">DEV</div>
+        <section className="section-shell min-h-screen overflow-hidden pt-[clamp(7rem,14vw,10rem)]">
+            <div className="hero-grid-line" />
+            <div className="hero-orb right-[-4rem] top-[7rem]" />
 
-            <div
-                className="
-                    text-[0.7rem] uppercase tracking-[0.4em] text-silver mb-8
-                    opacity-0 animate-fade-up [animate-delay:0.3s]
-                "
-            >
-                Full Stack Developer · Based in India
-            </div>
+            <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+                <div className="space-y-8">
+                    <div className="eyebrow reveal reveal-up">Full stack developer based in India</div>
 
-            <h1
-                className="
-                    font-playfair font-black leading-[0.9]
-                    tracking-[-0.03em] mb-2
-                    text-[clamp(56px,9vw,130px)]
-                    opacity-0 animate-fade-up [animation-delay:0.5s]
-                "
-            >
-                Mohanish <br />
-                <span className="italic text-accent">Pingale</span>
-            </h1>
-            {/* Role tagline */}
-            <p
-                className="
-                    font-cormorant font-[300] italic text-silver
-                    text-[clamp(20px,3vw,40px)] tracking-[0.02em] mb-16
-                    opacity-0 animate-fade-up [animation-delay:0.7s]
-                "
-            >
-                Architecting digital experiences at scale
-            </p>
+                    <div className="reveal reveal-up" data-reveal-delay="90">
+                        <p className="mb-5 max-w-[16rem] text-[0.72rem] uppercase tracking-[0.34em] text-[var(--metal)]">
+                            Editorial portfolio / selected craft / product-first systems
+                        </p>
+                        <h1 className="font-playfair text-[clamp(4.4rem,12vw,8.8rem)] font-black leading-[0.88] tracking-[-0.065em] text-[var(--paper)]">
+                            Mohanish
+                            <br />
+                            <span className="italic text-[var(--champagne)]">Pingale</span>
+                        </h1>
+                    </div>
 
-            {/* Bottom row: bio + CTAs */}
-            <div
-                className="
-                    flex justify-between items-end
-                    opacity-0 animate-fade-up [animation-delay:0.9s]
-                "
-            >
-                <p className="
-                    max-w-[380px]
-                    font-cormorant
-                    text-[1.10rem]
-                    leading-[1.7]
-                    text-silver
-                    font-[300]
-                    tracking-[0.02em]
-                    ">
-                    I craft robust systems and elegant interfaces bridging the gap between complex engineering and seamless user experience with full-stack mastery.
-                </p>
+                    <div className="reveal reveal-up max-w-[44rem]" data-reveal-delay="180">
+                        <p className="font-cormorant text-[clamp(1.55rem,3vw,2.45rem)] italic leading-[1.2] text-[var(--mist)]">
+                            Building products that feel calm on the surface and deeply considered underneath.
+                        </p>
+                    </div>
 
-                <div className="flex flex-col items-end gap-6">
-                    <Link href="#projects" className="btn-primary">
-                        <span>View My Work</span>
-                    </Link>
-                    <Link href="#contact" className="btn-ghost">
-                        Get In Touch
-                    </Link>
+                    <div
+                        className="reveal reveal-up grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end"
+                        data-reveal-delay="270"
+                    >
+                        <p className="section-copy">
+                            I design and build robust digital experiences across frontend, backend, and system design.
+                            My work aims for a quiet kind of confidence: interfaces that feel effortless, interactions
+                            that feel smooth, and codebases that scale with clarity.
+                        </p>
+
+                        <div className="flex flex-wrap gap-3">
+                            <Link href="#projects" className="btn-primary" data-hover>
+                                <span>Explore selected work</span>
+                            </Link>
+                            <Link href="#contact" className="btn-secondary" data-hover>
+                                Start a conversation
+                            </Link>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            {/* Scroll indicator (bottom right) */}
-            <div
-                className="
-                    absolute right-16 bottom-25
-                    flex items-center gap-4
-                    text-[0.55rem] uppercase tracking-[0.3em] text-dim
-                    opacity-0 animate-fade-in [animation-delay:1.5s]
-                "
-                style={{ writingMode: "vertical-rl" }}
-            >
-                <div className="hero-scroll-line" />
-                Scroll
+                <div className="reveal reveal-right luxe-panel relative overflow-hidden rounded-[2rem] p-6 sm:p-8" data-reveal-delay="250">
+                    <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[var(--line-strong)] to-transparent" />
+
+                    <div className="mb-8 flex items-start justify-between gap-6">
+                        <div>
+                            <p className="micro-label mb-3">Current focus</p>
+                            <h2 className="font-playfair text-[clamp(2rem,4vw,3rem)] font-bold leading-[0.98] tracking-[-0.04em]">
+                                Interfaces with substance
+                            </h2>
+                        </div>
+                        <span className="rounded-full border border-[var(--line)] px-3 py-1 text-[0.58rem] uppercase tracking-[0.22em] text-[var(--metal)]">
+                            2026
+                        </span>
+                    </div>
+
+                    <div className="mb-8 space-y-3">
+                        {highlights.map((item) => (
+                            <div
+                                key={item}
+                                className="flex items-center gap-3 border-b border-white/6 pb-3 last:border-b-0 last:pb-0"
+                            >
+                                <span className="h-2 w-2 rounded-full bg-[var(--champagne)]" />
+                                <span className="font-cormorant text-[1.18rem] text-[var(--mist)]">{item}</span>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className="impact-strip rounded-[1.3rem]">
+                        {heroStats.map((stat) => (
+                            <div key={stat.label} className="impact-item">
+                                <span className="metric-value">{stat.value}</span>
+                                <span className="block max-w-[11rem] text-[0.68rem] uppercase tracking-[0.22em] text-[var(--metal)]">
+                                    {stat.label}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </section>
     );

@@ -1,34 +1,58 @@
-import React from 'react';
+const contactLinks = [
+    { label: "GitHub", href: "https://github.com/mohanishp9" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/mohanish-pingale-507339261/" },
+    { label: "Resume", href: "/Mohanish_Pingale_FullStack_Developer_Resume.pdf" },
+];
 
 const Contact = () => {
-    const socialClass =
-        "text-[0.6rem] tracking-[0.25em] uppercase text-dim transition-colors duration-300 px-6 py-[0.8rem] border border-white/[0.06] hover:text-white hover:border-white/[0.2]";
     return (
-        <section
-            id="contact"
-            className="bg-near-black border-t border-white/[0.05] text-center px-8 py-28 md:px-16 md:py-40"
-        >
-            <div className="text-[0.6rem] tracking-[0.4em] uppercase text-dim mb-10 reveal-up">
-                Let's create something remarkable
-            </div>
+        <section id="contact" className="section-shell pb-[clamp(5rem,9vw,7rem)]">
+            <div className="contact-card reveal reveal-up overflow-hidden rounded-[2.2rem] p-8 sm:p-12">
+                <div className="mb-10 flex flex-col gap-6 border-b border-white/8 pb-8 lg:flex-row lg:items-end lg:justify-between">
+                    <div>
+                        <div className="eyebrow mb-5">Contact</div>
+                        <h2 className="section-title max-w-[10ch]">
+                            Let&apos;s make
+                            <br />
+                            something feel <em>effortless.</em>
+                        </h2>
+                    </div>
+                    <p className="section-copy max-w-[31rem]">
+                        If you are building a product that needs sharper interaction, cleaner engineering, or a more
+                        intentional frontend presence, I would love to hear what you are working on.
+                    </p>
+                </div>
 
-            <h2 className="font-playfair text-[clamp(48px,8vw,110px)] font-black leading-[0.95] tracking-[-0.03em] mb-12 reveal-up">
-                Let's<br />
-                <em className="italic text-accent">Talk.</em>
-            </h2>
-            <div>
-                <a
-                    href="mailto:mpingale31@gmail.com"
-                    className="inline-block font-cormorant text-[clamp(18px,2.5vw,28px)] font-light text-silver no-underline tracking-[0.05em] mb-20 relative transition-colors duration-300 hover:text-white
-                    after:content-[''] after:absolute after:left-0 after:bottom-[-4px] after:w-full after:h-[1px] after:bg-silver after:transition-colors after:duration-300 hover:after:bg-white reveal-up"
-                >
-                    mpingale31@gmail.com
-                </a>
-            </div>
-            <div className="flex flex-wrap justify-center gap-6 mt-8 reveal-up">
-                <a href="https://github.com/mohanishp9" className={socialClass} target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://www.linkedin.com/in/mohanish-pingale-507339261/" className={socialClass} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="/Mohanish_Pingale_FullStack_Developer_Resume.pdf" className={socialClass} target="_blank" rel="noopener noreferrer">Resume ↗</a>
+                <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+                    <div className="space-y-6">
+                        <a
+                            href="mailto:mpingale31@gmail.com"
+                            className="inline-block font-playfair text-[clamp(2rem,5vw,4rem)] font-bold tracking-[-0.04em] text-[var(--paper)] no-underline transition-opacity duration-300 hover:opacity-80"
+                            data-hover
+                        >
+                            mpingale31@gmail.com
+                        </a>
+                        <p className="font-cormorant text-[1.18rem] leading-[1.65] text-[var(--mist)]">
+                            Available for internships, freelance collaboration, and product-focused frontend or
+                            full-stack roles.
+                        </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-3">
+                        {contactLinks.map((link) => (
+                            <a
+                                key={link.label}
+                                href={link.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="social-link"
+                                data-hover
+                            >
+                                {link.label}
+                            </a>
+                        ))}
+                    </div>
+                </div>
             </div>
         </section>
     );

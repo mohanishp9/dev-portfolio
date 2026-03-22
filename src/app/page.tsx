@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { initAnimations } from "@/utils/animations";
 import { initReveal } from "@/utils/reveal"
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -15,17 +14,12 @@ import Footer from "@/components/Footer";
 
 
 export default function Home() {
-
-    // useEffect(() => {
-    //     initAnimations();
-    // }, []);
-
     useEffect(() => {
-        initReveal()
+        return initReveal();
     }, [])
 
   return (
-    <>
+    <div className="page-shell">
       <Navbar/>
       <Hero/>
       <Marquee />
@@ -35,6 +29,6 @@ export default function Home() {
       <Experience />
       <Contact />
       <Footer/>
-    </>
+    </div>
   );
 }

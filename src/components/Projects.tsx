@@ -1,213 +1,155 @@
 import { FaGithub } from "react-icons/fa";
 
+const projects = [
+    {
+        number: "01",
+        title: "Grove Crypto Tracker",
+        summary:
+            "A full-stack crypto portfolio tracker designed around clarity, secure authentication, and real-time visibility into holdings and transactions.",
+        impact: "Built to simplify daily portfolio monitoring with live market integrations and a clean transaction view.",
+        stack: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "CoinGecko API"],
+        github: "https://github.com/mohanishp9/crypto_portfolio_tracker",
+        live: "https://grove-crypto-tracker.vercel.app/",
+        year: "2026",
+    },
+    {
+        number: "02",
+        title: "QKart",
+        summary:
+            "A complete ecommerce experience with secure authentication, cart management, checkout flows, and a responsive shopping journey from browse to purchase.",
+        impact: "Focused on creating a dependable storefront flow with solid backend foundations and production-ready UX patterns.",
+        stack: ["React", "Node.js", "Express", "MongoDB", "REST APIs", "Testing"],
+        github: "https://github.com/mohanishp9/QKart_Backend",
+        live: "https://qkart-mohanish-pingales-projects.vercel.app/",
+        year: "2024",
+    },
+    {
+        number: "03",
+        title: "MP News Feed",
+        summary:
+            "A modular Flipboard-style news experience with reusable UI components, feed rendering, and testing-driven DOM behavior.",
+        impact: "Used component thinking and automated validation to keep the frontend maintainable while handling dynamic RSS content.",
+        stack: ["JavaScript", "HTML", "CSS", "Bootstrap", "RSS feeds"],
+        github: "https://github.com/mohanishp9/News-Board",
+        live: "https://mboard-mohanish-pingales-projects.vercel.app/",
+        year: "2024",
+    },
+    {
+        number: "04",
+        title: "MTripDynamic",
+        summary:
+            "A travel booking platform with dynamic reservation logic, availability handling, cost calculation, and modular API-backed pages.",
+        impact: "Connected data, booking flows, and frontend rendering into a streamlined travel product experience.",
+        stack: ["JavaScript", "Express", "LowDB", "REST APIs", "Deployment"],
+        github: "https://github.com/mohanishp9/MTripDynamic",
+        live: "https://mtripdynamic-mohanish-pingales-projects.vercel.app/",
+        year: "2024",
+    },
+];
+
 const Projects = () => {
     return (
-        <section id="projects" className="relative py-32 px-16">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 mb-20 reveal-left">
-                <h2 className="font-playfair text-[clamp(32px,4vw,55px)] font-black leading-none tracking-[-0.02em]">Selected<br /><em className="italic text-accent">Work</em></h2>
-                <span className="font-cormorant text-base text-dim italic">04 Projects</span>
+        <section id="projects" className="section-shell">
+            <div className="section-intro reveal reveal-up">
+                <span className="section-index">03</span>
+                Selected Work
+                <span className="section-line" />
             </div>
 
-            <div className="project-card reveal-scale">
-                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">01</div>
-                <div>
-                    <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
-                        Grove Crypto Tracker
-                    </h3>
-
-                    <p className="font-cormorant text-[1.05rem] text-silver leading-[1.6] font-light max-w-[500px] mb-6">
-                        A full-stack crypto portfolio tracker that lets users securely log in, track holdings and transactions, and view real-time market data using a React/TypeScript frontend and a Node/Express + MongoDB backend with CoinGecko integration.
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                        <span className="stack-badge">React</span>
-                        <span className="stack-badge">Node.js</span>
-                        <span className="stack-badge">Express.js</span>
-                        <span className="stack-badge">REST APIs</span>
-                        <span className="stack-badge">TypeScript</span>
-                        <span className="stack-badge">MongoDB</span>
-                        <span className="stack-badge">MongoDB Atlas</span>
-                        <span className="stack-badge">Mongoose ODM</span>
-                        <span className="stack-badge">MongoDB queries</span>
-                        <span className="stack-badge">JWT token</span>
-                    </div>
+            <div className="mb-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+                <div className="reveal reveal-left">
+                    <h2 className="section-title">
+                        The work is where
+                        <br />
+                        the details <em>speak.</em>
+                    </h2>
                 </div>
-                <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
-
-                    <div className="flex gap-3">
-
-                        <a
-                            href="https://github.com/mohanishp9/crypto_portfolio_tracker"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                        >
-                            <FaGithub />
-                        </a>
-
-                        <a
-                            href="https://grove-crypto-tracker.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                        >
-                            ↗
-                        </a>
-
-                    </div>
-
-                    <span className="text-[0.55rem] tracking-[0.2em] text-dim">2026</span>
-
+                <div className="reveal reveal-right">
+                    <p className="section-copy max-w-[39rem]">
+                        These projects show how I approach different product shapes, from dashboard-like utility to
+                        ecommerce and content-heavy interfaces. Each one sharpened a different part of my craft.
+                    </p>
                 </div>
             </div>
 
-            <div className="project-card reveal-scale">
-                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">02</div>
-                <div>
-                    <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
-                        QKart
-                    </h3>
+            <div className="grid gap-5">
+                {projects.map((project, index) => (
+                    <article
+                        key={project.title}
+                        className="project-card reveal reveal-up rounded-[2rem] p-6 sm:p-8"
+                        data-reveal-delay={index * 90}
+                    >
+                        <div className="relative z-[1] grid gap-8 lg:grid-cols-[96px_minmax(0,1fr)_240px]">
+                            <div className="flex items-start justify-between lg:flex-col">
+                                <span className="font-playfair text-[1.05rem] italic tracking-[0.14em] text-[var(--metal)]">
+                                    {project.number}
+                                </span>
+                                <span className="micro-label">{project.year}</span>
+                            </div>
 
-                    <p className="font-cormorant text-[1.05rem] text-silver leading-[1.6] font-light max-w-[500px] mb-6">
-                        Full-stack development of a complete online store featuring secure authentication, shopping cart, checkout flows, Node.js/MongoDB backend, responsive frontend & comprehensive testing.
-                    </p>
+                            <div>
+                                <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
+                                    <div>
+                                        <h3 className="mb-3 font-playfair text-[clamp(1.9rem,3vw,2.7rem)] font-semibold tracking-[-0.04em] text-[var(--paper)]">
+                                            {project.title}
+                                        </h3>
+                                        <p className="max-w-[42rem] font-cormorant text-[1.2rem] leading-[1.68] text-[var(--mist)]">
+                                            {project.summary}
+                                        </p>
+                                    </div>
+                                </div>
 
-                    <div className="flex flex-wrap gap-2">
-                        <span className="stack-badge">React</span>
-                        <span className="stack-badge">Node.js</span>
-                        <span className="stack-badge">Express.js</span>
-                        <span className="stack-badge">REST APIs</span>
-                        <span className="stack-badge">ES6 (JavaScript)</span>
-                        <span className="stack-badge">MongoDB</span>
-                        <span className="stack-badge">MongoDB Atlas</span>
-                        <span className="stack-badge">Mongoose ODM</span>
-                        <span className="stack-badge">MongoDB queries</span>
-                        <span className="stack-badge">JWT token</span>
-                    </div>
-                </div>
-                <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
+                                <div className="mb-6 rounded-[1.3rem] border border-white/6 bg-white/[0.025] p-4">
+                                    <p className="mb-2 text-[0.62rem] uppercase tracking-[0.24em] text-[var(--metal)]">
+                                        Project note
+                                    </p>
+                                    <p className="font-cormorant text-[1.08rem] leading-[1.6] text-[var(--mist)]">
+                                        {project.impact}
+                                    </p>
+                                </div>
 
-                    <div className="flex gap-3">
+                                <div className="flex flex-wrap gap-2">
+                                    {project.stack.map((item) => (
+                                        <span key={item} className="stack-badge">
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
 
-                        <a
-                            href="https://github.com/mohanishp9/QKart_Backend"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                        >
-                            <FaGithub />
-                        </a>
+                            <div className="flex flex-col justify-between gap-6 rounded-[1.4rem] border border-white/6 bg-black/20 p-5">
+                                <div>
+                                    <p className="micro-label mb-3">Explore</p>
+                                    <p className="font-cormorant text-[1.02rem] leading-[1.6] text-[var(--mist)]">
+                                        View the live build or inspect the code to see how the product is structured.
+                                    </p>
+                                </div>
 
-                        <a
-                            href="https://qkart-mohanish-pingales-projects.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                        >
-                            ↗
-                        </a>
-
-                    </div>
-
-                    <span className="text-[0.55rem] tracking-[0.2em] text-dim">2024</span>
-
-                </div>
-            </div>
-
-            <div className="project-card reveal-scale">
-                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">03</div>
-                <div>
-                    <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
-                        MP's News Feed
-                    </h3>
-
-                    <p className="font-cormorant text-[1.05rem] text-silver leading-[1.6] font-light max-w-[500px] mb-6">
-                        Built modular JavaScript components (accordion, carousel, navigation utilities) for a responsive Flipboard-style news feed, centralized DOM logic for better maintainability, and validated RSS feed rendering through automated, data-driven tests.
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                        <span className="stack-badge">HTML</span>
-                        <span className="stack-badge">CSS</span>
-                        <span className="stack-badge">Bootstrap</span>
-                        <span className="stack-badge">ES6 (JavaScript)</span>
-                        <span className="stack-badge">REST APIs</span>
-                    </div>
-                </div>
-                <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
-
-                    <div className="flex gap-3">
-
-                        <a
-                            href="https://github.com/mohanishp9/News-Board"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                        >
-                            <FaGithub />
-                        </a>
-
-                        <a
-                            href="https://mboard-mohanish-pingales-projects.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                        >
-                            ↗
-                        </a>
-
-                    </div>
-
-                    <span className="text-[0.55rem] tracking-[0.2em] text-dim">2024</span>
-
-                </div>
-            </div>
-
-            <div className="project-card reveal-scale">
-                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">04</div>
-                <div>
-                    <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
-                        MTripDynamic
-                    </h3>
-
-                    <p className="font-cormorant text-[1.05rem] text-silver leading-[1.6] font-light max-w-[500px] mb-6">
-                        Created RESTful Express + LowDB API for cities, adventures & bookings; implemented reservation logic, availability management, cost calculation, and dynamic data generation; connected to modular, responsive frontend.
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                        <span className="stack-badge">HTML</span>
-                        <span className="stack-badge">CSS</span>
-                        <span className="stack-badge">Bootstrap</span>
-                        <span className="stack-badge">ES6 (JavaScript)</span>
-                        <span className="stack-badge">Deployment (Vercel, Render)</span>
-                    </div>
-                </div>
-                <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
-
-                    <div className="flex gap-3">
-
-                        <a
-                            href="https://github.com/mohanishp9/MTripDynamic"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                        >
-                            <FaGithub />
-                        </a>
-
-                        <a
-                            href="https://mtripdynamic-mohanish-pingales-projects.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                        >
-                            ↗
-                        </a>
-
-                    </div>
-
-                    <span className="text-[0.55rem] tracking-[0.2em] text-dim">2024</span>
-
-                </div>
+                                <div className="flex flex-wrap gap-3">
+                                    <a
+                                        href={project.github}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="social-link min-w-[8rem]"
+                                        data-hover
+                                    >
+                                        <FaGithub />
+                                        <span>Source</span>
+                                    </a>
+                                    <a
+                                        href={project.live}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="social-link min-w-[8rem]"
+                                        data-hover
+                                    >
+                                        <span>Live site</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                ))}
             </div>
         </section>
     );

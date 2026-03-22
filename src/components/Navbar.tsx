@@ -4,51 +4,90 @@ import Link from "next/link";
 import NavLink from "@/components/NavLink";
 import { useEffect, useState } from "react";
 
+const navItems = [
+    { href: "#about", label: "About", id: "about" },
+    { href: "#skills", label: "Capabilities", id: "skills" },
+    { href: "#projects", label: "Projects", id: "projects" },
+    { href: "#experience", label: "Experience", id: "experience" },
+    { href: "#contact", label: "Contact", id: "contact" },
+];
+
 const Navbar = () => {
     const [scrolled, setScrolled] = useState<boolean>(false);
+    const [activeSection, setActiveSection] = useState<string>("about");
 
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 20);
         };
-        return () => window.removeEventListener("scroll", handleScroll);
+
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        const sections = navItems
+            .map((item) => document.getElementById(item.id))
+            .filter((section): section is HTMLElement => Boolean(section));
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActiveSection(entry.target.id);
+                    }
+                });
+            },
+            {
+                rootMargin: "-35% 0px -45% 0px",
+                threshold: 0.1,
+            }
+        );
+
+        sections.forEach((section) => observer.observe(section));
+
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("scroll", handleScroll);
+        };
     }, []);
 
     return (
         <nav
             className={`
-                fixed top-0 left-0 right-0
-                px-16 py-8
-                flex justify-between items-center
-                z-[100]
-                border-b border-white/5
-                backdrop-blur-2xl
+                fixed left-1/2 top-4 z-[120] w-[min(calc(100%-1.5rem),1200px)] -translate-x-1/2
+                rounded-full border backdrop-blur-xl
                 transition-all duration-300
-                ${scrolled ? "bg-black/90" : "bg-black/60"}
+                ${scrolled
+                    ? "border-[var(--line-strong)] bg-[rgba(16,16,18,0.92)] shadow-[0_24px_50px_rgba(0,0,0,0.22)]"
+                    : "border-[var(--line)] bg-[rgba(16,16,18,0.68)]"}
             `}
         >
-            <Link
-                href="/"
-                className="
-                    font-playfair text-[1.4rem] font-black
-                    tracking-[0.05em]
-                    text-white no-underline
-                "
-            >
-                MP
-            </Link>
+            <div className="flex min-h-[var(--nav-height)] items-center justify-between gap-6 px-5 sm:px-7">
+                <Link
+                    href="/"
+                    className="flex shrink-0 items-center gap-3 no-underline"
+                >
+                    <span className="font-playfair text-[1.45rem] font-black tracking-[0.08em] text-[var(--paper)]">
+                        MP
+                    </span>
+                    <span className="hidden text-[0.58rem] uppercase tracking-[0.28em] text-[var(--metal)] lg:inline-flex">
+                        Portfolio 2026
+                    </span>
+                </Link>
 
-            <ul className="hidden md:flex gap-12 list-none">
-                <li><NavLink href="#about">About</NavLink></li>
-                <li><NavLink href="#skills">Skills</NavLink></li>
-                <li><NavLink href="#projects">Projects</NavLink></li>
-                <li><NavLink href="#experience">Experience</NavLink></li>
-                <li><NavLink href="#contact">Contact</NavLink></li>
-            </ul>
+                <ul className="hidden list-none items-center gap-7 lg:flex">
+                    {navItems.map((item) => (
+                        <li key={item.id}>
+                            <NavLink href={item.href} isActive={activeSection === item.id}>
+                                {item.label}
+                            </NavLink>
+                        </li>
+                    ))}
+                </ul>
 
-            <div className="flex items-center gap-2.5 text-[0.7rem] tracking-[0.2em] text-silver">
-                <div className="w-1.5 h-1.5 bg-[#4ade80] rounded-full animate-pulse-custom"></div>
-                Available for work
+                <div className="hidden items-center gap-3 rounded-full border border-[var(--line)] bg-white/[0.02] px-4 py-2 text-[0.62rem] uppercase tracking-[0.22em] text-[var(--mist)] sm:flex">
+                    <span className="status-dot" />
+                    Available for work
+                </div>
             </div>
         </nav>
     );
