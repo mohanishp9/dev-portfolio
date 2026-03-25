@@ -3,8 +3,10 @@
 import Link from "next/link";
 import NavLink from "@/components/NavLink";
 import { useEffect, useState } from "react";
+import { useTickSound } from "@/hooks/useTickSound";
 
 const Navbar = () => {
+    const { playTick } = useTickSound('/sound/tick.wav');
     const [scrolled, setScrolled] = useState<boolean>(false);
 
     useEffect(() => {
@@ -35,10 +37,10 @@ const Navbar = () => {
                     text-white no-underline
                 "
             >
-                MP
+                <span onClick={playTick}>MP</span>
             </Link>
 
-            <ul className="hidden md:flex gap-12 list-none">
+            <ul className="hidden md:flex gap-12 list-none" onClick={playTick}>
                 <li><NavLink href="#about">About</NavLink></li>
                 <li><NavLink href="#skills">Skills</NavLink></li>
                 <li><NavLink href="#projects">Projects</NavLink></li>

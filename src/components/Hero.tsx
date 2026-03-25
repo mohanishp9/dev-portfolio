@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { useTickSound } from "@/hooks/useTickSound";
 
 const Hero = () => {
+    const { playTick } = useTickSound('/sound/tick.wav');
+
     return (
         <section
             className="
@@ -64,10 +67,16 @@ const Hero = () => {
 
                 <div className="flex flex-col items-end gap-6">
                     <Link href="#projects" className="btn-primary">
-                        <span>View My Work</span>
+                        <span
+                            onMouseEnter={playTick}
+                            onClick={playTick}
+                        >View My Work</span>
                     </Link>
                     <Link href="#contact" className="btn-ghost">
-                        Get In Touch
+                        <span
+                            onMouseEnter={playTick}
+                            onClick={playTick}
+                        >Get In Touch</span>
                     </Link>
                 </div>
             </div>

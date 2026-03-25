@@ -1,6 +1,8 @@
-import React from 'react';
+import { useTickSound } from "@/hooks/useTickSound";
 
 const Contact = () => {
+    const { playTick } = useTickSound('/sound/tick.wav');
+
     const socialClass =
         "text-[0.6rem] tracking-[0.25em] uppercase text-dim transition-colors duration-300 px-6 py-[0.8rem] border border-white/[0.06] hover:text-white hover:border-white/[0.2]";
     return (
@@ -26,9 +28,9 @@ const Contact = () => {
                 </a>
             </div>
             <div className="flex flex-wrap justify-center gap-6 mt-8 reveal-up">
-                <a href="https://github.com/mohanishp9" className={socialClass} target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="https://www.linkedin.com/in/mohanish-pingale-507339261/" className={socialClass} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="/Mohanish_Pingale_FullStack_Developer_Resume.pdf" className={socialClass} target="_blank" rel="noopener noreferrer">Resume ↗</a>
+                <a href="https://github.com/mohanishp9" className={socialClass} target="_blank" rel="noopener noreferrer"  onMouseEnter={playTick} onClick={playTick}>GitHub</a>
+                <a href="https://www.linkedin.com/in/mohanish-pingale-507339261/" className={socialClass} target="_blank" rel="noopener noreferrer"  onMouseEnter={playTick} onClick={playTick}>LinkedIn</a>
+                <a href="/Mohanish_Pingale_FullStack_Developer_Resume.pdf" className={socialClass} target="_blank" rel="noopener noreferrer"  onMouseEnter={playTick} onClick={playTick}>Resume ↗</a>
             </div>
         </section>
     );

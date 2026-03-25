@@ -1,6 +1,8 @@
 import { FaGithub } from "react-icons/fa";
+import { useTickSound } from "@/hooks/useTickSound";
 
 const Projects = () => {
+    const { playTick } = useTickSound('/sound/tick.wav');
     return (
         <section id="projects" className="relative py-32 px-16">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 mb-20 reveal-left">
@@ -41,6 +43,7 @@ const Projects = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                             onMouseEnter={playTick} onClick={playTick}
                         >
                             <FaGithub />
                         </a>
@@ -50,6 +53,7 @@ const Projects = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                             onMouseEnter={playTick} onClick={playTick}
                         >
                             ↗
                         </a>
@@ -94,6 +98,7 @@ const Projects = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                             onMouseEnter={playTick} onClick={playTick}
                         >
                             <FaGithub />
                         </a>
@@ -103,6 +108,7 @@ const Projects = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                             onMouseEnter={playTick} onClick={playTick}
                         >
                             ↗
                         </a>
@@ -142,6 +148,7 @@ const Projects = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                             onMouseEnter={playTick} onClick={playTick}
                         >
                             <FaGithub />
                         </a>
@@ -151,6 +158,7 @@ const Projects = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                             onMouseEnter={playTick} onClick={playTick}
                         >
                             ↗
                         </a>
@@ -190,6 +198,7 @@ const Projects = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                             onMouseEnter={playTick} onClick={playTick}
                         >
                             <FaGithub />
                         </a>
@@ -199,6 +208,7 @@ const Projects = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                             onMouseEnter={playTick} onClick={playTick}
                         >
                             ↗
                         </a>
