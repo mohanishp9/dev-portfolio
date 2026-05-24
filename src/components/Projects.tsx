@@ -14,6 +14,64 @@ const Projects = () => {
                 <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">01</div>
                 <div>
                     <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
+                        Petty Revenge Note
+                    </h3>
+
+                    <p className="font-cormorant text-[1.05rem] text-silver leading-[1.6] font-light max-w-[500px] mb-6">
+                        A full-stack revenge-note journaling app with secure JWT authentication, protected profile and note routes, Redux Toolkit state management for user, note, comment, and reaction data, plus comments with threaded replies, emoji reactions, likes, and paginated note/comment loading backed by Zod validation and Mongoose schema enforcement.
+                    </p>
+
+                    <div className="flex flex-wrap gap-2">
+                        <span className="stack-badge">Next.js</span>
+                        <span className="stack-badge">React</span>
+                        <span className="stack-badge">Redux Toolkit</span>
+                        <span className="stack-badge">Node.js</span>
+                        <span className="stack-badge">Express.js</span>
+                        <span className="stack-badge">REST APIs</span>
+                        <span className="stack-badge">TypeScript</span>
+                        <span className="stack-badge">MongoDB</span>
+                        <span className="stack-badge">MongoDB Atlas</span>
+                        <span className="stack-badge">Mongoose ODM</span>
+                        <span className="stack-badge">MongoDB queries</span>
+                        <span className="stack-badge">JWT token</span>
+                        <span className="stack-badge">Zod validation</span>
+                    </div>
+                </div>
+                <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
+
+                    <div className="flex gap-3">
+
+                        <a
+                            href="https://github.com/mohanishp9/petty-revenge-note"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                             onMouseEnter={playTick} onClick={playTick}
+                        >
+                            <FaGithub />
+                        </a>
+
+                        <a
+                            href="https://petty-revenge-note.vercel.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
+                             onMouseEnter={playTick} onClick={playTick}
+                        >
+                            ↗
+                        </a>
+
+                    </div>
+
+                    <span className="text-[0.55rem] tracking-[0.2em] text-dim">2026</span>
+
+                </div>
+            </div>
+
+            <div className="project-card reveal-scale">
+                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">02</div>
+                <div>
+                    <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
                         Grove Crypto Tracker
                     </h3>
 
@@ -66,7 +124,7 @@ const Projects = () => {
             </div>
 
             <div className="project-card reveal-scale">
-                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">02</div>
+                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">03</div>
                 <div>
                     <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
                         QKart
@@ -121,7 +179,7 @@ const Projects = () => {
             </div>
 
             <div className="project-card reveal-scale">
-                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">03</div>
+                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">04</div>
                 <div>
                     <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
                         MP's News Feed
@@ -171,7 +229,7 @@ const Projects = () => {
             </div>
 
             <div className="project-card reveal-scale">
-                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">04</div>
+                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">05</div>
                 <div>
                     <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
                         MTripDynamic
