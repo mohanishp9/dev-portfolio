@@ -3,6 +3,17 @@ import { FaGithub } from "react-icons/fa";
 const projects = [
     {
         number: "01",
+        title: "Petty Revenge Note",
+        summary:
+            "A full-stack revenge-note journaling app with secure JWT authentication, protected profile and note routes, Redux Toolkit state management for user, note, comment, and reaction data, plus comments with threaded replies, emoji reactions, likes, and paginated note/comment loading backed by Zod validation and Mongoose schema enforcement.",
+        impact: "Built to provide a highly interactive, authenticated journaling experience with robust data validation and scalable state management.",
+        stack: ["Next.js", "React", "Redux Toolkit", "TypeScript", "Node.js", "Express", "MongoDB", "JWT", "Zod"],
+        github: "https://github.com/mohanishp9/petty-revenge-note",
+        live: "https://petty-revenge-note.vercel.app/",
+        year: "2026",
+    },
+    {
+        number: "02",
         title: "Grove Crypto Tracker",
         summary:
             "A full-stack crypto portfolio tracker designed around clarity, secure authentication, and real-time visibility into holdings and transactions.",
@@ -13,7 +24,7 @@ const projects = [
         year: "2026",
     },
     {
-        number: "02",
+        number: "03",
         title: "QKart",
         summary:
             "A complete ecommerce experience with secure authentication, cart management, checkout flows, and a responsive shopping journey from browse to purchase.",
@@ -24,7 +35,7 @@ const projects = [
         year: "2024",
     },
     {
-        number: "03",
+        number: "04",
         title: "MP News Feed",
         summary:
             "A modular Flipboard-style news experience with reusable UI components, feed rendering, and testing-driven DOM behavior.",
@@ -35,7 +46,7 @@ const projects = [
         year: "2024",
     },
     {
-        number: "04",
+        number: "05",
         title: "MTripDynamic",
         summary:
             "A travel booking platform with dynamic reservation logic, availability handling, cost calculation, and modular API-backed pages.",
@@ -134,7 +145,7 @@ const Projects = () => {
                                         data-hover
                                     >
                                         <FaGithub />
-                                        <span>Source</span>
+                                        <span className="ml-2">Source</span>
                                     </a>
                                     <a
                                         href={project.live}

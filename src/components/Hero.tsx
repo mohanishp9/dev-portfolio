@@ -89,13 +89,13 @@ const Hero = () => {
 
                     <div className="impact-strip rounded-[1.3rem]">
                         {heroStats.map((stat) => (
-                            <div key={stat.label} className="impact-item">
-                                <span className="metric-value">{stat.value}</span>
-                                <span className="block max-w-[11rem] text-[0.68rem] uppercase tracking-[0.22em] text-[var(--metal)]">
-                                    {stat.label}
-                                </span>
-                            </div>
-                        ))}
+    <div key={stat.label} className="impact-item flex flex-col items-center text-center">
+        <span className="metric-value whitespace-nowrap">{stat.value}</span>
+        <span className="block text-[0.68rem] uppercase tracking-[0.22em] text-[var(--metal)] mt-1">
+            {stat.label}
+        </span>
+    </div>
+))}
                     </div>
                 </div>
             </div>
