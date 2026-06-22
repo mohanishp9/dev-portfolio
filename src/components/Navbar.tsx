@@ -53,26 +53,25 @@ const Navbar = () => {
     return (
         <nav
             className={`
-                fixed left-1/2 top-4 z-[120] w-[min(calc(100%-1.5rem),1200px)] -translate-x-1/2
-                rounded-full border backdrop-blur-xl
-                transition-all duration-300
+                fixed top-4 left-1/2 z-[120] w-[calc(100%-2rem)] max-w-5xl -translate-x-1/2 border transition-all duration-300
                 ${scrolled
-                    ? "border-[var(--line-strong)] bg-[rgba(16,16,18,0.92)] shadow-[0_24px_50px_rgba(0,0,0,0.22)]"
-                    : "border-[var(--line)] bg-[rgba(16,16,18,0.68)]"}
+                    ? "border-white/20 bg-zinc-950/85 backdrop-blur-md shadow-xl"
+                    : "border-white/5 bg-zinc-950/40 backdrop-blur-sm"}
             `}
         >
-            <div className="flex min-h-[var(--nav-height)] items-center justify-between gap-6 px-5 sm:px-7">
+            <div className="flex h-14 items-center justify-between px-6 lg:px-8">
                 <Link
                     href="/"
-                    className="flex shrink-0 items-center gap-2 no-underline"
+                    className="flex shrink-0 items-center gap-2 no-underline group"
                     aria-label="mohanish — home"
                 >
-                    <span className="font-space-mono text-[0.92rem] tracking-[0.02em] text-[var(--paper)]">
-                        mohanish<span className="mx-[0.55rem] text-[var(--metal)]">/</span>dev
+                    <span className="w-2 h-2 bg-accent group-hover:scale-150 transition-transform"></span>
+                    <span className="font-jetbrains text-xs tracking-widest text-slate-50 uppercase">
+                        M.Pingale
                     </span>
                 </Link>
 
-                <ul className="hidden list-none items-center gap-7 lg:flex">
+                <ul className="hidden list-none items-center gap-8 lg:flex">
                     {navItems.map((item) => (
                         <li key={item.id}>
                             <NavLink href={item.href} isActive={activeSection === item.id}>
@@ -82,9 +81,11 @@ const Navbar = () => {
                     ))}
                 </ul>
 
-                <div className="hidden items-center gap-3 rounded-full border border-[var(--line)] bg-white/[0.02] px-4 py-2 text-[0.62rem] uppercase tracking-[0.22em] text-[var(--mist)] sm:flex">
-                    <span className="status-dot" />
-                    Available for work
+                <div className="hidden items-center gap-2 sm:flex">
+                    <span className="w-1.5 h-1.5 bg-green-500 rounded-none animate-pulse" />
+                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-400">
+                        Available
+                    </span>
                 </div>
             </div>
         </nav>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { initReveal } from "@/utils/reveal"
+
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
@@ -14,14 +14,11 @@ import Footer from "@/components/Footer";
 
 
 export default function Home() {
-    useEffect(() => {
-        return initReveal();
-    }, [])
 
   return (
     <>
       <Navbar/>
-      <main className="page-shell">
+      <main>
         <Hero/>
         <Marquee />
         <About/>

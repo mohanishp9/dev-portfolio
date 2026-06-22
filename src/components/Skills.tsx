@@ -18,50 +18,43 @@ const capabilities = [
 
 const Skills = () => {
     return (
-        <section id="skills" className="section-shell">
-
-
-            <div className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-                <div className="reveal reveal-left">
-                    <h2 className="section-title">
-                        What I work with
+        <section id="skills" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24">
+            <div className="max-w-7xl">
+                <div className="mb-16">
+                    <h2 className="font-inter font-black uppercase text-4xl sm:text-6xl tracking-tight text-slate-50 mb-6">
+                        Technical Stack
                     </h2>
-                </div>
-                <div className="reveal reveal-right">
-                    <p className="section-copy max-w-[38rem]">
-                        I group these by what I actually do, not by buzzword. Here's the stack I reach for when
-                        building full stack web applications.
+                    <p className="font-jetbrains text-sm uppercase tracking-widest text-slate-400">
+                        Operational tools and languages
                     </p>
                 </div>
-            </div>
 
-            <div className="mt-8 flex flex-col border-t border-[var(--line)]">
-                {capabilities.map((capability, index) => (
-                    <div
-                        key={capability.title}
-                        className="reveal reveal-up group flex flex-col lg:flex-row lg:items-start gap-4 lg:gap-12 border-b border-[var(--line)] py-10 transition-colors hover:bg-white/[0.015]"
-                        data-reveal-delay={index * 110}
-                    >
-                        <div className="lg:w-1/3 shrink-0">
-                            <h3 className="font-playfair text-[2rem] font-semibold tracking-[-0.03em] text-[var(--paper)]">
-                                {capability.title}
-                            </h3>
-                        </div>
-                        <div className="lg:w-2/3">
-                            <p className="mb-8 font-cormorant text-[1.25rem] leading-[1.65] text-[var(--mist)] max-w-[36rem]">
-                                {capability.subtitle}
-                            </p>
-                            <div className="flex flex-wrap gap-x-8 gap-y-3">
-                                {capability.items.map((item) => (
-                                    <span key={item} className="font-space-mono text-[0.95rem] text-[var(--mist)] tracking-[0.05em] flex items-center">
-                                        <span className="mr-3 h-[1px] w-4 bg-[var(--champagne)] opacity-50"></span>
-                                        {item}
-                                    </span>
-                                ))}
+                <div className="grid border-t border-l border-white/10">
+                    {capabilities.map((capability) => (
+                        <div
+                            key={capability.title}
+                            className="grid lg:grid-cols-3 border-b border-white/10 hover:bg-white/5 transition-colors"
+                        >
+                            <div className="p-8 lg:border-r border-white/10">
+                                <h3 className="font-inter font-black uppercase text-2xl tracking-tight text-slate-50">
+                                    {capability.title}
+                                </h3>
+                            </div>
+                            <div className="p-8 lg:col-span-2 lg:border-r border-white/10">
+                                <p className="mb-8 font-inter text-lg leading-relaxed text-slate-400 max-w-2xl">
+                                    {capability.subtitle}
+                                </p>
+                                <div className="flex flex-wrap gap-2">
+                                    {capability.items.map((item) => (
+                                        <span key={item} className="font-jetbrains text-xs uppercase tracking-widest text-slate-400 border border-white/10 px-4 py-2">
+                                            {item}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </section>
     );

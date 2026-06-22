@@ -1,27 +1,23 @@
 import type { Metadata } from "next";
-import { Space_Mono, Playfair_Display, Cormorant_Garamond } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
 
-const playfair = Playfair_Display({
+
+
+const inter = Inter({
     subsets: ["latin"],
-    variable: "--font-playfair",
-    weight: ["400", "700", "900"],
-    style: ["normal", "italic"],
+    variable: "--font-inter",
+    display: "swap",
 });
 
-const spaceMono = Space_Mono({
+const jetbrainsMono = JetBrains_Mono({
     subsets: ["latin"],
-    variable: "--font-space-mono",
-    weight: ["400", "700"],
+    variable: "--font-jetbrains",
+    display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
-    subsets: ["latin"],
-    variable: "--font-cormorant",
-    weight: ["300", "400", "600"],
-    style: ["normal", "italic"],
-});
+
 
 export const metadata: Metadata = {
   title: "Portfolio | Mohanish Pingale",
@@ -36,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-          className={`${playfair.variable} ${spaceMono.variable} ${cormorant.variable}`}
+          className={`${inter.variable} ${jetbrainsMono.variable} font-inter antialiased bg-zinc-950 text-slate-50`}
       >
 
         {children}

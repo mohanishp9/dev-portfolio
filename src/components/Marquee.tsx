@@ -1,18 +1,19 @@
 const items = [
-    "Based in Pune, debugging in TypeScript",
-    "1+ year in, still learning",
-    "Builds to learn, ships to eat",
-    "Reads the docs. Eventually.",
-    "Open to roles — yes, you",
+    "System Status: Nominal",
+    "Deployment: Localhost",
+    "Current Stack: React // Next.js // Node",
+    "Active Environment: Production",
+    "Open for Connections: Port 8080",
 ];
 
 const Marquee = () => {
     return (
-        <section className="border-y border-[var(--line)] bg-white/[0.02]">
-            <div className="mx-auto w-[min(100%,var(--page-max))] overflow-hidden px-[var(--section-pad-x)] py-5">
-                <div className="ticker-track">
-                    {[...items, ...items].map((item, index) => (
-                        <span key={`${item}-${index}`} className="ticker-item">
+        <section className="border-y border-white/10 bg-accent text-zinc-950">
+            <div className="overflow-hidden py-3">
+                <div className="flex whitespace-nowrap animate-[marquee_20s_linear_infinite]">
+                    {[...items, ...items, ...items].map((item, index) => (
+                        <span key={`${item}-${index}`} className="flex items-center px-8 font-jetbrains text-xs font-bold uppercase tracking-widest">
+                            <span className="w-1.5 h-1.5 bg-zinc-950 mr-4" />
                             {item}
                         </span>
                     ))}

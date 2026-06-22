@@ -60,102 +60,66 @@ const projects = [
 
 const Projects = () => {
     return (
-        <section id="projects" className="section-shell">
-
-
-            <div className="mb-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
-                <div className="reveal reveal-left">
-                    <h2 className="section-title">
-                        Things I've built
+        <section id="projects" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24">
+            <div className="max-w-7xl">
+                <div className="mb-16">
+                    <h2 className="font-inter font-black uppercase text-4xl sm:text-6xl tracking-tight text-slate-50 mb-6">
+                        System Registry
                     </h2>
-                </div>
-                <div className="reveal reveal-right">
-                    <p className="section-copy max-w-[39rem]">
-                        Each of these taught me something different — from managing complex state to working with
-                        external APIs to building checkout flows. They're not all polished products, but they're
-                        honest work.
+                    <p className="font-jetbrains text-sm uppercase tracking-widest text-slate-400">
+                        Index of deployed architectures and modules
                     </p>
                 </div>
-            </div>
 
-            <div className="grid gap-5">
-                {projects.map((project, index) => (
-                    <article
-                        key={project.title}
-                        className="project-card reveal reveal-up rounded-[2rem] p-6 sm:p-8"
-                        data-reveal-delay={index * 90}
-                    >
-                        <div className="relative z-[1] grid gap-8 lg:grid-cols-[96px_minmax(0,1fr)_240px]">
-                            <div className="flex items-start justify-between lg:flex-col">
-                                <span className="font-playfair text-[1.05rem] italic tracking-[0.14em] text-[var(--metal)]">
-                                    {project.number}
-                                </span>
-                                <span className="micro-label">{project.year}</span>
-                            </div>
-
-                            <div>
-                                <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
-                                    <div>
-                                        <h3 className="mb-3 font-playfair text-[clamp(1.9rem,3vw,2.7rem)] font-semibold tracking-[-0.04em] text-[var(--paper)]">
-                                            {project.title}
-                                        </h3>
-                                        <p className="max-w-[42rem] font-cormorant text-[1.2rem] leading-[1.68] text-[var(--mist)]">
-                                            {project.summary}
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="mb-6 rounded-[1.3rem] border border-white/6 bg-white/[0.025] p-4">
-                                    <p className="mb-2 text-[0.62rem] uppercase tracking-[0.24em] text-[var(--metal)]">
-                                        What I learned
-                                    </p>
-                                    <p className="font-cormorant text-[1.08rem] leading-[1.6] text-[var(--mist)]">
-                                        {project.impact}
-                                    </p>
-                                </div>
-
-                                <div className="flex flex-wrap gap-2">
-                                    {project.stack.map((item) => (
-                                        <span key={item} className="stack-badge">
-                                            {item}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="flex flex-col justify-between gap-6 rounded-[1.4rem] border border-white/6 bg-black/20 p-5">
-                                <div>
-                                    <p className="micro-label mb-3">Explore</p>
-                                    <p className="font-cormorant text-[1.02rem] leading-[1.6] text-[var(--mist)]">
-                                        Check out the live build or dig into the source code.
-                                    </p>
-                                </div>
-
-                                <div className="flex flex-wrap gap-3">
-                                    <a
-                                        href={project.github}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="social-link min-w-[8rem]"
-                                        data-hover
-                                    >
-                                        <FaGithub />
-                                        <span className="ml-2">Source</span>
-                                    </a>
-                                    <a
-                                        href={project.live}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="social-link min-w-[8rem]"
-                                        data-hover
-                                    >
-                                        <span>Live site</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                ))}
+                <div className="w-full overflow-x-auto">
+                    <table className="w-full text-left border-collapse min-w-[800px]">
+                        <thead>
+                            <tr className="border-b border-white/20 font-jetbrains text-xs uppercase tracking-widest text-slate-500">
+                                <th className="pb-4 px-4 font-normal w-16">ID</th>
+                                <th className="pb-4 px-4 font-normal w-24">Year</th>
+                                <th className="pb-4 px-4 font-normal w-1/4">Module Name</th>
+                                <th className="pb-4 px-4 font-normal">Core Stack</th>
+                                <th className="pb-4 px-4 font-normal text-right">Access</th>
+                            </tr>
+                        </thead>
+                        <tbody className="font-inter">
+                            {projects.map((project) => (
+                                <tr key={project.title} className="border-b border-white/10 hover:bg-white/5 transition-colors group">
+                                    <td className="py-6 px-4 font-jetbrains text-sm text-slate-500">{project.number}</td>
+                                    <td className="py-6 px-4 font-jetbrains text-sm text-slate-400">{project.year}</td>
+                                    <td className="py-6 px-4">
+                                        <span className="block font-bold text-lg text-slate-50 mb-1">{project.title}</span>
+                                        <span className="block text-sm text-slate-400 line-clamp-1 opacity-0 group-hover:opacity-100 transition-opacity">{project.summary}</span>
+                                    </td>
+                                    <td className="py-6 px-4">
+                                        <div className="flex flex-wrap gap-2">
+                                            {project.stack.slice(0, 4).map((tech) => (
+                                                <span key={tech} className="font-jetbrains text-[0.65rem] uppercase tracking-wider text-slate-400 border border-white/10 px-2 py-1">
+                                                    {tech}
+                                                </span>
+                                            ))}
+                                            {project.stack.length > 4 && (
+                                                <span className="font-jetbrains text-[0.65rem] uppercase tracking-wider text-slate-500 px-1 py-1">
+                                                    +{project.stack.length - 4}
+                                                </span>
+                                            )}
+                                        </div>
+                                    </td>
+                                    <td className="py-6 px-4 text-right">
+                                        <div className="flex items-center justify-end gap-4">
+                                            <a href={project.github} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-xs uppercase tracking-widest text-slate-400 hover:text-accent transition-colors">
+                                                Source
+                                            </a>
+                                            <a href={project.live} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-xs uppercase tracking-widest text-slate-50 bg-white/10 px-3 py-1.5 hover:bg-accent transition-colors">
+                                                Launch
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </section>
     );
