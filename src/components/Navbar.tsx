@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const navItems = [
     { href: "#about", label: "About", id: "about" },
-    { href: "#skills", label: "Capabilities", id: "skills" },
+    { href: "#skills", label: "Skills", id: "skills" },
     { href: "#projects", label: "Projects", id: "projects" },
     { href: "#experience", label: "Experience", id: "experience" },
     { href: "#contact", label: "Contact", id: "contact" },
@@ -37,8 +37,8 @@ const Navbar = () => {
                 });
             },
             {
-                rootMargin: "-35% 0px -45% 0px",
-                threshold: 0.1,
+                rootMargin: "-20% 0px -60% 0px",
+                threshold: 0,
             }
         );
 
@@ -64,13 +64,11 @@ const Navbar = () => {
             <div className="flex min-h-[var(--nav-height)] items-center justify-between gap-6 px-5 sm:px-7">
                 <Link
                     href="/"
-                    className="flex shrink-0 items-center gap-3 no-underline"
+                    className="flex shrink-0 items-center gap-2 no-underline"
+                    aria-label="mohanish — home"
                 >
-                    <span className="font-playfair text-[1.45rem] font-black tracking-[0.08em] text-[var(--paper)]">
-                        MP
-                    </span>
-                    <span className="hidden text-[0.58rem] uppercase tracking-[0.28em] text-[var(--metal)] lg:inline-flex">
-                        Portfolio 2026
+                    <span className="font-space-mono text-[0.92rem] tracking-[0.02em] text-[var(--paper)]">
+                        mohanish<span className="mx-[0.55rem] text-[var(--metal)]">/</span>dev
                     </span>
                 </Link>
 

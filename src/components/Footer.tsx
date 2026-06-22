@@ -5,7 +5,7 @@ const Footer = () => {
                 Copyright 2026 Mohanish Pingale
             </div>
             <div className="font-cormorant text-[1rem] italic text-[var(--mist)]">
-                Designed to feel quiet, built to feel sharp.
+                Built with Next.js and Tailwind
             </div>
         </footer>
     );

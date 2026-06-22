@@ -1,41 +1,36 @@
 import Link from "next/link";
 
 const heroStats = [
-    { value: "6+", label: "Projects shipped end-to-end" },
-    { value: "2+", label: "Years refining product craft" },
-    { value: "100%", label: "Focus on polish and performance" },
+    { value: "5+", label: "Projects shipped" },
+    { value: "1+", label: "Years building web apps" },
+    { value: "Open", label: "To new roles" },
 ];
 
 const highlights = [
-    "Full-stack product engineering",
-    "Interface systems with restraint",
-    "Performance-minded interaction design",
+    "Full stack dev at Indux Technology, Pune",
+    "Building multi-tenant ecommerce (MagikPro, NutriNative)",
+    "React, Next.js, TypeScript, Node.js",
 ];
 
 const Hero = () => {
     return (
         <section className="section-shell min-h-screen overflow-hidden pt-[clamp(7rem,14vw,10rem)]">
-            <div className="hero-grid-line" />
-            <div className="hero-orb right-[-4rem] top-[7rem]" />
 
             <div className="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
                 <div className="space-y-8">
-                    <div className="eyebrow reveal reveal-up">Full stack developer based in India</div>
+                    <div className="eyebrow reveal reveal-up">Full stack developer in Pune</div>
 
                     <div className="reveal reveal-up" data-reveal-delay="90">
-                        <p className="mb-5 max-w-[16rem] text-[0.72rem] uppercase tracking-[0.34em] text-[var(--metal)]">
-                            Editorial portfolio / selected craft / product-first systems
-                        </p>
                         <h1 className="font-playfair text-[clamp(4.4rem,12vw,8.8rem)] font-black leading-[0.88] tracking-[-0.065em] text-[var(--paper)]">
                             Mohanish
                             <br />
-                            <span className="italic text-[var(--champagne)]">Pingale</span>
+                            <span>Pingale</span>
                         </h1>
                     </div>
 
                     <div className="reveal reveal-up max-w-[44rem]" data-reveal-delay="180">
                         <p className="font-cormorant text-[clamp(1.55rem,3vw,2.45rem)] italic leading-[1.2] text-[var(--mist)]">
-                            Building products that feel calm on the surface and deeply considered underneath.
+                            I build web apps from database to interface — and I care about every layer working well together.
                         </p>
                     </div>
 
@@ -44,17 +39,18 @@ const Hero = () => {
                         data-reveal-delay="270"
                     >
                         <p className="section-copy">
-                            I design and build robust digital experiences across frontend, backend, and system design.
-                            My work aims for a quiet kind of confidence: interfaces that feel effortless, interactions
-                            that feel smooth, and codebases that scale with clarity.
+                            I work across React, Next.js, Node.js, and TypeScript. Currently at Indux Technology,
+                            shipping features for multi-tenant ecommerce products. I like the parts where frontend
+                            and backend have to cooperate closely — getting data flows right, making the UI respond
+                            the way it should.
                         </p>
 
                         <div className="flex flex-wrap gap-3">
                             <Link href="#projects" className="btn-primary" data-hover>
-                                <span>Explore selected work</span>
+                                <span>See my work</span>
                             </Link>
                             <Link href="#contact" className="btn-secondary" data-hover>
-                                Start a conversation
+                                Get in touch
                             </Link>
                         </div>
                     </div>
@@ -65,9 +61,9 @@ const Hero = () => {
 
                     <div className="mb-8 flex items-start justify-between gap-6">
                         <div>
-                            <p className="micro-label mb-3">Current focus</p>
+                            <p className="micro-label mb-3">Right now</p>
                             <h2 className="font-playfair text-[clamp(2rem,4vw,3rem)] font-bold leading-[0.98] tracking-[-0.04em]">
-                                Interfaces with substance
+                                Shipping ecommerce at scale
                             </h2>
                         </div>
                         <span className="rounded-full border border-[var(--line)] px-3 py-1 text-[0.58rem] uppercase tracking-[0.22em] text-[var(--metal)]">
@@ -89,13 +85,13 @@ const Hero = () => {
 
                     <div className="impact-strip rounded-[1.3rem]">
                         {heroStats.map((stat) => (
-    <div key={stat.label} className="impact-item flex flex-col items-center text-center">
-        <span className="metric-value whitespace-nowrap">{stat.value}</span>
-        <span className="block text-[0.68rem] uppercase tracking-[0.22em] text-[var(--metal)] mt-1">
-            {stat.label}
-        </span>
-    </div>
-))}
+                            <div key={stat.label} className="impact-item flex flex-col items-center text-center">
+                                <span className="metric-value whitespace-nowrap">{stat.value}</span>
+                                <span className="block text-[0.68rem] uppercase tracking-[0.22em] text-[var(--metal)] mt-1">
+                                    {stat.label}
+                                </span>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>

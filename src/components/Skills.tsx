@@ -1,69 +1,66 @@
 const capabilities = [
     {
-        title: "Interface direction",
-        subtitle: "Building UIs that feel considered, responsive, and steady.",
+        title: "Frontend",
+        subtitle: "React, Next.js, and the ecosystem around them. I build interfaces that work across screen sizes and handle real state, not just demo state.",
         items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux", "Responsive UI"],
     },
     {
-        title: "Application backbone",
-        subtitle: "Shaping APIs, auth flows, and service logic that can grow cleanly.",
-        items: ["Node.js", "Express.js", "REST APIs", "JWT auth", "Modular architecture"],
+        title: "Backend",
+        subtitle: "REST APIs, auth flows, database modeling. I like building backends that are straightforward to reason about and don't hide complexity in abstractions.",
+        items: ["Node.js", "Express.js", "REST APIs", "JWT auth", "MongoDB", "Mongoose"],
     },
     {
-        title: "Data and delivery",
-        subtitle: "Connecting products to reliable storage, deployment, and team workflows.",
-        items: ["MongoDB", "Mongoose", "Docker", "CI/CD", "GitHub", "Postman"],
+        title: "Tools & workflow",
+        subtitle: "What I use day to day to ship reliably — version control, containers, testing, CI/CD.",
+        items: ["Git", "Docker", "Postman", "CI/CD", "Zod", "Jest"],
     },
 ];
 
 const Skills = () => {
     return (
         <section id="skills" className="section-shell">
-            <div className="section-intro reveal reveal-up">
-                <span className="section-index">02</span>
-                Capabilities
-                <span className="section-line" />
-            </div>
+
 
             <div className="mb-12 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
                 <div className="reveal reveal-left">
                     <h2 className="section-title">
-                        What I bring to
-                        <br />
-                        a product <em>team.</em>
+                        What I work with
                     </h2>
                 </div>
                 <div className="reveal reveal-right">
                     <p className="section-copy max-w-[38rem]">
-                        Instead of treating skills as a long checklist, I think in terms of outcomes: shaping
-                        interface quality, strengthening the application core, and making delivery dependable from
-                        prototype to production.
+                        I group these by what I actually do, not by buzzword. Here's the stack I reach for when
+                        building full stack web applications.
                     </p>
                 </div>
             </div>
 
-            <div className="grid gap-5 lg:grid-cols-3">
+            <div className="mt-8 flex flex-col border-t border-[var(--line)]">
                 {capabilities.map((capability, index) => (
-                    <article
+                    <div
                         key={capability.title}
-                        className="skill-card reveal reveal-up rounded-[1.75rem] p-7"
+                        className="reveal reveal-up group flex flex-col lg:flex-row lg:items-start gap-4 lg:gap-12 border-b border-[var(--line)] py-10 transition-colors hover:bg-white/[0.015]"
                         data-reveal-delay={index * 110}
                     >
-                        <p className="micro-label mb-4">0{index + 1}</p>
-                        <h3 className="mb-3 font-playfair text-[1.8rem] font-semibold tracking-[-0.03em] text-[var(--paper)]">
-                            {capability.title}
-                        </h3>
-                        <p className="mb-6 font-cormorant text-[1.15rem] leading-[1.65] text-[var(--mist)]">
-                            {capability.subtitle}
-                        </p>
-                        <div className="flex flex-wrap gap-2.5">
-                            {capability.items.map((item) => (
-                                <span key={item} className="skill-pill">
-                                    {item}
-                                </span>
-                            ))}
+                        <div className="lg:w-1/3 shrink-0">
+                            <h3 className="font-playfair text-[2rem] font-semibold tracking-[-0.03em] text-[var(--paper)]">
+                                {capability.title}
+                            </h3>
                         </div>
-                    </article>
+                        <div className="lg:w-2/3">
+                            <p className="mb-8 font-cormorant text-[1.25rem] leading-[1.65] text-[var(--mist)] max-w-[36rem]">
+                                {capability.subtitle}
+                            </p>
+                            <div className="flex flex-wrap gap-x-8 gap-y-3">
+                                {capability.items.map((item) => (
+                                    <span key={item} className="font-space-mono text-[0.95rem] text-[var(--mist)] tracking-[0.05em] flex items-center">
+                                        <span className="mr-3 h-[1px] w-4 bg-[var(--champagne)] opacity-50"></span>
+                                        {item}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 ))}
             </div>
         </section>

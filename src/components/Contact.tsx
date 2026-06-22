@@ -12,14 +12,12 @@ const Contact = () => {
                     <div>
                         <div className="eyebrow mb-5">Contact</div>
                         <h2 className="section-title max-w-[10ch]">
-                            Let&apos;s make
-                            <br />
-                            something feel <em>effortless.</em>
+                            Let's talk
                         </h2>
                     </div>
                     <p className="section-copy max-w-[31rem]">
-                        If you are building a product that needs sharper interaction, cleaner engineering, or a more
-                        intentional frontend presence, I would love to hear what you are working on.
+                        I'm looking for full-time roles, internships, or freelance projects in full stack or
+                        frontend development. If something here caught your eye, I'd like to hear about it.
                     </p>
                 </div>
 
@@ -33,8 +31,7 @@ const Contact = () => {
                             mpingale31@gmail.com
                         </a>
                         <p className="font-cormorant text-[1.18rem] leading-[1.65] text-[var(--mist)]">
-                            Available for internships, freelance collaboration, and product-focused frontend or
-                            full-stack roles.
+                            Available for internships, freelance collaboration, and full-time full stack roles.
                         </p>
                     </div>
 

@@ -19,16 +19,18 @@ export default function Home() {
     }, [])
 
   return (
-    <div className="page-shell">
+    <>
       <Navbar/>
-      <Hero/>
-      <Marquee />
-      <About/>
-      <Skills />
-      <Projects />
-      <Experience />
-      <Contact />
-      <Footer/>
-    </div>
+      <main className="page-shell">
+        <Hero/>
+        <Marquee />
+        <About/>
+        <Skills />
+        <Projects />
+        <Experience />
+        <Contact />
+        <Footer/>
+      </main>
+    </>
   );
 }

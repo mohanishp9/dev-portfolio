@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Mono, Playfair_Display, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
-import CustomCursor from "@/components/CustomCursor";
+
 
 const playfair = Playfair_Display({
     subsets: ["latin"],
@@ -25,7 +25,7 @@ const cormorant = Cormorant_Garamond({
 
 export const metadata: Metadata = {
   title: "Portfolio | Mohanish Pingale",
-  description: "Editorial portfolio for Mohanish Pingale, a full stack developer building polished, high-performing digital products.",
+  description: "Full stack developer portfolio for Mohanish Pingale. Projects, skills, and experience in React, Next.js, and Node.js.",
 };
 
 export default function RootLayout({
@@ -38,7 +38,7 @@ export default function RootLayout({
       <body
           className={`${playfair.variable} ${spaceMono.variable} ${cormorant.variable}`}
       >
-        <CustomCursor />
+
         {children}
       </body>
     </html>

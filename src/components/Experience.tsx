@@ -1,47 +1,55 @@
 const Experience = () => {
     return (
         <section id="experience" className="section-shell">
-            <div className="section-intro reveal reveal-up">
-                <span className="section-index">04</span>
-                Experience
-                <span className="section-line" />
-            </div>
+
 
             <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
                 <div className="reveal reveal-left">
                     <h2 className="section-title">
-                        Building inside
-                        <br />
-                        real product <em>contexts.</em>
+                        Where I've worked
                     </h2>
                 </div>
 
-                <article className="timeline-card reveal reveal-right rounded-[2rem] p-7 sm:p-8">
-                    <div className="mb-8 flex flex-col gap-4 border-b border-white/8 pb-6 sm:flex-row sm:items-start sm:justify-between">
-                        <div>
-                            <p className="micro-label mb-3">Full Stack Developer Intern</p>
-                            <h3 className="font-playfair text-[2rem] font-semibold tracking-[-0.04em] text-[var(--paper)]">
+                <div className="reveal reveal-right flex flex-col pl-6 border-l border-[var(--line-strong)] ml-2 sm:ml-0">
+                    <div className="relative mb-8 pl-6">
+                        <span className="absolute -left-[31px] top-2.5 h-3 w-3 rounded-full bg-[var(--champagne)] shadow-[0_0_12px_rgba(221,206,178,0.4)]" />
+                        <div className="mb-6">
+                            <h3 className="font-playfair text-[2.2rem] font-semibold tracking-[-0.03em] text-[var(--paper)]">
                                 Indux Technology
                             </h3>
+                            <p className="font-space-mono text-[0.85rem] uppercase tracking-[0.15em] text-[var(--metal)] mt-2">
+                                Full Stack Developer Intern <span className="mx-2 opacity-50">|</span> Feb 2026 - Present
+                            </p>
                         </div>
-                        <span className="rounded-full border border-[var(--line)] px-3 py-1 text-[0.58rem] uppercase tracking-[0.22em] text-[var(--metal)]">
-                            Feb 2026 - Present
-                        </span>
-                    </div>
 
-                    <div className="grid gap-6 md:grid-cols-2">
-                        <p className="font-cormorant text-[1.15rem] leading-[1.68] text-[var(--mist)]">
-                            Contributing to MagikPro and NutriNative, two ecommerce products built on a shared
-                            multi-tenant foundation where a single application serves multiple brands with
-                            domain-specific presentation.
-                        </p>
-                        <p className="font-cormorant text-[1.15rem] leading-[1.68] text-[var(--mist)]">
-                            The work spans UI customization, dynamic data rendering, and product behavior that adapts
-                            cleanly across storefronts, a practical place to refine both system thinking and execution
-                            quality.
-                        </p>
+                        <div className="space-y-10 mt-8">
+                            <div className="relative">
+                                <h4 className="font-space-mono text-[1rem] uppercase tracking-[0.1em] text-[var(--mist)] mb-3">
+                                    MagikPro & NutriNative
+                                </h4>
+                                <p className="font-cormorant text-[1.2rem] leading-[1.7] text-[var(--mist)] max-w-[40rem]">
+                                    Two multi-tenant ecommerce products built on a shared backend. A single codebase
+                                    serves multiple brands, each with its own domain and product catalog. My work here
+                                    was mostly on the backend — building out API routes, writing database queries, handling
+                                    tenant-specific business logic, and making sure the data layer kept up with what the
+                                    frontend needed.
+                                </p>
+                            </div>
+
+                            <div className="relative">
+                                <h4 className="font-space-mono text-[1rem] uppercase tracking-[0.1em] text-[var(--mist)] mb-3">
+                                    InduxCRM
+                                </h4>
+                                <p className="font-cormorant text-[1.2rem] leading-[1.7] text-[var(--mist)] max-w-[40rem]">
+                                    An internal CRM tool where I worked across the stack — building out both the API and
+                                    the frontend views. Handling everything from database schemas to the UI that displays
+                                    and manipulates that data. It was the kind of project where you can't hide behind one
+                                    side of the stack, which made it a good learning ground.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </article>
+                </div>
             </div>
         </section>
     );

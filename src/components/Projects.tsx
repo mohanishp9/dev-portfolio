@@ -5,8 +5,8 @@ const projects = [
         number: "01",
         title: "Petty Revenge Note",
         summary:
-            "A full-stack revenge-note journaling app with secure JWT authentication, protected profile and note routes, Redux Toolkit state management for user, note, comment, and reaction data, plus comments with threaded replies, emoji reactions, likes, and paginated note/comment loading backed by Zod validation and Mongoose schema enforcement.",
-        impact: "Built to provide a highly interactive, authenticated journaling experience with robust data validation and scalable state management.",
+            "A journaling app where you can write notes, post them, and let people comment and react. Full auth with JWT, Redux for state management, threaded comments, emoji reactions, and paginated feeds. I wanted to build something with real social features, not just CRUD.",
+        impact: "Learned a lot about managing complex state with Redux Toolkit and using Zod for runtime validation. First project where I had to think about how comments, replies, and reactions all relate in the store.",
         stack: ["Next.js", "React", "Redux Toolkit", "TypeScript", "Node.js", "Express", "MongoDB", "JWT", "Zod"],
         github: "https://github.com/mohanishp9/petty-revenge-note",
         live: "https://petty-revenge-note.vercel.app/",
@@ -16,8 +16,8 @@ const projects = [
         number: "02",
         title: "Grove Crypto Tracker",
         summary:
-            "A full-stack crypto portfolio tracker designed around clarity, secure authentication, and real-time visibility into holdings and transactions.",
-        impact: "Built to simplify daily portfolio monitoring with live market integrations and a clean transaction view.",
+            "Track your crypto portfolio in one place. Connects to CoinGecko for live prices, shows your holdings and transaction history in a clean dashboard.",
+        impact: "First project using a live external API — dealing with CoinGecko's rate limits taught me about caching and graceful error handling.",
         stack: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "CoinGecko API"],
         github: "https://github.com/mohanishp9/crypto_portfolio_tracker",
         live: "https://grove-crypto-tracker.vercel.app/",
@@ -27,8 +27,8 @@ const projects = [
         number: "03",
         title: "QKart",
         summary:
-            "A complete ecommerce experience with secure authentication, cart management, checkout flows, and a responsive shopping journey from browse to purchase.",
-        impact: "Focused on creating a dependable storefront flow with solid backend foundations and production-ready UX patterns.",
+            "An ecommerce app with the full flow: browse products, add to cart, checkout, order management. Built to learn how to handle cart state, authentication, and product logic end to end.",
+        impact: "First complete ecommerce build. Cart management and checkout logic were the hardest parts — getting state right when items change mid-session.",
         stack: ["React", "Node.js", "Express", "MongoDB", "REST APIs", "Testing"],
         github: "https://github.com/mohanishp9/QKart_Backend",
         live: "https://qkart-mohanish-pingales-projects.vercel.app/",
@@ -38,8 +38,8 @@ const projects = [
         number: "04",
         title: "MP News Feed",
         summary:
-            "A modular Flipboard-style news experience with reusable UI components, feed rendering, and testing-driven DOM behavior.",
-        impact: "Used component thinking and automated validation to keep the frontend maintainable while handling dynamic RSS content.",
+            "A Flipboard-style news reader that pulls from RSS feeds and renders them in a scrollable card layout. Focused on reusable components and test-driven DOM behavior.",
+        impact: "Taught me component architecture — when to split things up, when to keep them together. Also my first time writing tests that check what the user actually sees, not just what functions return.",
         stack: ["JavaScript", "HTML", "CSS", "Bootstrap", "RSS feeds"],
         github: "https://github.com/mohanishp9/News-Board",
         live: "https://mboard-mohanish-pingales-projects.vercel.app/",
@@ -49,8 +49,8 @@ const projects = [
         number: "05",
         title: "MTripDynamic",
         summary:
-            "A travel booking platform with dynamic reservation logic, availability handling, cost calculation, and modular API-backed pages.",
-        impact: "Connected data, booking flows, and frontend rendering into a streamlined travel product experience.",
+            "A travel booking app with search, availability checking, cost calculation, and reservation logic. The backend handles booking flow; the frontend renders it cleanly.",
+        impact: "First time connecting frontend rendering to non-trivial backend logic. Availability checks and cost calculations had to stay consistent across the stack.",
         stack: ["JavaScript", "Express", "LowDB", "REST APIs", "Deployment"],
         github: "https://github.com/mohanishp9/MTripDynamic",
         live: "https://mtripdynamic-mohanish-pingales-projects.vercel.app/",
@@ -61,24 +61,19 @@ const projects = [
 const Projects = () => {
     return (
         <section id="projects" className="section-shell">
-            <div className="section-intro reveal reveal-up">
-                <span className="section-index">03</span>
-                Selected Work
-                <span className="section-line" />
-            </div>
+
 
             <div className="mb-12 grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
                 <div className="reveal reveal-left">
                     <h2 className="section-title">
-                        The work is where
-                        <br />
-                        the details <em>speak.</em>
+                        Things I've built
                     </h2>
                 </div>
                 <div className="reveal reveal-right">
                     <p className="section-copy max-w-[39rem]">
-                        These projects show how I approach different product shapes, from dashboard-like utility to
-                        ecommerce and content-heavy interfaces. Each one sharpened a different part of my craft.
+                        Each of these taught me something different — from managing complex state to working with
+                        external APIs to building checkout flows. They're not all polished products, but they're
+                        honest work.
                     </p>
                 </div>
             </div>
@@ -112,7 +107,7 @@ const Projects = () => {
 
                                 <div className="mb-6 rounded-[1.3rem] border border-white/6 bg-white/[0.025] p-4">
                                     <p className="mb-2 text-[0.62rem] uppercase tracking-[0.24em] text-[var(--metal)]">
-                                        Project note
+                                        What I learned
                                     </p>
                                     <p className="font-cormorant text-[1.08rem] leading-[1.6] text-[var(--mist)]">
                                         {project.impact}
@@ -132,7 +127,7 @@ const Projects = () => {
                                 <div>
                                     <p className="micro-label mb-3">Explore</p>
                                     <p className="font-cormorant text-[1.02rem] leading-[1.6] text-[var(--mist)]">
-                                        View the live build or inspect the code to see how the product is structured.
+                                        Check out the live build or dig into the source code.
                                     </p>
                                 </div>
 

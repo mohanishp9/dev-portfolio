@@ -1,46 +1,40 @@
 const principles = [
     {
         label: "Approach",
-        title: "Quiet interfaces, clear intent",
-        body: "I care about the feeling of a product as much as the implementation behind it. The best interfaces rarely shout; they guide, respond, and stay dependable under pressure.",
+        title: "End to end, not just one layer",
+        body: "I like touching every part of a feature — from the database schema to the button someone clicks. That's where the interesting problems are.",
     },
     {
-        label: "Build style",
-        title: "Strong systems underneath",
-        body: "From API contracts to database modeling and frontend states, I like building foundations that stay maintainable as the product grows and the UI becomes richer.",
+        label: "What I care about",
+        title: "Things that work, not just look good",
+        body: "A polished UI means nothing if the data is wrong or the API is slow. I try to make both sides solid — the interface and the logic behind it.",
     },
 ];
 
 const About = () => {
     return (
         <section id="about" className="section-shell">
-            <div className="section-intro reveal reveal-up">
-                <span className="section-index">01</span>
-                About
-                <span className="section-line" />
-            </div>
+
 
             <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
                 <div className="space-y-8">
                     <div className="reveal reveal-left">
                         <h2 className="section-title max-w-[14ch]">
-                            Calm on the screen,
-                            <br />
-                            rigorous in the <em>system.</em>
+                            I build things
+                            <br />I'd want to use.
                         </h2>
                     </div>
 
                     <div className="reveal reveal-left space-y-6">
                         <p className="section-copy">
-                            I am a full stack developer who enjoys turning complex product requirements into thoughtful,
-                            usable experiences. My strongest work sits at the intersection of engineering discipline and
-                            visual sensitivity, where backend logic, frontend polish, and performance all support the
-                            same user story.
+                            I'm a full stack developer based in Pune. I got into web development because I like
+                            making things people can actually use — not just see, but click through, submit forms on,
+                            come back to.
                         </p>
                         <p className="section-copy">
-                            Whether I am shaping a multi-tenant ecommerce experience or building a lean project from
-                            scratch, I try to make every layer feel intentional, from the information architecture to
-                            the final hover state.
+                            I work mainly with React, Next.js, Node.js, Express, and MongoDB. The part I enjoy most
+                            is where frontend and backend have to talk to each other — getting the data flow right,
+                            making the UI respond the way it should.
                         </p>
                     </div>
 
@@ -63,38 +57,25 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="reveal reveal-right">
-                    <div className="about-portrait rounded-[2rem] p-8 sm:p-10">
-                        <div className="relative flex h-full flex-col justify-between gap-10">
-                            <div className="flex items-start justify-between gap-6">
-                                <div>
-                                    <p className="micro-label mb-4">Studio note</p>
-                                    <p className="max-w-[14rem] font-cormorant text-[1.18rem] leading-[1.55] text-[var(--mist)]">
-                                        Products feel premium when the details are consistent, not when the effects are loud.
-                                    </p>
-                                </div>
-                                <span className="rounded-full border border-[var(--line)] px-3 py-1 text-[0.58rem] uppercase tracking-[0.22em] text-[var(--metal)]">
-                                    Pune, India
-                                </span>
-                            </div>
+                <div className="reveal reveal-right space-y-6">
+                    <div>
+                        <p className="micro-label mb-3">Quick look</p>
+                        <p className="max-w-[24rem] font-cormorant text-[1.18rem] leading-[1.55] text-[var(--mist)]">
+                            Interning @ Indux Technology. Building multi-tenant ecommerce.
+                        </p>
+                    </div>
 
-                            <div className="flex flex-1 items-center justify-center">
-                                <span className="about-mark">MP</span>
-                            </div>
-
-                            <div className="grid gap-4 sm:grid-cols-2">
-                                <div className="metric-card rounded-[1.25rem]">
-                                    <span className="metric-value">5+</span>
-                                    <span className="micro-label">Core technologies used confidently</span>
-                                </div>
-                                <div className="metric-card rounded-[1.25rem]">
-                                    <span className="metric-value">1</span>
-                                    <span className="micro-label">Goal: make every product feel composed</span>
-                                </div>
-                            </div>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="metric-card rounded-[1.25rem]">
+                            <span className="metric-value">5+</span>
+                            <span className="micro-label">Projects on GitHub</span>
+                        </div>
+                        <div className="metric-card rounded-[1.25rem]">
+                            <span className="metric-value">1+</span>
+                            <span className="micro-label">Year building for the web</span>
+                      </div>
                         </div>
                     </div>
-                </div>
             </div>
         </section>
     );

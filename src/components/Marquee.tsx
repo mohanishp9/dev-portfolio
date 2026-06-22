@@ -1,9 +1,9 @@
 const items = [
-    "Design systems with taste",
-    "Interfaces tuned for motion",
-    "Backend foundations that hold",
-    "Case-study thinking with build speed",
-    "Accessible, responsive product craft",
+    "Based in Pune, debugging in TypeScript",
+    "1+ year in, still learning",
+    "Builds to learn, ships to eat",
+    "Reads the docs. Eventually.",
+    "Open to roles — yes, you",
 ];
 
 const Marquee = () => {
