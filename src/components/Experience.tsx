@@ -2,54 +2,75 @@ const Experience = () => {
     return (
         <section id="experience" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24">
             <div className="max-w-7xl">
-                <div className="grid lg:grid-cols-3 gap-16 lg:gap-24">
-                    <div className="lg:col-span-1">
-                        <h2 className="font-inter font-black uppercase text-4xl sm:text-6xl tracking-tight text-slate-50 mb-6">
-                            Operational History
+
+                {/* Issue header */}
+                <div data-reveal className="flex items-center justify-between border-b border-white/10 pb-6 mb-16">
+                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
+                        Issue 05 &nbsp;/&nbsp; Operational History
+                    </span>
+                    <div data-reveal="line" className="h-[1px] flex-1 mx-8 bg-white/10" />
+                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
+                        Timeline
+                    </span>
+                </div>
+
+                <div className="grid lg:grid-cols-[280px_1fr] gap-16 lg:gap-24">
+                    {/* Left */}
+                    <div data-reveal="left">
+                        <div
+                            className="font-inter font-black text-[8rem] leading-none tracking-tight text-white/5 select-none mb-8"
+                            aria-hidden="true"
+                        >
+                            05
+                        </div>
+                        <h2 className="font-inter font-black uppercase text-2xl tracking-tight text-slate-50 leading-tight">
+                            Operational<br />History
                         </h2>
-                        <p className="font-jetbrains text-sm uppercase tracking-widest text-slate-400">
-                            Log of professional deployments
-                        </p>
                     </div>
 
-                    <div className="lg:col-span-2 border-l border-white/10 pl-8 lg:pl-16 relative">
-                        <div className="absolute -left-[5px] top-0 w-[9px] h-[9px] bg-accent" />
-                        
-                        <div className="mb-8">
-                            <h3 className="font-inter font-black uppercase text-3xl sm:text-4xl tracking-tight text-slate-50 mb-2">
-                                Indux Technology
-                            </h3>
-                            <div className="flex flex-wrap items-center gap-4 font-jetbrains text-xs uppercase tracking-widest text-slate-500">
-                                <span>Full Stack Developer Intern</span>
-                                <span className="w-1 h-1 bg-white/20" />
-                                <span>Feb 2026 - Present</span>
-                            </div>
+                    {/* Right — timeline */}
+                    <div data-reveal>
+                        {/* Year chapter break */}
+                        <div className="flex items-center gap-6 mb-12">
+                            <span className="font-inter font-black text-5xl text-slate-50">2026</span>
+                            <div className="h-[1px] flex-1 bg-white/10" />
                         </div>
 
-                        <div className="space-y-16">
-                            <div className="border border-white/10 p-8 hover:bg-white/5 transition-colors">
-                                <h4 className="font-jetbrains text-sm uppercase tracking-widest text-accent mb-4">
-                                    Module // MagikPro & NutriNative
-                                </h4>
-                                <p className="font-inter text-base leading-relaxed text-slate-400">
-                                    Two multi-tenant ecommerce products built on a shared backend. A single codebase
-                                    serves multiple brands, each with its own domain and product catalog. My work here
-                                    was mostly on the backend — building out API routes, writing database queries, handling
-                                    tenant-specific business logic, and making sure the data layer kept up with what the
-                                    frontend needed.
+                        {/* Company block */}
+                        <div className="border-l border-accent/60 pl-8 mb-16">
+                            <div data-stagger="1" className="mb-8">
+                                <h3 className="font-inter font-black uppercase text-3xl text-slate-50 mb-1">
+                                    Indux Technology
+                                </h3>
+                                <p className="font-jetbrains text-xs uppercase tracking-widest text-slate-500">
+                                    Full Stack Developer Intern &nbsp;/&nbsp; Feb 2026 – Present
                                 </p>
                             </div>
 
-                            <div className="border border-white/10 p-8 hover:bg-white/5 transition-colors">
-                                <h4 className="font-jetbrains text-sm uppercase tracking-widest text-accent mb-4">
-                                    Module // InduxCRM
-                                </h4>
-                                <p className="font-inter text-base leading-relaxed text-slate-400">
-                                    An internal CRM tool where I worked across the stack — building out both the API and
-                                    the frontend views. Handling everything from database schemas to the UI that displays
-                                    and manipulates that data. It was the kind of project where you can't hide behind one
-                                    side of the stack, which made it a good learning ground.
-                                </p>
+                            <div className="grid sm:grid-cols-2 gap-px bg-white/10">
+                                {[
+                                    {
+                                        label: "Module // MagikPro & NutriNative",
+                                        body: "Two multi-tenant ecommerce products built on a shared backend. My work was mostly on the backend — building API routes, writing database queries, handling tenant-specific business logic, and making sure the data layer kept up with what the frontend needed.",
+                                    },
+                                    {
+                                        label: "Module // InduxCRM",
+                                        body: "An internal CRM tool where I worked across the stack — building out both the API and the frontend views. Handling everything from database schemas to the UI. It was the kind of project where you can't hide behind one side of the stack.",
+                                    },
+                                ].map((mod, i) => (
+                                    <div
+                                        key={mod.label}
+                                        data-stagger={String(i + 2)}
+                                        className="bg-zinc-950 p-8 hover:bg-white/[0.025] transition-colors"
+                                    >
+                                        <p className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-accent mb-4">
+                                            {mod.label}
+                                        </p>
+                                        <p className="font-inter text-sm leading-relaxed text-slate-400">
+                                            {mod.body}
+                                        </p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>

@@ -13,42 +13,86 @@ const principles = [
 
 const About = () => {
     return (
-        <section id="about" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24">
+        <section id="about" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 overflow-hidden">
             <div className="max-w-7xl">
-                <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-                    <div>
-                        <h2 className="font-inter font-black uppercase text-3xl sm:text-5xl tracking-tight text-slate-50 mb-8">
-                            System Specifications
+
+                {/* Issue header */}
+                <div data-reveal className="flex items-center justify-between border-b border-white/10 pb-6 mb-16">
+                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
+                        Issue 02 &nbsp;/&nbsp; Profile
+                    </span>
+                    <div data-reveal="line" className="h-[1px] flex-1 mx-8 bg-white/10" />
+                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
+                        The Engineer
+                    </span>
+                </div>
+
+                {/* Two-column editorial spread */}
+                <div className="grid lg:grid-cols-[280px_1fr] gap-16 lg:gap-24">
+
+                    {/* Left — masthead column */}
+                    <div data-reveal="left">
+                        {/* Large issue number as design element */}
+                        <div
+                            className="font-inter font-black text-[8rem] leading-none tracking-tight text-white/5 select-none mb-8"
+                            aria-hidden="true"
+                        >
+                            02
+                        </div>
+                        <h2 className="font-inter font-black uppercase text-2xl tracking-tight text-slate-50 mb-6 leading-tight">
+                            About<br />The Engineer
                         </h2>
-                        <div className="space-y-6 border-l border-white/10 pl-6 lg:pl-8">
-                            <p className="font-inter text-lg leading-relaxed text-slate-400">
-                                I'm a full stack developer based in Pune. I got into web development because I like
-                                making things people can actually use — not just see, but click through, submit forms on,
-                                come back to.
-                            </p>
-                            <p className="font-inter text-lg leading-relaxed text-slate-400">
-                                I work mainly with React, Next.js, Node.js, Express, and MongoDB. The part I enjoy most
-                                is where frontend and backend have to talk to each other — getting the data flow right,
-                                making the UI respond the way it should.
-                            </p>
+                        {/* Quick spec table */}
+                        <div className="border-t border-white/10">
+                            {[
+                                { k: "Based", v: "Pune, India" },
+                                { k: "Focus", v: "Full Stack" },
+                                { k: "Status", v: "SDE Intern" },
+                            ].map((row) => (
+                                <div key={row.k} className="flex justify-between border-b border-white/10 py-3">
+                                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-600">{row.k}</span>
+                                    <span className="font-inter text-sm text-slate-300">{row.v}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
-                    <div className="grid gap-6">
-                        {principles.map((item, index) => (
-                            <article
-                                key={item.title}
-                                className="border border-white/10 p-8 hover:bg-white/5 transition-colors"
-                            >
-                                <p className="font-jetbrains text-xs uppercase tracking-widest text-slate-500 mb-4">{item.label}</p>
-                                <h3 className="mb-3 font-inter font-bold text-xl tracking-tight text-slate-50">
-                                    {item.title}
-                                </h3>
-                                <p className="font-inter text-base leading-relaxed text-slate-400">
-                                    {item.body}
-                                </p>
-                            </article>
-                        ))}
+                    {/* Right — editorial prose */}
+                    <div data-reveal>
+                        <div className="border-l border-accent/60 pl-8 mb-12">
+                            <p className="font-inter text-xl leading-relaxed text-slate-300 mb-6">
+                                I'm a full stack developer based in Pune. I got into web
+                                development because I like making things people can actually use —
+                                not just see, but click through, submit forms on, come back to.
+                            </p>
+                            <p className="font-inter text-lg leading-relaxed text-slate-400">
+                                I work mainly with React, Next.js, Node.js, Express, and MongoDB.
+                                The part I enjoy most is where frontend and backend have to talk
+                                to each other — getting the data flow right, making the UI respond
+                                the way it should.
+                            </p>
+                        </div>
+
+                        {/* Principle cards — staggered in */}
+                        <div className="grid sm:grid-cols-2 gap-px bg-white/10">
+                            {principles.map((item, i) => (
+                                <article
+                                    key={item.title}
+                                    data-stagger={String(i + 1)}
+                                    className="bg-zinc-950 p-8 hover:bg-white/[0.03] transition-colors"
+                                >
+                                    <p className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-accent mb-3">
+                                        {item.label}
+                                    </p>
+                                    <h3 className="font-inter font-bold text-base text-slate-50 mb-3 leading-snug">
+                                        {item.title}
+                                    </h3>
+                                    <p className="font-inter text-sm leading-relaxed text-slate-400">
+                                        {item.body}
+                                    </p>
+                                </article>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
