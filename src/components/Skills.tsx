@@ -18,7 +18,7 @@ const capabilities = [
 
 const Skills = () => {
     return (
-        <section id="skills" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24">
+        <section id="skills" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 overflow-hidden">
             <div className="max-w-7xl">
 
                 {/* Issue header */}
@@ -32,8 +32,8 @@ const Skills = () => {
                     </span>
                 </div>
 
-                <div className="grid lg:grid-cols-[280px_1fr] gap-16 lg:gap-24 mb-16">
-                    <div data-reveal="left">
+                <div className="grid lg:grid-cols-[280px_1fr] gap-16 lg:gap-24 mb-16 relative">
+                    <div data-reveal="left" className="relative z-10 pt-8">
                         <div
                             className="font-inter font-black text-[8rem] leading-none tracking-tight text-white/5 select-none mb-8"
                             aria-hidden="true"

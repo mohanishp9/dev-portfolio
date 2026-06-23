@@ -25,12 +25,7 @@ body {
   background-color: #09090b; /* zinc-950 */
   color: #f8fafc; /* slate-50 */
   font-family: var(--font-inter), sans-serif;
-  /* Global Grid Background for Industrial Aesthetic */
-  background-image: 
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 4rem 4rem;
-  background-position: center center;
+  cursor: none;
 }
 
 ::selection {
@@ -38,8 +33,9 @@ body {
   color: #fff;
 }
 
-a {
+a, button {
   color: inherit;
+  cursor: none !important;
 }
 
 .font-inter {

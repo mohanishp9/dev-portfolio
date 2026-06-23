@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DecryptedText from "@/components/DecryptedText";
 
 const Hero = () => {
     return (
@@ -34,11 +35,11 @@ const Hero = () => {
                     {/* Display name — huge cover headline */}
                     <h1
                         data-reveal
-                        className="font-inter font-black uppercase leading-[0.82] tracking-[-0.03em] text-slate-50 mb-10"
+                        className="font-inter font-black uppercase leading-[0.82] tracking-[-0.03em] text-slate-50 mb-10 flex flex-col"
                         style={{ fontSize: "clamp(4rem, 12vw, 10rem)" }}
                     >
-                        Mohanish<br />
-                        <span className="text-white/20">Pingale</span>
+                        <DecryptedText text="Mohanish" />
+                        <DecryptedText text="Pingale" className="text-white/20" />
                     </h1>
 
                     {/* Divider */}

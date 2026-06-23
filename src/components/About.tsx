@@ -31,8 +31,7 @@ const About = () => {
                 <div className="grid lg:grid-cols-[280px_1fr] gap-16 lg:gap-24">
 
                     {/* Left — masthead column */}
-                    <div data-reveal="left">
-                        {/* Large issue number as design element */}
+                    <div data-reveal="left" className="relative z-10 pt-8">
                         <div
                             className="font-inter font-black text-[8rem] leading-none tracking-tight text-white/5 select-none mb-8"
                             aria-hidden="true"

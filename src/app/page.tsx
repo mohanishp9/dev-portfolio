@@ -11,17 +11,24 @@ import About from "@/components/About";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import Experience from "@/components/Experience";
+
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import DynamicGrid from "@/components/DynamicGrid";
+import Telemetry from "@/components/Telemetry";
+import CrosshairCursor from "@/components/CrosshairCursor";
 
 export default function Home() {
   useScrollReveal();
 
   return (
     <>
+      <CrosshairCursor />
+      <DynamicGrid />
       <ReadingProgress />
+      <Telemetry />
       <Navbar />
-      <main>
+      <main className="min-h-screen relative selection:bg-accent selection:text-black">
         <Hero />
         <Marquee />
         <About />
