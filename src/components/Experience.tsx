@@ -39,12 +39,17 @@ const Experience = () => {
                         {/* Company block */}
                         <div className="border-l border-accent/60 pl-8 mb-16">
                             <div data-stagger="1" className="mb-8">
-                                <h3 className="font-inter font-black uppercase text-3xl text-slate-50 mb-1">
+                                <h3 className="font-inter font-black uppercase text-3xl text-slate-50 mb-3">
                                     Indux Technology
                                 </h3>
-                                <p className="font-jetbrains text-xs uppercase tracking-widest text-slate-500">
-                                    Full Stack Developer Intern &nbsp;/&nbsp; Feb 2026 – Present
-                                </p>
+                                <div className="flex flex-wrap items-center gap-3">
+                                    <span className="font-jetbrains text-[0.65rem] font-bold uppercase tracking-[0.2em] bg-accent text-black px-3 py-1">
+                                        Full Stack Developer Intern
+                                    </span>
+                                    <span className="font-jetbrains text-[0.65rem] uppercase tracking-[0.2em] text-slate-500">
+                                        Feb 2026 – Present
+                                    </span>
+                                </div>
                             </div>
 
                             <div className="grid sm:grid-cols-2 gap-px bg-white/10">

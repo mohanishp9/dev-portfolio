@@ -81,9 +81,9 @@ const Navbar = () => {
                     ))}
                 </ul>
 
-                <div className="hidden items-center gap-2 sm:flex">
-                    <span className="w-1.5 h-1.5 bg-green-500 rounded-none animate-pulse" />
-                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-400">
+                <div className="hidden items-center sm:flex bg-[#ccff00] px-3 py-1.5 gap-2">
+                    <span className="w-1.5 h-1.5 bg-black animate-pulse" />
+                    <span className="font-jetbrains text-[0.6rem] font-bold uppercase tracking-widest text-black">
                         Available
                     </span>
                 </div>

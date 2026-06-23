@@ -23,9 +23,11 @@ const Hero = () => {
                 <div>
                     {/* Kicker */}
                     <div data-reveal className="flex items-center gap-3 mb-8">
-                        <div className="h-[2px] w-8 bg-accent" />
-                        <span className="font-jetbrains text-xs uppercase tracking-[0.3em] text-accent">
+                        <span className="font-jetbrains text-[0.65rem] font-bold uppercase tracking-[0.2em] bg-[#ccff00] text-black px-3 py-1">
                             System Online
+                        </span>
+                        <span className="font-jetbrains text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">
+                            V 1.0.0
                         </span>
                     </div>
 
@@ -51,7 +53,7 @@ const Hero = () => {
                         <div className="flex flex-wrap gap-4">
                             <Link
                                 href="#projects"
-                                className="font-jetbrains text-xs uppercase tracking-widest border border-white/20 px-6 py-3.5 hover:bg-white/5 hover:border-white/40 transition-colors"
+                                className="font-jetbrains text-xs uppercase tracking-widest text-slate-300 border border-white/20 px-6 py-3.5 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-colors"
                             >
                                 View Work &#8594;
                             </Link>

@@ -88,7 +88,7 @@ const Projects = () => {
                     <div data-reveal className="bg-zinc-950 p-10 flex flex-col justify-between min-h-[480px] hover:bg-white/[0.025] transition-colors group">
                         <div>
                             <div className="flex items-center justify-between mb-8">
-                                <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-accent">
+                                <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-black bg-[#ccff00] px-3 py-1 font-bold">
                                     Featured &nbsp;/&nbsp; {featuredProject.year}
                                 </span>
                                 <span
@@ -98,7 +98,7 @@ const Projects = () => {
                                     {featuredProject.number}
                                 </span>
                             </div>
-                            <h3 className="font-inter font-black uppercase text-3xl sm:text-4xl tracking-tight text-slate-50 mb-5 leading-tight group-hover:text-accent transition-colors">
+                            <h3 className="font-inter font-black uppercase text-3xl sm:text-4xl tracking-tight text-slate-50 mb-5 leading-tight group-hover:text-white transition-colors">
                                 {featuredProject.title}
                             </h3>
                             <p className="font-inter text-base leading-relaxed text-slate-400 max-w-lg mb-6">
@@ -106,18 +106,18 @@ const Projects = () => {
                             </p>
                             <div className="flex flex-wrap gap-2 mb-8">
                                 {featuredProject.stack.map((tech) => (
-                                    <span key={tech} className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-500 border border-white/10 px-3 py-1.5">
+                                    <span key={tech} className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-500 border border-white/10 px-3 py-1.5 bg-white/[0.02]">
                                         {tech}
                                     </span>
                                 ))}
                             </div>
                         </div>
-                        <div className="flex gap-6 border-t border-white/10 pt-6">
+                        <div className="flex gap-4 border-t border-white/10 pt-6">
                             <a
                                 href={featuredProject.github}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="font-jetbrains text-xs uppercase tracking-widest text-slate-400 hover:text-accent transition-colors"
+                                className="font-jetbrains text-[0.65rem] uppercase tracking-widest text-slate-300 border border-white/20 px-5 py-2.5 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all"
                             >
                                 Source Code &#8594;
                             </a>
@@ -125,9 +125,10 @@ const Projects = () => {
                                 href={featuredProject.live}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="font-jetbrains text-xs uppercase tracking-widest text-accent border-b border-accent pb-0.5 hover:text-white hover:border-white transition-colors"
+                                className="font-jetbrains text-[0.65rem] uppercase tracking-widest border border-[#ccff00] bg-[#ccff00] px-5 py-2.5 hover:bg-[#ff5500] hover:border-[#ff5500] transition-all font-bold"
+                                style={{ color: "#000000" }}
                             >
-                                Live &#8594;
+                                Live View &#8594;
                             </a>
                         </div>
                     </div>
@@ -157,11 +158,11 @@ const Projects = () => {
                                         {project.summary}
                                     </p>
                                 </div>
-                                <div className="flex gap-5 border-t border-white/10 pt-4">
-                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-500 hover:text-accent transition-colors">
+                                <div className="flex gap-3 border-t border-white/10 pt-5 mt-auto">
+                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-400 border border-white/20 px-4 py-2 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all">
                                         Source &#8594;
                                     </a>
-                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-400 hover:text-accent transition-colors">
+                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-300 border border-white/20 px-4 py-2 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all">
                                         Live &#8594;
                                     </a>
                                 </div>
@@ -186,9 +187,9 @@ const Projects = () => {
                                 {project.title}
                             </h3>
                             <p className="font-inter text-xs leading-relaxed text-slate-500 mb-5">{project.impact}</p>
-                            <div className="flex gap-5">
-                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-500 hover:text-accent transition-colors">Source &#8594;</a>
-                                <a href={project.live} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-400 hover:text-accent transition-colors">Live &#8594;</a>
+                            <div className="flex gap-3 mt-auto pt-4 border-t border-white/10">
+                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-400 border border-white/20 px-3 py-1.5 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all">Source &#8594;</a>
+                                <a href={project.live} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-300 border border-white/20 px-3 py-1.5 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all">Live &#8594;</a>
                             </div>
                         </div>
                     ))}

@@ -3,6 +3,7 @@
 @theme {
   --font-inter: var(--font-inter);
   --font-jetbrains: var(--font-jetbrains);
+  --color-accent: #ff5500;
 }
 
 :root {

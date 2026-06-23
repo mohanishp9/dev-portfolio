@@ -61,7 +61,7 @@ const Contact = () => {
                                         href={link.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="font-jetbrains text-xs uppercase tracking-widest text-slate-400 border border-white/10 px-6 py-3.5 hover:bg-accent hover:text-black hover:border-accent transition-all"
+                                        className="font-jetbrains text-xs uppercase tracking-widest text-slate-400 border border-white/10 px-6 py-3.5 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all"
                                     >
                                         {link.label}
                                     </a>

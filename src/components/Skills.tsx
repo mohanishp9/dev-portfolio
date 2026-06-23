@@ -89,7 +89,7 @@ const Skills = () => {
                                 </div>
                             </div>
                             <div className="px-6 py-8 flex items-center">
-                                <span className="font-jetbrains text-xs text-slate-600">{String(cap.items.length).padStart(2, "0")}</span>
+                                <span className="font-jetbrains text-[0.6rem] font-bold bg-[#3b82f6] text-white px-2 py-1">{String(cap.items.length).padStart(2, "0")}</span>
                             </div>
                         </div>
                     ))}
