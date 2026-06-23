@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-          className={`${inter.variable} ${jetbrainsMono.variable} font-inter antialiased bg-zinc-950 text-slate-50`}
+          className={`${inter.variable} ${jetbrainsMono.variable} font-inter antialiased`}
       >
 
         {children}

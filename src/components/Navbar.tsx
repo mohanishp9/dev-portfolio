@@ -17,12 +17,15 @@ const Navbar = () => {
     const [activeSection, setActiveSection] = useState<string>("about");
 
     useEffect(() => {
+        const container = document.getElementById("main-scroll-container");
+        if (!container) return;
+
         const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
+            setScrolled(container.scrollTop > 20);
         };
 
         handleScroll();
-        window.addEventListener("scroll", handleScroll, { passive: true });
+        container.addEventListener("scroll", handleScroll, { passive: true });
 
         const sections = navItems
             .map((item) => document.getElementById(item.id))
@@ -37,6 +40,7 @@ const Navbar = () => {
                 });
             },
             {
+                root: container,
                 rootMargin: "-20% 0px -60% 0px",
                 threshold: 0,
             }
@@ -46,17 +50,17 @@ const Navbar = () => {
 
         return () => {
             observer.disconnect();
-            window.removeEventListener("scroll", handleScroll);
+            container.removeEventListener("scroll", handleScroll);
         };
     }, []);
 
     return (
         <nav
             className={`
-                fixed top-4 left-1/2 z-[120] w-[calc(100%-2rem)] max-w-5xl -translate-x-1/2 border transition-all duration-300
+                sticky top-12 sm:top-16 z-[120] mx-auto w-[calc(100%-2rem)] max-w-5xl border transition-all duration-500 rounded-2xl mb-12
                 ${scrolled
-                    ? "border-white/20 bg-zinc-950/85 backdrop-blur-md shadow-xl"
-                    : "border-white/5 bg-zinc-950/40 backdrop-blur-sm"}
+                    ? "border-white/20 bg-white/[0.03] backdrop-blur-md backdrop-saturate-150 shadow-[0_8px_32px_rgba(0,0,0,0.8)]"
+                    : "border-white/10 bg-white/[0.02] backdrop-blur-sm shadow-lg"}
             `}
         >
             <div className="flex h-14 items-center justify-between px-6 lg:px-8">
@@ -81,7 +85,7 @@ const Navbar = () => {
                     ))}
                 </ul>
 
-                <div className="hidden items-center sm:flex bg-[#ccff00] px-3 py-1.5 gap-2">
+                <div className="hidden items-center sm:flex bg-[#ccff00] px-3.5 py-1.5 gap-2 rounded-lg">
                     <span className="w-1.5 h-1.5 bg-black animate-pulse" />
                     <span className="font-jetbrains text-[0.6rem] font-bold uppercase tracking-widest text-black">
                         Available

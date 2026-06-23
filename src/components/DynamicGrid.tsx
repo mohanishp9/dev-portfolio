@@ -1,14 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, useSpring, useMotionTemplate } from "framer-motion";
 
 export default function DynamicGrid() {
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+    const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
-            setMousePos({ x: e.clientX, y: e.clientY });
+            if (containerRef.current) {
+                const rect = containerRef.current.getBoundingClientRect();
+                setMousePos({ 
+                    x: e.clientX - rect.left, 
+                    y: e.clientY - rect.top 
+                });
+            }
         };
         window.addEventListener("mousemove", handleMouseMove);
         return () => window.removeEventListener("mousemove", handleMouseMove);
@@ -26,7 +33,7 @@ export default function DynamicGrid() {
     const maskImage = useMotionTemplate`radial-gradient(circle 300px at ${springX}px ${springY}px, black 0%, transparent 100%)`;
 
     return (
-        <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden bg-[#09090b]">
+        <div ref={containerRef} className="absolute inset-0 pointer-events-none z-[-1] overflow-hidden">
             {/* Base very dim grid */}
             <div 
                 className="absolute inset-0"
