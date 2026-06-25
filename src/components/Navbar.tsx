@@ -59,14 +59,14 @@ const Navbar = () => {
                     : "border-white/10 bg-white/[0.02] backdrop-blur-sm shadow-lg"}
             `}
         >
-            <div className="flex h-14 items-center justify-between px-6 lg:px-8">
+            <div className="flex h-16 items-center justify-between px-6 lg:px-8">
                 <Link
                     href="/"
                     className="flex shrink-0 items-center gap-2 no-underline group"
                     aria-label="mohanish — home"
                 >
                     <span className="w-2 h-2 bg-accent group-hover:scale-150 transition-transform"></span>
-                    <span className="font-jetbrains text-xs tracking-widest text-slate-50 uppercase">
+                    <span className="font-jetbrains text-sm font-bold tracking-widest text-slate-50 uppercase">
                         M.Pingale
                     </span>
                 </Link>
@@ -83,7 +83,7 @@ const Navbar = () => {
 
                 <div className="hidden items-center sm:flex bg-[#ccff00] px-3.5 py-1.5 gap-2 rounded-lg">
                     <span className="w-1.5 h-1.5 bg-black animate-pulse" />
-                    <span className="font-jetbrains text-[0.6rem] font-bold uppercase tracking-widest text-black">
+                    <span className="font-jetbrains text-xs font-bold uppercase tracking-widest text-black">
                         Available
                     </span>
                 </div>
