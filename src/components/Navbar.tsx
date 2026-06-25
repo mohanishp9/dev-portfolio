@@ -17,15 +17,12 @@ const Navbar = () => {
     const [activeSection, setActiveSection] = useState<string>("about");
 
     useEffect(() => {
-        const container = document.getElementById("main-scroll-container");
-        if (!container) return;
-
         const handleScroll = () => {
-            setScrolled(container.scrollTop > 20);
+            setScrolled(window.scrollY > 20);
         };
 
         handleScroll();
-        container.addEventListener("scroll", handleScroll, { passive: true });
+        window.addEventListener("scroll", handleScroll, { passive: true });
 
         const sections = navItems
             .map((item) => document.getElementById(item.id))
@@ -40,7 +37,6 @@ const Navbar = () => {
                 });
             },
             {
-                root: container,
                 rootMargin: "-20% 0px -60% 0px",
                 threshold: 0,
             }
@@ -50,14 +46,14 @@ const Navbar = () => {
 
         return () => {
             observer.disconnect();
-            container.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("scroll", handleScroll);
         };
     }, []);
 
     return (
         <nav
             className={`
-                sticky top-12 sm:top-16 z-[120] mx-auto w-[calc(100%-2rem)] max-w-5xl border transition-all duration-500 rounded-2xl mb-12
+                sticky top-6 z-[120] mx-auto w-[calc(100%-2rem)] max-w-5xl border transition-all duration-500 rounded-2xl mb-12
                 ${scrolled
                     ? "border-white/20 bg-white/[0.03] backdrop-blur-md backdrop-saturate-150 shadow-[0_8px_32px_rgba(0,0,0,0.8)]"
                     : "border-white/10 bg-white/[0.02] backdrop-blur-sm shadow-lg"}

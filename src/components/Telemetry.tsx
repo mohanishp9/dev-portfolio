@@ -41,12 +41,12 @@ export default function Telemetry() {
     if (!mounted) return null;
 
     return (
-        <div className="fixed bottom-6 right-6 sm:right-12 z-50 pointer-events-none flex flex-col items-end gap-1 opacity-90 drop-shadow-md">
-            <div className="font-jetbrains text-[0.65rem] font-bold uppercase tracking-widest text-black/60">
-                SYS_T: <span className="text-black">{time}</span>
+        <div className="fixed bottom-6 right-6 z-50 pointer-events-none flex flex-col items-end gap-1 opacity-70">
+            <div className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-500">
+                SYS_T: <span className="text-white">{time}</span>
             </div>
-            <div className="font-jetbrains text-[0.65rem] font-bold uppercase tracking-widest text-black/60">
-                LATENCY: <span className="text-black">{ping}MS</span>
+            <div className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-500">
+                LATENCY: <span className="text-[#ccff00]">{ping}MS</span>
             </div>
         </div>
     );
