@@ -3,6 +3,7 @@
 @theme {
   --font-inter: var(--font-inter);
   --font-jetbrains: var(--font-jetbrains);
+  --font-playfair: var(--font-playfair);
   --color-accent: #ff5500;
 }
 
@@ -48,6 +49,10 @@ a, button {
 
 .font-jetbrains {
   font-family: var(--font-jetbrains), monospace;
+}
+
+.font-playfair {
+  font-family: var(--font-playfair), serif;
 }
 
 /* ── Scroll Reveal System ───────────────────────────── */

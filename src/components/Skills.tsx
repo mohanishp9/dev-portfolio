@@ -27,7 +27,7 @@ const Skills = () => {
                         Issue 03 &nbsp;/&nbsp; Technical Specification
                     </span>
                     <div data-reveal="line" className="h-[1px] flex-1 mx-8 bg-white/10" />
-                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
+                    <span className="font-playfair italic text-3xl tracking-tight text-slate-400">
                         Spec Sheet
                     </span>
                 </div>
@@ -40,7 +40,7 @@ const Skills = () => {
                         >
                             03
                         </div>
-                        <h2 className="font-inter font-black uppercase text-2xl tracking-tight text-slate-50 leading-tight">
+                        <h2 className="font-playfair italic uppercase text-3xl tracking-tight text-slate-50 leading-tight">
                             Technical<br />Specification
                         </h2>
                     </div>
@@ -55,9 +55,9 @@ const Skills = () => {
                 {/* Spec table — rows stagger in */}
                 <div data-reveal className="border-t border-white/10">
                     {/* Table header */}
-                    <div className="grid grid-cols-3 lg:grid-cols-[1fr_2fr_auto] gap-px bg-white/10">
+                    <div className="grid grid-cols-3 lg:grid-cols-[1fr_2fr_auto] border-b border-white/10">
                         {["Module", "Specification", "Components"].map((h) => (
-                            <div key={h} className="bg-zinc-950 px-6 py-3">
+                            <div key={h} className="px-6 py-3">
                                 <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-slate-600">{h}</span>
                             </div>
                         ))}
@@ -68,10 +68,10 @@ const Skills = () => {
                         <div
                             key={cap.title}
                             data-stagger={String(i + 1)}
-                            className="grid lg:grid-cols-[1fr_2fr_auto] border-t border-white/10 hover:bg-white/[0.025] transition-colors group"
+                            className="grid lg:grid-cols-[1fr_2fr_auto] border-b border-white/10 group"
                         >
                             <div className="px-6 py-8 border-b lg:border-b-0 lg:border-r border-white/10">
-                                <h3 className="font-inter font-black uppercase text-xl text-slate-50">
+                                <h3 className="font-playfair italic text-2xl text-slate-50">
                                     {cap.title}
                                 </h3>
                             </div>

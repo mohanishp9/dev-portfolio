@@ -32,7 +32,7 @@ const projects = [
         stack: ["React", "Node.js", "Express", "MongoDB", "REST APIs", "Testing"],
         github: "https://github.com/mohanishp9/QKart_Backend",
         live: "https://qkart-mohanish-pingales-projects.vercel.app/",
-        year: "2024",
+        year: "2025",
         featured: false,
     },
     {
@@ -44,7 +44,7 @@ const projects = [
         stack: ["JavaScript", "HTML", "CSS", "Bootstrap", "RSS feeds"],
         github: "https://github.com/mohanishp9/News-Board",
         live: "https://mboard-mohanish-pingales-projects.vercel.app/",
-        year: "2024",
+        year: "2025",
         featured: false,
     },
     {
@@ -56,7 +56,7 @@ const projects = [
         stack: ["JavaScript", "Express", "LowDB", "REST APIs"],
         github: "https://github.com/mohanishp9/MTripDynamic",
         live: "https://mtripdynamic-mohanish-pingales-projects.vercel.app/",
-        year: "2024",
+        year: "2025",
         featured: false,
     },
 ];
@@ -76,16 +76,16 @@ const Projects = () => {
                         Issue 04 &nbsp;/&nbsp; Selected Work
                     </span>
                     <div data-reveal="line" className="h-[1px] flex-1 mx-8 bg-white/10" />
-                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
-                        Feature Article
+                    <span className="font-playfair italic text-3xl tracking-tight text-slate-400">
+                        Selected Works
                     </span>
                 </div>
 
                 {/* Hero project + secondary — magazine spread */}
-                <div className="grid lg:grid-cols-[3fr_2fr] gap-px bg-white/10 mb-px">
+                <div className="grid lg:grid-cols-[3fr_2fr] border-b border-white/10">
 
                     {/* LEAD STORY */}
-                    <div data-reveal className="bg-zinc-950 p-10 flex flex-col justify-between min-h-[480px] hover:bg-white/[0.025] transition-colors group">
+                    <div data-reveal className="p-8 sm:p-12 lg:pl-0 flex flex-col justify-between min-h-[480px] border-b lg:border-b-0 lg:border-r border-white/10 group">
                         <div>
                             <div className="flex items-center justify-between mb-8">
                                 <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-black bg-[#ccff00] px-3 py-1 font-bold">
@@ -134,13 +134,13 @@ const Projects = () => {
                     </div>
 
                     {/* Secondary stories column */}
-                    <div className="flex flex-col gap-px">
+                    <div className="flex flex-col">
                         {secondaryProjects.map((project, i) => (
                             <div
                                 key={project.title}
                                 data-reveal
                                 data-stagger={String(i + 1)}
-                                className="bg-zinc-950 p-8 flex flex-col justify-between flex-1 hover:bg-white/[0.025] transition-colors group"
+                                className={`p-8 sm:p-12 lg:pr-0 flex flex-col justify-between flex-1 group ${i === 0 ? "border-b border-white/10" : ""}`}
                             >
                                 <div>
                                     <div className="flex items-center justify-between mb-5">
@@ -172,12 +172,12 @@ const Projects = () => {
                 </div>
 
                 {/* Strip — remaining projects */}
-                <div data-reveal className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/10">
+                <div data-reveal className="grid sm:grid-cols-2 lg:grid-cols-3">
                     {stripProjects.map((project, i) => (
                         <div
                             key={project.title}
                             data-stagger={String(i + 1)}
-                            className="bg-zinc-950 p-8 hover:bg-white/[0.025] transition-colors group"
+                            className="p-8 sm:p-12 border-r border-b border-white/10 group [&:nth-child(3n)]:border-r-0 [&:nth-child(3n+1)]:lg:pl-0"
                         >
                             <div className="flex items-start justify-between mb-4">
                                 <span className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-600">{project.year}</span>

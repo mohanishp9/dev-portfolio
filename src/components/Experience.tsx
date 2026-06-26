@@ -9,7 +9,7 @@ const Experience = () => {
                         Issue 05 &nbsp;/&nbsp; Operational History
                     </span>
                     <div data-reveal="line" className="h-[1px] flex-1 mx-8 bg-white/10" />
-                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
+                    <span className="font-playfair italic text-3xl tracking-tight text-slate-400">
                         Timeline
                     </span>
                 </div>
@@ -23,7 +23,7 @@ const Experience = () => {
                         >
                             05
                         </div>
-                        <h2 className="font-inter font-black uppercase text-2xl tracking-tight text-slate-50 leading-tight">
+                        <h2 className="font-playfair italic uppercase text-3xl tracking-tight text-slate-50 leading-tight">
                             Operational<br />History
                         </h2>
                     </div>
@@ -39,7 +39,7 @@ const Experience = () => {
                         {/* Company block */}
                         <div className="border-l border-accent/60 pl-8 mb-16">
                             <div data-stagger="1" className="mb-8">
-                                <h3 className="font-inter font-black uppercase text-3xl text-slate-50 mb-3">
+                                <h3 className="font-playfair italic uppercase text-4xl text-slate-50 mb-3">
                                     Indux Technology
                                 </h3>
                                 <div className="flex flex-wrap items-center gap-3">
@@ -52,7 +52,7 @@ const Experience = () => {
                                 </div>
                             </div>
 
-                            <div className="grid sm:grid-cols-2 gap-px bg-white/10">
+                            <div className="grid sm:grid-cols-2 gap-12 pt-8 border-t border-white/10">
                                 {[
                                     {
                                         label: "Module // MagikPro & NutriNative",
@@ -66,7 +66,7 @@ const Experience = () => {
                                     <div
                                         key={mod.label}
                                         data-stagger={String(i + 2)}
-                                        className="bg-zinc-950 p-8 hover:bg-white/[0.025] transition-colors"
+                                        className="flex flex-col"
                                     >
                                         <p className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-accent mb-4">
                                             {mod.label}

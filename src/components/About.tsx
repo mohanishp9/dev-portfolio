@@ -22,7 +22,7 @@ const About = () => {
                         Issue 02 &nbsp;/&nbsp; Profile
                     </span>
                     <div data-reveal="line" className="h-[1px] flex-1 mx-8 bg-white/10" />
-                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
+                    <span className="font-playfair italic text-3xl tracking-tight text-slate-400">
                         The Engineer
                     </span>
                 </div>
@@ -38,7 +38,7 @@ const About = () => {
                         >
                             02
                         </div>
-                        <h2 className="font-inter font-black uppercase text-2xl tracking-tight text-slate-50 mb-6 leading-tight">
+                        <h2 className="font-playfair italic uppercase text-3xl tracking-tight text-slate-50 mb-6 leading-tight">
                             About<br />The Engineer
                         </h2>
                         {/* Quick spec table */}
@@ -58,13 +58,16 @@ const About = () => {
 
                     {/* Right — editorial prose */}
                     <div data-reveal>
-                        <div className="border-l border-accent/60 pl-8 mb-12">
-                            <p className="font-inter text-xl leading-relaxed text-slate-300 mb-6">
+                        <div 
+                            className="mb-16 text-slate-300 font-playfair sm:columns-2 gap-12"
+                            style={{ columnRule: "1px solid rgba(255,255,255,0.1)" }}
+                        >
+                            <p className="text-xl leading-relaxed mb-6 break-inside-avoid">
                                 I'm a full stack developer based in Pune. I got into web
                                 development because I like making things people can actually use —
                                 not just see, but click through, submit forms on, come back to.
                             </p>
-                            <p className="font-inter text-lg leading-relaxed text-slate-400">
+                            <p className="text-lg leading-relaxed break-inside-avoid">
                                 I work mainly with React, Next.js, Node.js, Express, and MongoDB.
                                 The part I enjoy most is where frontend and backend have to talk
                                 to each other — getting the data flow right, making the UI respond
@@ -72,40 +75,25 @@ const About = () => {
                             </p>
                         </div>
 
-                        {/* Principle cards — staggered in */}
-                        <div className="grid sm:grid-cols-2 gap-px bg-white/10">
-                            {principles.map((item, i) => {
-                                // Make the first card a bright, premium accent block
-                                const isHighlighted = i === 0;
-                                
-                                return (
-                                    <article
-                                        key={item.title}
-                                        data-stagger={String(i + 1)}
-                                        className={`p-8 transition-colors ${
-                                            isHighlighted 
-                                            ? "bg-[#3b82f6] hover:bg-[#2563eb]" 
-                                            : "bg-zinc-950 hover:bg-white/[0.03]"
-                                        }`}
-                                    >
-                                        <p className={`font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] mb-3 ${
-                                            isHighlighted ? "text-blue-100" : "text-accent"
-                                        }`}>
-                                            {item.label}
-                                        </p>
-                                        <h3 className={`font-inter font-bold text-base mb-3 leading-snug ${
-                                            isHighlighted ? "text-white" : "text-slate-50"
-                                        }`}>
-                                            {item.title}
-                                        </h3>
-                                        <p className={`font-inter text-sm leading-relaxed ${
-                                            isHighlighted ? "text-blue-50" : "text-slate-400"
-                                        }`}>
-                                            {item.body}
-                                        </p>
-                                    </article>
-                                );
-                            })}
+                        {/* Principles — no cards, just editorial text blocks */}
+                        <div className="border-t border-white/10 pt-8 grid sm:grid-cols-2 gap-12">
+                            {principles.map((item, i) => (
+                                <article
+                                    key={item.title}
+                                    data-stagger={String(i + 1)}
+                                    className="flex flex-col"
+                                >
+                                    <p className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-accent mb-3">
+                                        {item.label}
+                                    </p>
+                                    <h3 className="font-playfair italic text-2xl tracking-tight text-slate-50 mb-3 leading-snug">
+                                        {item.title}
+                                    </h3>
+                                    <p className="font-inter text-sm leading-relaxed text-slate-400">
+                                        {item.body}
+                                    </p>
+                                </article>
+                            ))}
                         </div>
                     </div>
                 </div>
