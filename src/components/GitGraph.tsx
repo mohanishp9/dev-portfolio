@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import DecryptedText from "./DecryptedText";
+import { DecompileNode } from "./Decompiler";
 
 interface ContributionDay {
   contributionCount: number;
@@ -24,6 +25,7 @@ export default function GitGraph() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [activeDay, setActiveDay] = useState<ContributionDay | null>(null);
+  const [apiLatency, setApiLatency] = useState<number>(0);
 
   // Sizing configurations to make the graph bigger and fully customizable
   const CELL_SIZE = 14; // in pixels
@@ -34,9 +36,11 @@ export default function GitGraph() {
   useEffect(() => {
     async function fetchGitData() {
       try {
+        const start = performance.now();
         const res = await fetch("/api/github");
         if (!res.ok) throw new Error("Failed to fetch GitHub contribution data");
         const json = await res.json();
+        setApiLatency(Math.round(performance.now() - start));
         setData(json);
         
         // Find today or last active day to show by default
@@ -99,8 +103,25 @@ export default function GitGraph() {
     });
   };
 
+  const decompilerData = {
+    state: loading ? "fetching_github_api" : error ? "fallback_mock_data" : "hydrated",
+    network: {
+      endpoint: "/api/github",
+      latency_ms: apiLatency,
+    },
+    graph_engine: {
+      cells_rendered: data ? data.weeks.length * 7 : 0,
+      active_hover: activeDay ? { date: activeDay.date, commits: activeDay.contributionCount } : null
+    },
+    vitals: {
+      max_capacity: maxCommits,
+      consistency_score: consistency + "%",
+    }
+  };
+
   return (
-    <section id="activity" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 relative">
+    <DecompileNode name="GitGraph_Telemetry" data={decompilerData}>
+    <section id="activity" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 bg-[#0a0a0c]">
       <div className="grid lg:grid-cols-[1fr_320px] gap-16 items-start">
         
         {/* Left main block: Title, Grid & HUD */}
@@ -295,5 +316,6 @@ export default function GitGraph() {
 
       </div>
     </section>
+    </DecompileNode>
   );
 }

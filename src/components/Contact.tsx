@@ -1,3 +1,7 @@
+"use client";
+import { useState } from "react";
+import { DecompileNode } from "./Decompiler";
+
 const contactLinks = [
     { label: "GitHub", href: "https://github.com/mohanishp9" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/mohanish-pingale-507339261/" },
@@ -5,7 +9,20 @@ const contactLinks = [
 ];
 
 const Contact = () => {
+    const [emailHovered, setEmailHovered] = useState(false);
+    
+    const decompilerData = {
+        interaction: {
+            primary_channel_status: emailHovered ? "HOT (User interaction detected)" : "IDLE",
+        },
+        routing: {
+            links_mounted: contactLinks.length,
+            resume_asset_ready: true
+        }
+    };
+
     return (
+        <DecompileNode name="Initialize_Contact" data={decompilerData}>
         <section id="contact" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24">
             <div className="max-w-7xl">
 
@@ -42,6 +59,8 @@ const Contact = () => {
                             </p>
                             <a
                                 href="mailto:mpingale31@gmail.com"
+                                onMouseEnter={() => setEmailHovered(true)}
+                                onMouseLeave={() => setEmailHovered(false)}
                                 className="block font-inter font-black uppercase tracking-tight text-slate-50 hover:text-accent transition-colors"
                                 style={{ fontSize: "clamp(1.5rem, 4vw, 3.5rem)", lineHeight: 1 }}
                             >
@@ -75,6 +94,7 @@ const Contact = () => {
                 </div>
             </div>
         </section>
+        </DecompileNode>
     );
 };
 

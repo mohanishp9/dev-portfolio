@@ -123,4 +123,53 @@ a, button {
   }
 }
 
+/* ── Developer Mode ────────────────────────── */
 
+.dev-mode-active * {
+  outline: 1px solid rgba(255, 85, 0, 0.3) !important;
+  background-color: rgba(255, 85, 0, 0.02) !important;
+}
+
+.dev-mode-active::after {
+  content: "DEV_MODE_ACTIVE // COMPONENT BOUNDS VISIBLE";
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--accent, #ff5500);
+  color: #000;
+  font-family: var(--font-jetbrains), monospace;
+  font-size: 10px;
+  padding: 6px 12px;
+  z-index: 99999;
+  pointer-events: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.2em;
+}
+
+/* ── Liquid Glass Effect ────────────────────────── */
+
+.liquid-glass {
+  border: none;
+}
+
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.15) 80%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}

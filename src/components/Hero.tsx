@@ -1,8 +1,58 @@
+"use client";
+
 import Link from "next/link";
-import DecryptedText from "@/components/DecryptedText";
+import HeroName from "@/components/HeroName";
+import { useEffect, useState, useRef } from "react";
+import { DecompileNode } from "./Decompiler";
 
 const Hero = () => {
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const [fontSizePx, setFontSizePx] = useState<string>("0px");
+    const [cursorDist, setCursorDist] = useState<number>(0);
+
+    useEffect(() => {
+        const updateSize = () => {
+            if (titleRef.current) {
+                const style = window.getComputedStyle(titleRef.current);
+                setFontSizePx(style.fontSize);
+            }
+        };
+        
+        // Initial calc and resize listener
+        updateSize();
+        window.addEventListener("resize", updateSize);
+
+        // Pythagorean cursor distance tracker
+        const handleMouseMove = (e: MouseEvent) => {
+            if (titleRef.current) {
+                const rect = titleRef.current.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const dist = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
+                setCursorDist(Math.round(dist));
+            }
+        };
+        window.addEventListener("mousemove", handleMouseMove);
+
+        return () => {
+            window.removeEventListener("resize", updateSize);
+            window.removeEventListener("mousemove", handleMouseMove);
+        };
+    }, []);
+
+    const decompilerData = {
+        viewport_math: {
+            computed_clamp_size: fontSizePx,
+            cursor_distance_to_core: `${cursorDist}px`
+        },
+        typography: {
+            font_family: "Inter",
+            weight: "Black (900)"
+        }
+    };
+
     return (
+        <DecompileNode name="Hero_Masthead" data={decompilerData}>
         <section className="relative min-h-screen flex flex-col border-b border-white/10 px-6 sm:px-12 lg:px-24 pt-28 pb-16">
 
             {/* Cover masthead line */}
@@ -32,15 +82,9 @@ const Hero = () => {
                         </span>
                     </div>
 
-                    {/* Display name — huge cover headline */}
-                    <h1
-                        data-reveal
-                        className="font-inter font-black uppercase leading-[0.82] tracking-[-0.03em] text-slate-50 mb-10 flex flex-col"
-                        style={{ fontSize: "clamp(4rem, 12vw, 10rem)" }}
-                    >
-                        <DecryptedText text="Mohanish" />
-                        <DecryptedText text="Pingale" className="text-white/20" />
-                    </h1>
+                    <div ref={titleRef} data-reveal>
+                        <HeroName />
+                    </div>
 
                     {/* Divider */}
                     <div data-reveal="line" className="h-[1px] w-full bg-white/10 mb-10" />
@@ -48,8 +92,7 @@ const Hero = () => {
                     {/* Sub-headline + CTA */}
                     <div data-reveal className="grid sm:grid-cols-2 gap-8 items-end">
                         <p className="font-inter text-lg leading-relaxed text-slate-400 max-w-md">
-                            Full Stack Engineer. I build robust, scalable web applications
-                            from database schema to user interface.
+                            I write code because I love making things. Seeing an idea go from a blank screen to a working application never gets old.
                         </p>
                         <div className="flex flex-wrap gap-4">
                             <Link
@@ -71,10 +114,10 @@ const Hero = () => {
                 {/* Right stats column — magazine sidebar */}
                 <div data-reveal="left" className="hidden lg:flex flex-col gap-0 border-l border-white/10 pl-10 min-w-[200px]">
                     {[
-                        { label: "Location", value: "Pune, India" },
+                        { label: "Location", value: "Nashik, India" },
                         { label: "Role", value: "Full Stack Eng." },
                         { label: "Status", value: "Available" },
-                        { label: "Stack", value: "TS / Next / Node" },
+                        { label: "Stack", value: "TS / Next / MERN / Node" },
                     ].map((stat, i) => (
                         <div
                             key={stat.label}
@@ -95,6 +138,7 @@ const Hero = () => {
             {/* Bottom cover rule */}
             <div data-reveal="line" className="h-[1px] w-full bg-white/10 mt-16" />
         </section>
+        </DecompileNode>
     );
 };
 

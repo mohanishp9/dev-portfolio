@@ -18,28 +18,33 @@ import Footer from "@/components/Footer";
 import DynamicGrid from "@/components/DynamicGrid";
 import Telemetry from "@/components/Telemetry";
 import CrosshairCursor from "@/components/CrosshairCursor";
+import CommandPalette from "@/components/CommandPalette";
+import { DecompilerProvider, DecompileNode } from "@/components/Decompiler";
 
 export default function Home() {
   useScrollReveal();
 
   return (
-    <div className="min-h-screen bg-[#09090b] relative">
-      <CrosshairCursor />
-      <DynamicGrid />
-      <ReadingProgress />
-      <Telemetry />
-      <Navbar />
-      <main className="relative selection:bg-accent selection:text-white">
-        <Hero />
-        <Marquee />
-        <About />
-        <Skills />
-        <Projects />
-        <GitGraph />
-        <Experience />
-        <Contact />
-        <Footer />
-      </main>
-    </div>
+    <DecompilerProvider>
+      <div className="min-h-screen bg-[#09090b] relative">
+        <CommandPalette />
+        <CrosshairCursor />
+        <DynamicGrid />
+        <ReadingProgress />
+        <Telemetry />
+        <Navbar />
+        <main className="relative selection:bg-accent selection:text-white">
+          <Hero />
+          <Marquee />
+          <About />
+          <Skills />
+          <Projects />
+          <GitGraph />
+          <Experience />
+          <Contact />
+          <Footer />
+        </main>
+      </div>
+    </DecompilerProvider>
   );
 }

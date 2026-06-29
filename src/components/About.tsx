@@ -1,19 +1,62 @@
+"use client";
+import { useEffect, useState, useRef } from "react";
+import { DecompileNode } from "./Decompiler";
+
 const principles = [
     {
         label: "Approach",
         title: "End to end, not just one layer",
-        body: "I like touching every part of a feature — from the database schema to the button someone clicks. That's where the interesting problems are.",
+        body: "I like touching every part of a feature, from the database schema to the button someone clicks. That's where the interesting problems are.",
     },
     {
         label: "What I care about",
         title: "Things that work, not just look good",
-        body: "A polished UI means nothing if the data is wrong or the API is slow. I try to make both sides solid — the interface and the logic behind it.",
+        body: "A polished UI means nothing if the data is wrong or the API is slow. I try to make both sides solid, the interface and the logic behind it.",
     },
 ];
 
 const About = () => {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [scrollDepth, setScrollDepth] = useState<string>("0.0%");
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!sectionRef.current) return;
+            const rect = sectionRef.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            // Calculate how much of this specific section has been scrolled past
+            if (rect.top <= windowHeight && rect.bottom >= 0) {
+                const totalScrollable = rect.height + windowHeight;
+                const scrolled = windowHeight - rect.top;
+                const percentage = Math.max(0, Math.min(100, (scrolled / totalScrollable) * 100));
+                setScrollDepth(percentage.toFixed(1) + "%");
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        handleScroll(); // Init
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // Statically calculate word count based on text content
+    const baseWordCount = 58; // Length of the bio paragraph
+    const totalWordCount = baseWordCount + principles.reduce((acc, curr) => acc + curr.body.split(" ").length, 0);
+
+    const decompilerData = {
+        content_metrics: {
+            word_count: totalWordCount,
+            estimated_read_time: "42 seconds",
+            typography_columns: 2
+        },
+        viewport_tracker: {
+            scroll_depth: scrollDepth
+        }
+    };
+
     return (
-        <section id="about" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 overflow-hidden">
+        <DecompileNode name="About_Profile" data={decompilerData}>
+        <section ref={sectionRef} id="about" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 overflow-hidden">
             <div className="max-w-7xl">
 
                 {/* Issue header */}
@@ -64,13 +107,13 @@ const About = () => {
                         >
                             <p className="text-xl leading-relaxed mb-6 break-inside-avoid">
                                 I'm a full stack developer based in Pune. I got into web
-                                development because I like making things people can actually use —
-                                not just see, but click through, submit forms on, come back to.
+                                development because I like making things people can actually use.
+                                Not just see, but click through, submit forms on, come back to.
                             </p>
                             <p className="text-lg leading-relaxed break-inside-avoid">
                                 I work mainly with React, Next.js, Node.js, Express, and MongoDB.
-                                The part I enjoy most is where frontend and backend have to talk
-                                to each other — getting the data flow right, making the UI respond
+                                The part I enjoy most is where frontend and backend shake hands & have talk
+                                with each other, getting the data flow right, making the UI respond
                                 the way it should.
                             </p>
                         </div>
@@ -99,6 +142,7 @@ const About = () => {
                 </div>
             </div>
         </section>
+        </DecompileNode>
     );
 };
 

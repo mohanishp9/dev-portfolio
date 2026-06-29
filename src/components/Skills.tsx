@@ -1,3 +1,5 @@
+"use client";
+
 const capabilities = [
     {
         title: "Frontend",
@@ -16,8 +18,26 @@ const capabilities = [
     },
 ];
 
+import { useState } from "react";
+import { DecompileNode } from "./Decompiler";
+
 const Skills = () => {
+    const [activeSpec, setActiveSpec] = useState<string>("None");
+
+    const totalSkills = capabilities.reduce((acc, cap) => acc + cap.items.length, 0);
+
+    const decompilerData = {
+        array_metrics: {
+            modules: capabilities.length,
+            total_skills_mapped: totalSkills
+        },
+        interaction: {
+            active_hovered_spec: activeSpec
+        }
+    };
+
     return (
+        <DecompileNode name="Technical_Spec_Sheet" data={decompilerData}>
         <section id="skills" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 overflow-hidden">
             <div className="max-w-7xl">
 
@@ -68,6 +88,8 @@ const Skills = () => {
                         <div
                             key={cap.title}
                             data-stagger={String(i + 1)}
+                            onMouseEnter={() => setActiveSpec(cap.title)}
+                            onMouseLeave={() => setActiveSpec("None")}
                             className="grid lg:grid-cols-[1fr_2fr_auto] border-b border-white/10 group"
                         >
                             <div className="px-6 py-8 border-b lg:border-b-0 lg:border-r border-white/10">
@@ -96,6 +118,7 @@ const Skills = () => {
                 </div>
             </div>
         </section>
+        </DecompileNode>
     );
 };
 

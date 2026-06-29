@@ -19,7 +19,7 @@ const projects = [
         impact: "First project using a live external API — dealing with CoinGecko rate limits taught me about caching.",
         stack: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "CoinGecko API"],
         github: "https://github.com/mohanishp9/crypto_portfolio_tracker",
-        live: "https://grove-crypto-tracker.vercel.app/",
+        live: "https://cypher-sight.vercel.app/",
         year: "2026",
         featured: false,
     },
@@ -65,9 +65,37 @@ const featuredProject = projects.find((p) => p.featured)!;
 const secondaryProjects = projects.filter((p) => !p.featured).slice(0, 2);
 const stripProjects = projects.filter((p) => !p.featured).slice(2);
 
+import { useEffect, useState, useRef } from "react";
+import { DecompileNode } from "./Decompiler";
+
 const Projects = () => {
+    const [activeProject, setActiveProject] = useState<string>("None");
+    const [renderTime, setRenderTime] = useState<number>(0);
+
+    useEffect(() => {
+        const start = performance.now();
+        setRenderTime(Number((performance.now() - start).toFixed(2)));
+    }, []);
+
+    const decompilerData = {
+        array_metrics: {
+            total: projects.length,
+            featured: 1,
+            secondary: secondaryProjects.length,
+            strip: stripProjects.length
+        },
+        dom_metrics: {
+            render_cycle_ms: renderTime,
+            estimated_nodes: projects.length * 14 + projects.reduce((acc, p) => acc + p.stack.length, 0),
+        },
+        viewport: {
+            active_intersecting_node: activeProject
+        }
+    };
+
     return (
-        <section id="projects" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24">
+        <DecompileNode name="Projects_Showcase" data={decompilerData}>
+        <section id="projects" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 relative">
             <div className="max-w-7xl">
 
                 {/* Issue header */}
@@ -85,7 +113,11 @@ const Projects = () => {
                 <div className="grid lg:grid-cols-[3fr_2fr] border-b border-white/10">
 
                     {/* LEAD STORY */}
-                    <div data-reveal className="p-8 sm:p-12 lg:pl-0 flex flex-col justify-between min-h-[480px] border-b lg:border-b-0 lg:border-r border-white/10 group">
+                    <div 
+                        data-reveal 
+                        onMouseEnter={() => setActiveProject(featuredProject.title)}
+                        className="p-8 sm:p-12 lg:pl-0 flex flex-col justify-between min-h-[480px] border-b lg:border-b-0 lg:border-r border-white/10 group"
+                    >
                         <div>
                             <div className="flex items-center justify-between mb-8">
                                 <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-black bg-[#ccff00] px-3 py-1 font-bold">
@@ -140,6 +172,7 @@ const Projects = () => {
                                 key={project.title}
                                 data-reveal
                                 data-stagger={String(i + 1)}
+                                onMouseEnter={() => setActiveProject(project.title)}
                                 className={`p-8 sm:p-12 lg:pr-0 flex flex-col justify-between flex-1 group ${i === 0 ? "border-b border-white/10" : ""}`}
                             >
                                 <div>
@@ -177,6 +210,7 @@ const Projects = () => {
                         <div
                             key={project.title}
                             data-stagger={String(i + 1)}
+                            onMouseEnter={() => setActiveProject(project.title)}
                             className="p-8 sm:p-12 border-r border-b border-white/10 group [&:nth-child(3n)]:border-r-0 [&:nth-child(3n+1)]:lg:pl-0"
                         >
                             <div className="flex items-start justify-between mb-4">
@@ -196,6 +230,7 @@ const Projects = () => {
                 </div>
             </div>
         </section>
+        </DecompileNode>
     );
 };
 

@@ -53,10 +53,10 @@ const Navbar = () => {
     return (
         <nav
             className={`
-                sticky top-6 z-[120] mx-auto w-[calc(100%-2rem)] max-w-5xl border transition-all duration-500 rounded-2xl mb-12
+                sticky top-6 z-[120] mx-auto w-[calc(100%-2rem)] max-w-5xl transition-all duration-500 rounded-2xl mb-12 liquid-glass
                 ${scrolled
-                    ? "border-white/20 bg-white/[0.03] backdrop-blur-md backdrop-saturate-150 shadow-[0_8px_32px_rgba(0,0,0,0.8)]"
-                    : "border-white/10 bg-white/[0.02] backdrop-blur-sm shadow-lg"}
+                    ? "backdrop-saturate-150 shadow-[0_8px_32px_rgba(0,0,0,0.8)]"
+                    : "shadow-[0_4px_16px_rgba(0,0,0,0.4)]"}
             `}
         >
             <div className="flex h-16 items-center justify-between px-6 lg:px-8">
@@ -81,7 +81,7 @@ const Navbar = () => {
                     ))}
                 </ul>
 
-                <div className="hidden items-center sm:flex bg-[#ccff00] px-3.5 py-1.5 gap-2 rounded-lg">
+                <div className="hidden items-center sm:flex bg-[#ff5500] px-3.5 py-1.5 gap-2 rounded-lg">
                     <span className="w-1.5 h-1.5 bg-black animate-pulse" />
                     <span className="font-jetbrains text-xs font-bold uppercase tracking-widest text-black">
                         Available
