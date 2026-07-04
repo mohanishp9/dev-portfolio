@@ -3,24 +3,16 @@ import Link from "next/link";
 interface Props {
     href: string;
     children: React.ReactNode;
+    isActive?: boolean;
 }
 
-export default function NavLink({ href, children }: Props) {
+export default function NavLink({ href, children, isActive = false }: Props) {
     return (
         <Link
             href={href}
-            className="
-        nav-underline
-        font-space-mono
-        text-[0.65rem]
-        uppercase
-        tracking-[0.25em]
-        text-silver
-        no-underline
-        transition-colors
-        duration-300
-        hover:text-white
-      "
+            className={`font-jetbrains text-sm font-bold uppercase tracking-widest transition-colors ${
+                isActive ? "text-slate-50 border-b-2 border-[#ff5500] pb-1" : "text-slate-400 hover:text-slate-50"
+            }`}
         >
             {children}
         </Link>

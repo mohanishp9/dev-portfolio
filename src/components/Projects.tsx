@@ -1,283 +1,236 @@
-import { FaGithub } from "react-icons/fa";
-import { useTickSound } from "@/hooks/useTickSound";
+const projects = [
+    {
+        number: "01",
+        title: "Petty Revenge Note",
+        summary:
+            "A journaling app where you can write notes, post them, and let people comment and react. Full auth with JWT, Redux for state management, threaded comments, emoji reactions, and paginated feeds.",
+        impact: "Learned a lot about managing complex state with Redux Toolkit and using Zod for runtime validation.",
+        stack: ["Next.js", "React", "Redux Toolkit", "TypeScript", "Node.js", "Express", "MongoDB", "JWT", "Zod"],
+        github: "https://github.com/mohanishp9/petty-revenge-note",
+        live: "https://petty-revenge-note.vercel.app/",
+        year: "2026",
+        featured: true,
+    },
+    {
+        number: "02",
+        title: "Grove Crypto Tracker",
+        summary:
+            "Track your crypto portfolio in one place. Connects to CoinGecko for live prices, shows your holdings and transaction history in a clean dashboard.",
+        impact: "First project using a live external API — dealing with CoinGecko rate limits taught me about caching.",
+        stack: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "CoinGecko API"],
+        github: "https://github.com/mohanishp9/crypto_portfolio_tracker",
+        live: "https://cypher-sight.vercel.app/",
+        year: "2026",
+        featured: false,
+    },
+    {
+        number: "03",
+        title: "QKart",
+        summary:
+            "An ecommerce app with the full flow: browse products, add to cart, checkout, order management.",
+        impact: "First complete ecommerce build. Cart management and checkout logic — getting state right when items change mid-session.",
+        stack: ["React", "Node.js", "Express", "MongoDB", "REST APIs", "Testing"],
+        github: "https://github.com/mohanishp9/QKart_Backend",
+        live: "https://qkart-mohanish-pingales-projects.vercel.app/",
+        year: "2025",
+        featured: false,
+    },
+    {
+        number: "04",
+        title: "MP News Feed",
+        summary:
+            "A Flipboard-style news reader that pulls from RSS feeds and renders them in a scrollable card layout.",
+        impact: "Taught me component architecture — when to split things up, when to keep them together.",
+        stack: ["JavaScript", "HTML", "CSS", "Bootstrap", "RSS feeds"],
+        github: "https://github.com/mohanishp9/News-Board",
+        live: "https://mboard-mohanish-pingales-projects.vercel.app/",
+        year: "2025",
+        featured: false,
+    },
+    {
+        number: "05",
+        title: "MTripDynamic",
+        summary:
+            "A travel booking app with search, availability checking, cost calculation, and reservation logic.",
+        impact: "First time connecting frontend rendering to non-trivial backend logic.",
+        stack: ["JavaScript", "Express", "LowDB", "REST APIs"],
+        github: "https://github.com/mohanishp9/MTripDynamic",
+        live: "https://mtripdynamic-mohanish-pingales-projects.vercel.app/",
+        year: "2025",
+        featured: false,
+    },
+];
+
+const featuredProject = projects.find((p) => p.featured)!;
+const secondaryProjects = projects.filter((p) => !p.featured).slice(0, 2);
+const stripProjects = projects.filter((p) => !p.featured).slice(2);
+
+import { useEffect, useState, useRef } from "react";
+import { DecompileNode } from "./Decompiler";
 
 const Projects = () => {
-    const { playTick } = useTickSound('/sound/tick.wav');
+    const [activeProject, setActiveProject] = useState<string>("None");
+    const [renderTime, setRenderTime] = useState<number>(0);
+
+    useEffect(() => {
+        const start = performance.now();
+        setRenderTime(Number((performance.now() - start).toFixed(2)));
+    }, []);
+
+    const decompilerData = {
+        array_metrics: {
+            total: projects.length,
+            featured: 1,
+            secondary: secondaryProjects.length,
+            strip: stripProjects.length
+        },
+        dom_metrics: {
+            render_cycle_ms: renderTime,
+            estimated_nodes: projects.length * 14 + projects.reduce((acc, p) => acc + p.stack.length, 0),
+        },
+        viewport: {
+            active_intersecting_node: activeProject
+        }
+    };
+
     return (
-        <section id="projects" className="relative py-32 px-16">
-            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6 mb-20 reveal-left">
-                <h2 className="font-playfair text-[clamp(32px,4vw,55px)] font-black leading-none tracking-[-0.02em]">Selected<br /><em className="italic text-accent">Work</em></h2>
-                <span className="font-cormorant text-base text-dim italic">04 Projects</span>
-            </div>
+        <DecompileNode name="Projects_Showcase" data={decompilerData}>
+        <section id="projects" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 relative">
+            <div className="max-w-7xl">
 
-            <div className="project-card reveal-scale">
-                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">01</div>
-                <div>
-                    <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
-                        Petty Revenge Note
-                    </h3>
+                {/* Issue header */}
+                <div data-reveal className="flex items-center justify-between border-b border-white/10 pb-6 mb-16">
+                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
+                        Issue 04 &nbsp;/&nbsp; Selected Work
+                    </span>
+                    <div data-reveal="line" className="h-[1px] flex-1 mx-8 bg-white/10" />
+                    <span className="font-playfair italic text-3xl tracking-tight text-slate-400">
+                        Selected Works
+                    </span>
+                </div>
 
-                    <p className="font-cormorant text-[1.05rem] text-silver leading-[1.6] font-light max-w-[500px] mb-6">
-                        A full-stack revenge-note journaling app with secure JWT authentication, protected profile and note routes, Redux Toolkit state management for user, note, comment, and reaction data, plus comments with threaded replies, emoji reactions, likes, and paginated note/comment loading backed by Zod validation and Mongoose schema enforcement.
-                    </p>
+                {/* Hero project + secondary — magazine spread */}
+                <div className="grid lg:grid-cols-[3fr_2fr] border-b border-white/10">
 
-                    <div className="flex flex-wrap gap-2">
-                        <span className="stack-badge">Next.js</span>
-                        <span className="stack-badge">React</span>
-                        <span className="stack-badge">Redux Toolkit</span>
-                        <span className="stack-badge">Node.js</span>
-                        <span className="stack-badge">Express.js</span>
-                        <span className="stack-badge">REST APIs</span>
-                        <span className="stack-badge">TypeScript</span>
-                        <span className="stack-badge">MongoDB</span>
-                        <span className="stack-badge">MongoDB Atlas</span>
-                        <span className="stack-badge">Mongoose ODM</span>
-                        <span className="stack-badge">MongoDB queries</span>
-                        <span className="stack-badge">JWT token</span>
-                        <span className="stack-badge">Zod validation</span>
+                    {/* LEAD STORY */}
+                    <div 
+                        data-reveal 
+                        onMouseEnter={() => setActiveProject(featuredProject.title)}
+                        className="p-8 sm:p-12 lg:pl-0 flex flex-col justify-between min-h-[480px] border-b lg:border-b-0 lg:border-r border-white/10 group"
+                    >
+                        <div>
+                            <div className="flex items-center justify-between mb-8">
+                                <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-black bg-[#ccff00] px-3 py-1 font-bold">
+                                    Featured &nbsp;/&nbsp; {featuredProject.year}
+                                </span>
+                                <span
+                                    className="font-inter font-black text-[5rem] leading-none text-white/5 select-none"
+                                    aria-hidden="true"
+                                >
+                                    {featuredProject.number}
+                                </span>
+                            </div>
+                            <h3 className="font-inter font-black uppercase text-3xl sm:text-4xl tracking-tight text-slate-50 mb-5 leading-tight group-hover:text-white transition-colors">
+                                {featuredProject.title}
+                            </h3>
+                            <p className="font-inter text-base leading-relaxed text-slate-400 max-w-lg mb-6">
+                                {featuredProject.summary}
+                            </p>
+                            <div className="flex flex-wrap gap-2 mb-8">
+                                {featuredProject.stack.map((tech) => (
+                                    <span key={tech} className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-500 border border-white/10 px-3 py-1.5 bg-white/[0.02]">
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="flex gap-4 border-t border-white/10 pt-6">
+                            <a
+                                href={featuredProject.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-jetbrains text-[0.65rem] uppercase tracking-widest text-slate-300 border border-white/20 px-5 py-2.5 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all"
+                            >
+                                Source Code &#8594;
+                            </a>
+                            <a
+                                href={featuredProject.live}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-jetbrains text-[0.65rem] uppercase tracking-widest border border-[#ccff00] bg-[#ccff00] px-5 py-2.5 hover:bg-[#ff5500] hover:border-[#ff5500] transition-all font-bold"
+                                style={{ color: "#000000" }}
+                            >
+                                Live View &#8594;
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Secondary stories column */}
+                    <div className="flex flex-col">
+                        {secondaryProjects.map((project, i) => (
+                            <div
+                                key={project.title}
+                                data-reveal
+                                data-stagger={String(i + 1)}
+                                onMouseEnter={() => setActiveProject(project.title)}
+                                className={`p-8 sm:p-12 lg:pr-0 flex flex-col justify-between flex-1 group ${i === 0 ? "border-b border-white/10" : ""}`}
+                            >
+                                <div>
+                                    <div className="flex items-center justify-between mb-5">
+                                        <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-slate-600">
+                                            {project.year}
+                                        </span>
+                                        <span className="font-inter font-black text-[3rem] leading-none text-white/5 select-none" aria-hidden="true">
+                                            {project.number}
+                                        </span>
+                                    </div>
+                                    <h3 className="font-inter font-bold uppercase text-xl text-slate-50 mb-3 leading-tight group-hover:text-accent transition-colors">
+                                        {project.title}
+                                    </h3>
+                                    <p className="font-inter text-sm leading-relaxed text-slate-400 mb-4">
+                                        {project.summary}
+                                    </p>
+                                </div>
+                                <div className="flex gap-3 border-t border-white/10 pt-5 mt-auto">
+                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-400 border border-white/20 px-4 py-2 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all">
+                                        Source &#8594;
+                                    </a>
+                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-300 border border-white/20 px-4 py-2 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all">
+                                        Live &#8594;
+                                    </a>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
-                <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
 
-                    <div className="flex gap-3">
-
-                        <a
-                            href="https://github.com/mohanishp9/petty-revenge-note"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                             onMouseEnter={playTick} onClick={playTick}
+                {/* Strip — remaining projects */}
+                <div data-reveal className="grid sm:grid-cols-2 lg:grid-cols-3">
+                    {stripProjects.map((project, i) => (
+                        <div
+                            key={project.title}
+                            data-stagger={String(i + 1)}
+                            onMouseEnter={() => setActiveProject(project.title)}
+                            className="p-8 sm:p-12 border-r border-b border-white/10 group [&:nth-child(3n)]:border-r-0 [&:nth-child(3n+1)]:lg:pl-0"
                         >
-                            <FaGithub />
-                        </a>
-
-                        <a
-                            href="https://petty-revenge-note.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                             onMouseEnter={playTick} onClick={playTick}
-                        >
-                            ↗
-                        </a>
-
-                    </div>
-
-                    <span className="text-[0.55rem] tracking-[0.2em] text-dim">2026</span>
-
-                </div>
-            </div>
-
-            <div className="project-card reveal-scale">
-                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">02</div>
-                <div>
-                    <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
-                        Grove Crypto Tracker
-                    </h3>
-
-                    <p className="font-cormorant text-[1.05rem] text-silver leading-[1.6] font-light max-w-[500px] mb-6">
-                        A full-stack crypto portfolio tracker that lets users securely log in, track holdings and transactions, and view real-time market data using a React/TypeScript frontend and a Node/Express + MongoDB backend with CoinGecko integration.
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                        <span className="stack-badge">React</span>
-                        <span className="stack-badge">Node.js</span>
-                        <span className="stack-badge">Express.js</span>
-                        <span className="stack-badge">REST APIs</span>
-                        <span className="stack-badge">TypeScript</span>
-                        <span className="stack-badge">MongoDB</span>
-                        <span className="stack-badge">MongoDB Atlas</span>
-                        <span className="stack-badge">Mongoose ODM</span>
-                        <span className="stack-badge">MongoDB queries</span>
-                        <span className="stack-badge">JWT token</span>
-                    </div>
-                </div>
-                <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
-
-                    <div className="flex gap-3">
-
-                        <a
-                            href="https://github.com/mohanishp9/crypto_portfolio_tracker"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                             onMouseEnter={playTick} onClick={playTick}
-                        >
-                            <FaGithub />
-                        </a>
-
-                        <a
-                            href="https://grove-crypto-tracker.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                             onMouseEnter={playTick} onClick={playTick}
-                        >
-                            ↗
-                        </a>
-
-                    </div>
-
-                    <span className="text-[0.55rem] tracking-[0.2em] text-dim">2026</span>
-
-                </div>
-            </div>
-
-            <div className="project-card reveal-scale">
-                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">03</div>
-                <div>
-                    <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
-                        QKart
-                    </h3>
-
-                    <p className="font-cormorant text-[1.05rem] text-silver leading-[1.6] font-light max-w-[500px] mb-6">
-                        Full-stack development of a complete online store featuring secure authentication, shopping cart, checkout flows, Node.js/MongoDB backend, responsive frontend & comprehensive testing.
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                        <span className="stack-badge">React</span>
-                        <span className="stack-badge">Node.js</span>
-                        <span className="stack-badge">Express.js</span>
-                        <span className="stack-badge">REST APIs</span>
-                        <span className="stack-badge">ES6 (JavaScript)</span>
-                        <span className="stack-badge">MongoDB</span>
-                        <span className="stack-badge">MongoDB Atlas</span>
-                        <span className="stack-badge">Mongoose ODM</span>
-                        <span className="stack-badge">MongoDB queries</span>
-                        <span className="stack-badge">JWT token</span>
-                    </div>
-                </div>
-                <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
-
-                    <div className="flex gap-3">
-
-                        <a
-                            href="https://github.com/mohanishp9/QKart_Backend"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                             onMouseEnter={playTick} onClick={playTick}
-                        >
-                            <FaGithub />
-                        </a>
-
-                        <a
-                            href="https://qkart-mohanish-pingales-projects.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                             onMouseEnter={playTick} onClick={playTick}
-                        >
-                            ↗
-                        </a>
-
-                    </div>
-
-                    <span className="text-[0.55rem] tracking-[0.2em] text-dim">2024</span>
-
-                </div>
-            </div>
-
-            <div className="project-card reveal-scale">
-                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">04</div>
-                <div>
-                    <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
-                        MP's News Feed
-                    </h3>
-
-                    <p className="font-cormorant text-[1.05rem] text-silver leading-[1.6] font-light max-w-[500px] mb-6">
-                        Built modular JavaScript components (accordion, carousel, navigation utilities) for a responsive Flipboard-style news feed, centralized DOM logic for better maintainability, and validated RSS feed rendering through automated, data-driven tests.
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                        <span className="stack-badge">HTML</span>
-                        <span className="stack-badge">CSS</span>
-                        <span className="stack-badge">Bootstrap</span>
-                        <span className="stack-badge">ES6 (JavaScript)</span>
-                        <span className="stack-badge">REST APIs</span>
-                    </div>
-                </div>
-                <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
-
-                    <div className="flex gap-3">
-
-                        <a
-                            href="https://github.com/mohanishp9/News-Board"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                             onMouseEnter={playTick} onClick={playTick}
-                        >
-                            <FaGithub />
-                        </a>
-
-                        <a
-                            href="https://mboard-mohanish-pingales-projects.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                             onMouseEnter={playTick} onClick={playTick}
-                        >
-                            ↗
-                        </a>
-
-                    </div>
-
-                    <span className="text-[0.55rem] tracking-[0.2em] text-dim">2024</span>
-
-                </div>
-            </div>
-
-            <div className="project-card reveal-scale">
-                <div className="font-playfair text-[0.85rem] italic text-dim pt-[0.3rem] tracking-[0.15em]">05</div>
-                <div>
-                    <h3 className="project-title font-playfair text-[clamp(24px,3vw,36px)] font-bold tracking-[-0.01em] mb-3 transition-colors duration-300">
-                        MTripDynamic
-                    </h3>
-
-                    <p className="font-cormorant text-[1.05rem] text-silver leading-[1.6] font-light max-w-[500px] mb-6">
-                        Created RESTful Express + LowDB API for cities, adventures & bookings; implemented reservation logic, availability management, cost calculation, and dynamic data generation; connected to modular, responsive frontend.
-                    </p>
-
-                    <div className="flex flex-wrap gap-2">
-                        <span className="stack-badge">HTML</span>
-                        <span className="stack-badge">CSS</span>
-                        <span className="stack-badge">Bootstrap</span>
-                        <span className="stack-badge">ES6 (JavaScript)</span>
-                        <span className="stack-badge">Deployment (Vercel, Render)</span>
-                    </div>
-                </div>
-                <div className="flex flex-col items-end gap-4 pt-[0.3rem] max-[900px]:hidden">
-
-                    <div className="flex gap-3">
-
-                        <a
-                            href="https://github.com/mohanishp9/MTripDynamic"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                             onMouseEnter={playTick} onClick={playTick}
-                        >
-                            <FaGithub />
-                        </a>
-
-                        <a
-                            href="https://mtripdynamic-mohanish-pingales-projects.vercel.app/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="arrow-icon flex items-center justify-center w-[40px] h-[40px] border border-white/15 rounded-full text-[1rem] text-silver transition-all duration-300 hover:border-white/40 hover:text-white"
-                             onMouseEnter={playTick} onClick={playTick}
-                        >
-                            ↗
-                        </a>
-
-                    </div>
-
-                    <span className="text-[0.55rem] tracking-[0.2em] text-dim">2024</span>
-
+                            <div className="flex items-start justify-between mb-4">
+                                <span className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-600">{project.year}</span>
+                                <span className="font-inter font-black text-[2.5rem] leading-none text-white/5 select-none" aria-hidden="true">{project.number}</span>
+                            </div>
+                            <h3 className="font-inter font-bold text-base text-slate-50 mb-2 leading-tight group-hover:text-accent transition-colors">
+                                {project.title}
+                            </h3>
+                            <p className="font-inter text-xs leading-relaxed text-slate-500 mb-5">{project.impact}</p>
+                            <div className="flex gap-3 mt-auto pt-4 border-t border-white/10">
+                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-400 border border-white/20 px-3 py-1.5 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all">Source &#8594;</a>
+                                <a href={project.live} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-300 border border-white/20 px-3 py-1.5 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all">Live &#8594;</a>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </section>
+        </DecompileNode>
     );
 };
 

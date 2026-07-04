@@ -1,100 +1,144 @@
+"use client";
+
 import Link from "next/link";
-import { useTickSound } from "@/hooks/useTickSound";
+import HeroName from "@/components/HeroName";
+import { useEffect, useState, useRef } from "react";
+import { DecompileNode } from "./Decompiler";
 
 const Hero = () => {
-    const { playTick } = useTickSound('/sound/tick.wav');
+    const titleRef = useRef<HTMLHeadingElement>(null);
+    const [fontSizePx, setFontSizePx] = useState<string>("0px");
+    const [cursorDist, setCursorDist] = useState<number>(0);
+
+    useEffect(() => {
+        const updateSize = () => {
+            if (titleRef.current) {
+                const style = window.getComputedStyle(titleRef.current);
+                setFontSizePx(style.fontSize);
+            }
+        };
+        
+        // Initial calc and resize listener
+        updateSize();
+        window.addEventListener("resize", updateSize);
+
+        // Pythagorean cursor distance tracker
+        const handleMouseMove = (e: MouseEvent) => {
+            if (titleRef.current) {
+                const rect = titleRef.current.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const dist = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
+                setCursorDist(Math.round(dist));
+            }
+        };
+        window.addEventListener("mousemove", handleMouseMove);
+
+        return () => {
+            window.removeEventListener("resize", updateSize);
+            window.removeEventListener("mousemove", handleMouseMove);
+        };
+    }, []);
+
+    const decompilerData = {
+        viewport_math: {
+            computed_clamp_size: fontSizePx,
+            cursor_distance_to_core: `${cursorDist}px`
+        },
+        typography: {
+            font_family: "Inter",
+            weight: "Black (900)"
+        }
+    };
 
     return (
-        <section
-            className="
-                min-h-screen
-                flex flex-col justify-end
-                px-16 pb-24 pt-32
-                relative overflow-hidden
-            "
-        >
-            <div className="hero-bg-text">DEV</div>
+        <DecompileNode name="Hero_Masthead" data={decompilerData}>
+        <section className="relative min-h-screen flex flex-col border-b border-white/10 px-6 sm:px-12 lg:px-24 pt-28 pb-16">
 
-            <div
-                className="
-                    text-[0.7rem] uppercase tracking-[0.4em] text-silver mb-8
-                    opacity-0 animate-fade-up [animate-delay:0.3s]
-                "
-            >
-                Full Stack Developer · Based in India
+            {/* Cover masthead line */}
+            <div data-reveal="line" className="h-[1px] w-full bg-white/10 mb-10" />
+
+            {/* Vol / Issue row */}
+            <div data-reveal className="flex items-center justify-between mb-16">
+                <span className="font-jetbrains text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">
+                    Vol.01 &nbsp;/&nbsp; Issue.01 &nbsp;/&nbsp; 2026
+                </span>
+                <span className="font-jetbrains text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">
+                    Portfolio &mdash; Developer Edition
+                </span>
             </div>
 
-            <h1
-                className="
-                    font-playfair font-black leading-[0.9]
-                    tracking-[-0.03em] mb-2
-                    text-[clamp(56px,9vw,130px)]
-                    opacity-0 animate-fade-up [animation-delay:0.5s]
-                "
-            >
-                Mohanish <br />
-                <span className="italic text-accent">Pingale</span>
-            </h1>
-            {/* Role tagline */}
-            <p
-                className="
-                    font-cormorant font-[300] italic text-silver
-                    text-[clamp(20px,3vw,40px)] tracking-[0.02em] mb-16
-                    opacity-0 animate-fade-up [animation-delay:0.7s]
-                "
-            >
-                Architecting digital experiences at scale
-            </p>
+            {/* Main headline + right column */}
+            <div className="flex-1 grid lg:grid-cols-[1fr_auto] gap-16 items-end">
 
-            {/* Bottom row: bio + CTAs */}
-            <div
-                className="
-                    flex justify-between items-end
-                    opacity-0 animate-fade-up [animation-delay:0.9s]
-                "
-            >
-                <p className="
-                    max-w-[380px]
-                    font-cormorant
-                    text-[1.10rem]
-                    leading-[1.7]
-                    text-silver
-                    font-[300]
-                    tracking-[0.02em]
-                    ">
-                    I craft robust systems and elegant interfaces bridging the gap between complex engineering and seamless user experience with full-stack mastery.
-                </p>
+                <div>
+                    {/* Kicker */}
+                    <div data-reveal className="flex items-center gap-3 mb-8">
+                        <span className="font-jetbrains text-[0.65rem] font-bold uppercase tracking-[0.2em] bg-[#ccff00] text-black px-3 py-1">
+                            System Online
+                        </span>
+                        <span className="font-jetbrains text-[0.65rem] uppercase tracking-[0.3em] text-slate-500">
+                            V 1.0.0
+                        </span>
+                    </div>
 
-                <div className="flex flex-col items-end gap-6">
-                    <Link href="#projects" className="btn-primary">
-                        <span
-                            onMouseEnter={playTick}
-                            onClick={playTick}
-                        >View My Work</span>
-                    </Link>
-                    <Link href="#contact" className="btn-ghost">
-                        <span
-                            onMouseEnter={playTick}
-                            onClick={playTick}
-                        >Get In Touch</span>
-                    </Link>
+                    <div ref={titleRef} data-reveal>
+                        <HeroName />
+                    </div>
+
+                    {/* Divider */}
+                    <div data-reveal="line" className="h-[1px] w-full bg-white/10 mb-10" />
+
+                    {/* Sub-headline + CTA */}
+                    <div data-reveal className="grid sm:grid-cols-2 gap-8 items-end">
+                        <p className="font-inter text-lg leading-relaxed text-slate-400 max-w-md">
+                            I write code because I love making things. Seeing an idea go from a blank screen to a working application never gets old.
+                        </p>
+                        <div className="flex flex-wrap gap-4">
+                            <Link
+                                href="#projects"
+                                className="font-jetbrains text-xs uppercase tracking-widest text-slate-300 border border-white/20 px-6 py-3.5 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-colors"
+                            >
+                                View Work &#8594;
+                            </Link>
+                            <Link
+                                href="#contact"
+                                className="font-jetbrains text-xs uppercase tracking-widest bg-accent text-black font-bold px-6 py-3.5 hover:bg-[#ff7733] transition-colors"
+                            >
+                                Initialize Contact
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Right stats column — magazine sidebar */}
+                <div data-reveal="left" className="hidden lg:flex flex-col gap-0 border-l border-white/10 pl-10 min-w-[200px]">
+                    {[
+                        { label: "Location", value: "Nashik, India" },
+                        { label: "Role", value: "Full Stack Eng." },
+                        { label: "Status", value: "Available" },
+                        { label: "Stack", value: "TS / Next / MERN / Node" },
+                    ].map((stat, i) => (
+                        <div
+                            key={stat.label}
+                            data-stagger={String(i + 1)}
+                            className="border-b border-white/10 py-5"
+                        >
+                            <span className="block font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-slate-600 mb-1">
+                                {stat.label}
+                            </span>
+                            <span className="block font-inter font-bold text-sm text-slate-200">
+                                {stat.value}
+                            </span>
+                        </div>
+                    ))}
                 </div>
             </div>
 
-            {/* Scroll indicator (bottom right) */}
-            <div
-                className="
-                    absolute right-16 bottom-25
-                    flex items-center gap-4
-                    text-[0.55rem] uppercase tracking-[0.3em] text-dim
-                    opacity-0 animate-fade-in [animation-delay:1.5s]
-                "
-                style={{ writingMode: "vertical-rl" }}
-            >
-                <div className="hero-scroll-line" />
-                Scroll
-            </div>
+            {/* Bottom cover rule */}
+            <div data-reveal="line" className="h-[1px] w-full bg-white/10 mt-16" />
         </section>
+        </DecompileNode>
     );
 };
 

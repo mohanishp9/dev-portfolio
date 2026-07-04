@@ -1,41 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Space_Mono, Playfair_Display, Cormorant_Garamond } from "next/font/google";
+import { Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import CustomCursor from "@/components/CustomCursor";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+
+
+
+const inter = Inter({
+    subsets: ["latin"],
+    variable: "--font-inter",
+    display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const jetbrainsMono = JetBrains_Mono({
+    subsets: ["latin"],
+    variable: "--font-jetbrains",
+    display: "swap",
 });
 
 const playfair = Playfair_Display({
     subsets: ["latin"],
     variable: "--font-playfair",
-    weight: ["400", "700", "900"],
-    style: ["normal", "italic"],
+    display: "swap",
 });
 
-const spaceMono = Space_Mono({
-    subsets: ["latin"],
-    variable: "--font-space-mono",
-    weight: ["400", "700"],
-});
 
-const cormorant = Cormorant_Garamond({
-    subsets: ["latin"],
-    variable: "--font-cormorant",
-    weight: ["300", "400", "600"],
-    style: ["normal", "italic"],
-});
 
 export const metadata: Metadata = {
   title: "Portfolio | Mohanish Pingale",
-  description: "Full Stack Developer",
+  description: "Full stack developer portfolio for Mohanish Pingale. Projects, skills, and experience in React, Next.js, and Node.js.",
 };
 
 export default function RootLayout({
@@ -46,9 +38,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-          className={`${playfair.variable} ${spaceMono.variable} ${cormorant.variable}`}
+          className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable} font-inter antialiased`}
       >
-        <CustomCursor />
+
         {children}
       </body>
     </html>

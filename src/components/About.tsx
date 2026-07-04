@@ -1,65 +1,148 @@
+"use client";
+import { useEffect, useState, useRef } from "react";
+import { DecompileNode } from "./Decompiler";
+
+const principles = [
+    {
+        label: "Approach",
+        title: "End to end, not just one layer",
+        body: "I like touching every part of a feature, from the database schema to the button someone clicks. That's where the interesting problems are.",
+    },
+    {
+        label: "What I care about",
+        title: "Things that work, not just look good",
+        body: "A polished UI means nothing if the data is wrong or the API is slow. I try to make both sides solid, the interface and the logic behind it.",
+    },
+];
+
 const About = () => {
+    const sectionRef = useRef<HTMLElement>(null);
+    const [scrollDepth, setScrollDepth] = useState<string>("0.0%");
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (!sectionRef.current) return;
+            const rect = sectionRef.current.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            
+            // Calculate how much of this specific section has been scrolled past
+            if (rect.top <= windowHeight && rect.bottom >= 0) {
+                const totalScrollable = rect.height + windowHeight;
+                const scrolled = windowHeight - rect.top;
+                const percentage = Math.max(0, Math.min(100, (scrolled / totalScrollable) * 100));
+                setScrollDepth(percentage.toFixed(1) + "%");
+            }
+        };
+
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        handleScroll(); // Init
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // Statically calculate word count based on text content
+    const baseWordCount = 58; // Length of the bio paragraph
+    const totalWordCount = baseWordCount + principles.reduce((acc, curr) => acc + curr.body.split(" ").length, 0);
+
+    const decompilerData = {
+        content_metrics: {
+            word_count: totalWordCount,
+            estimated_read_time: "42 seconds",
+            typography_columns: 2
+        },
+        viewport_tracker: {
+            scroll_depth: scrollDepth
+        }
+    };
+
     return (
-        <section id="about" className="relative py-32 px-16">
-            <div className="flex items-center gap-6 mb-20 text-[0.70rem] tracking-[0.4em] uppercase text-[var(--dim)]">
-                <span className="text-[0.7rem] italic font-[Playfair_Display] text-[var(--silver)]">
-                    01
-                </span>
-                About
-                <span className="flex-1 h-px bg-white/10 max-w-[200px]" />
-            </div>
+        <DecompileNode name="About_Profile" data={decompilerData}>
+        <section ref={sectionRef} id="about" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 overflow-hidden">
+            <div className="max-w-7xl">
 
-            <div className="grid grid-cols-2 gap-24 items-start max-[900px]:grid-cols-1">
-                <div>
-                    <h2
-                        className="
-                            font-playfair
-                            text-[clamp(36px,4vw,60px)]
-                            font-bold
-                            leading-[1.1]
-                            tracking-[-0.02em]
-                            mb-12
-                            reveal-left
-                        "
-                    >
-                        Code is my <br />
-                        <em className="italic text-accent">craft,</em> systems <br />
-                        my canvas.
-                    </h2>
-                    <p className="about-text reveal-left">
-                        I am a full-stack developer with deep expertise in designing and building production grade applications. My work spans from database architecture to pixel-perfect interfaces, always with a focus on performance, maintainability, and user experience.
-                    </p>
+                {/* Issue header */}
+                <div data-reveal className="flex items-center justify-between border-b border-white/10 pb-6 mb-16">
+                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
+                        Issue 02 &nbsp;/&nbsp; Profile
+                    </span>
+                    <div data-reveal="line" className="h-[1px] flex-1 mx-8 bg-white/10" />
+                    <span className="font-playfair italic text-3xl tracking-tight text-slate-400">
+                        The Engineer
+                    </span>
+                </div>
 
-                    <p className="about-text reveal-left">
-                        I believe great software is indistinguishable from great design where technical precision meets aesthetic clarity. When not shipping features, I contribute to open source and mentor the next generation of engineers.
-                    </p>
-                    <div className="grid grid-cols-2 gap-[2px] mt-16 reveal-left">
-                        <div className="p-8 border border-white/10 bg-white/[0.02] transition-colors duration-300 hover:bg-white/[0.05]">
-                            <div className="font-playfair text-[3.5rem] font-black italic leading-none mb-[0.4rem] text-white"> 2+ </div>
-                            <div className="text-[0.65rem] tracking-[0.25em] uppercase text-dim"> Year Coding Journey </div>
+                {/* Two-column editorial spread */}
+                <div className="grid lg:grid-cols-[280px_1fr] gap-16 lg:gap-24">
+
+                    {/* Left — masthead column */}
+                    <div data-reveal="left" className="relative z-10 pt-8">
+                        <div
+                            className="font-inter font-black text-[8rem] leading-none tracking-tight text-white/5 select-none mb-8"
+                            aria-hidden="true"
+                        >
+                            02
                         </div>
-                        <div className="p-8 border border-white/10 bg-white/[0.02] transition-colors duration-300 hover:bg-white/[0.05]">
-                            <div className="font-playfair text-[3.5rem] font-black italic leading-none mb-[0.4rem] text-white"> 5+ </div>
-                            <div className="text-[0.65rem] tracking-[0.25em] uppercase text-dim"> Personal Projects Built </div>
-                        </div>
-                        <div className="p-8 border border-white/10 bg-white/[0.02] transition-colors duration-300 hover:bg-white/[0.05]">
-                            <div className="font-playfair text-[3.5rem] font-black italic leading-none mb-[0.4rem] text-white"> 5+ </div>
-                            <div className="text-[0.65rem] tracking-[0.25em] uppercase text-dim"> Technologies Mastered </div>
-                        </div>
-                        <div className="p-8 border border-white/10 bg-white/[0.02] transition-colors duration-300 hover:bg-white/[0.05]">
-                            <div className="font-playfair text-[3.5rem] font-black italic leading-none mb-[0.4rem] text-white"> 100% </div>
-                            <div className="text-[0.65rem] tracking-[0.25em] uppercase text-dim"> Ready to Build for You </div>
+                        <h2 className="font-playfair italic uppercase text-3xl tracking-tight text-slate-50 mb-6 leading-tight">
+                            About<br />The Engineer
+                        </h2>
+                        {/* Quick spec table */}
+                        <div className="border-t border-white/10">
+                            {[
+                                { k: "Based", v: "Pune, India" },
+                                { k: "Focus", v: "Full Stack" },
+                                { k: "Status", v: "SDE Intern" },
+                            ].map((row) => (
+                                <div key={row.k} className="flex justify-between border-b border-white/10 py-3">
+                                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-600">{row.k}</span>
+                                    <span className="font-inter text-sm text-slate-300">{row.v}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
-                </div>
-                <div className="relative reveal-right">
-                    <div className="about-portrait">
-                        <div className="about-portrait-inner">MP</div>
-                        <span className="portrait-tag">India</span>
+
+                    {/* Right — editorial prose */}
+                    <div data-reveal>
+                        <div 
+                            className="mb-16 text-slate-300 font-playfair sm:columns-2 gap-12"
+                            style={{ columnRule: "1px solid rgba(255,255,255,0.1)" }}
+                        >
+                            <p className="text-xl leading-relaxed mb-6 break-inside-avoid">
+                                I'm a full stack developer based in Pune. I got into web
+                                development because I like making things people can actually use.
+                                Not just see, but click through, submit forms on, come back to.
+                            </p>
+                            <p className="text-lg leading-relaxed break-inside-avoid">
+                                I work mainly with React, Next.js, Node.js, Express, and MongoDB.
+                                The part I enjoy most is where frontend and backend shake hands & have talk
+                                with each other, getting the data flow right, making the UI respond
+                                the way it should.
+                            </p>
+                        </div>
+
+                        {/* Principles — no cards, just editorial text blocks */}
+                        <div className="border-t border-white/10 pt-8 grid sm:grid-cols-2 gap-12">
+                            {principles.map((item, i) => (
+                                <article
+                                    key={item.title}
+                                    data-stagger={String(i + 1)}
+                                    className="flex flex-col"
+                                >
+                                    <p className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-accent mb-3">
+                                        {item.label}
+                                    </p>
+                                    <h3 className="font-playfair italic text-2xl tracking-tight text-slate-50 mb-3 leading-snug">
+                                        {item.title}
+                                    </h3>
+                                    <p className="font-inter text-sm leading-relaxed text-slate-400">
+                                        {item.body}
+                                    </p>
+                                </article>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+        </DecompileNode>
     );
 };
 
