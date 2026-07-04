@@ -15,7 +15,7 @@ import Experience from "@/components/Experience";
 
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import DynamicGrid from "@/components/DynamicGrid";
+import Oscilloscope from "@/components/Oscilloscope";
 import Telemetry from "@/components/Telemetry";
 import CrosshairCursor from "@/components/CrosshairCursor";
 import CommandPalette from "@/components/CommandPalette";
@@ -29,7 +29,7 @@ export default function Home() {
       <div className="min-h-screen bg-[#09090b] relative">
         <CommandPalette />
         <CrosshairCursor />
-        <DynamicGrid />
+        <Oscilloscope />
         <ReadingProgress />
         <Telemetry />
         <Navbar />
