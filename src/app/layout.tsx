@@ -44,6 +44,9 @@ export const metadata: Metadata = {
     siteName: "Mohanish Pingale Portfolio",
     images: [{ url: "/og-image.png", width: 1200, height: 630, alt: "Mohanish Pingale" }],
   },
+  verification: {
+    google: "v1Cl1kqcZ2ILTRgAGFEW-ul0GdrW4FfNXyYhI-vYKv0",
+  },
 };
 
 export default function RootLayout({
