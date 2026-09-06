@@ -55,13 +55,14 @@ export default function HeroName() {
             </h1>
 
             {/* LAYER 2: The 3D Offset Shadow (Static Orange Outline) */}
-            <h1 className="absolute top-0 left-0 font-inter font-black uppercase leading-[0.82] tracking-[-0.03em] flex flex-col text-transparent stroke-text-accent translate-x-[6px] translate-y-[6px] opacity-40 -z-10 pointer-events-none">
+            <div aria-hidden="true" className="absolute top-0 left-0 font-inter font-black uppercase leading-[0.82] tracking-[-0.03em] flex flex-col text-transparent stroke-text-accent translate-x-[6px] translate-y-[6px] opacity-40 -z-10 pointer-events-none">
                 <DecryptedText text="Mohanish" />
                 <DecryptedText text="Pingale" />
-            </h1>
+            </div>
 
             {/* LAYER 3: The X-Ray Barcode Scanner (Revealed by mouse cursor) */}
-            <h1 
+            <div 
+                aria-hidden="true"
                 className="absolute top-0 left-0 font-inter font-black uppercase leading-[0.82] tracking-[-0.03em] flex flex-col text-transparent barcode-fill pointer-events-none z-10"
                 style={{
                     clipPath: isHovering 
@@ -72,7 +73,7 @@ export default function HeroName() {
             >
                 <span>Mohanish</span>
                 <span>Pingale</span>
-            </h1>
+            </div>
 
             <style jsx>{`
                 .stroke-text-base {
