@@ -184,3 +184,96 @@ a, button {
   mask-composite: exclude;
   pointer-events: none;
 }
+
+/* ── AMOLED / Liquid Obsidian Engine ────────────────── */
+
+[data-theme="amoled"] {
+  color-scheme: dark;
+}
+
+[data-theme="amoled"] body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Turn off CRT noise so OLED pixels turn off completely */
+[data-theme="amoled"] body::after {
+  opacity: 0 !important;
+  display: none !important;
+}
+
+/* Base background overrides to pure pitch black */
+[data-theme="amoled"] .min-h-screen.bg-\[\#09090b\],
+[data-theme="amoled"] .bg-\[\#09090b\],
+[data-theme="amoled"] .bg-\[\#0a0a0c\],
+[data-theme="amoled"] .bg-\[\#040405\],
+[data-theme="amoled"] section {
+  background-color: #000000 !important;
+}
+
+/* Specular razor-thin divider lines */
+[data-theme="amoled"] .border-white\/10 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+[data-theme="amoled"] [data-reveal="line"] {
+  background-color: rgba(255, 255, 255, 0.22) !important;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.18) !important;
+}
+
+/* AMOLED Liquid Glass Navbar: Polished piano black with specular top highlight */
+[data-theme="amoled"] .liquid-glass {
+  background: linear-gradient(180deg, rgba(16, 16, 20, 0.88) 0%, rgba(0, 0, 0, 0.96) 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
+    0 16px 40px rgba(0, 0, 0, 0.98),
+    0 0 25px rgba(255, 85, 0, 0.08) !important;
+}
+
+[data-theme="amoled"] .liquid-glass::before {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(255, 255, 255, 0.2) 20%,
+    rgba(255, 255, 255, 0) 45%,
+    rgba(255, 255, 255, 0.15) 75%,
+    rgba(255, 255, 255, 0.5) 100%
+  ) !important;
+}
+
+/* Polished obsidian card luster on active containers */
+[data-theme="amoled"] .sticky.top-32,
+[data-theme="amoled"] #activity .border.border-white\/10,
+[data-theme="amoled"] #contact .border {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, rgba(0, 0, 0, 0.85) 100%) !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+    0 20px 45px -10px rgba(0, 0, 0, 0.98) !important;
+}
+
+/* Projects row hover: subtle piano-lacquer sheen */
+[data-theme="amoled"] #projects .group:hover {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%) !important;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Luminous high-contrast text */
+[data-theme="amoled"] .text-slate-50,
+[data-theme="amoled"] .text-slate-100 {
+  color: #ffffff !important;
+  text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
+}
+
+/* Hero barcode pure black gradient */
+[data-theme="amoled"] .barcode-fill {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #ff5500 0px,
+    #ff5500 8px,
+    #000000 8px,
+    #000000 16px
+  ) !important;
+}
+

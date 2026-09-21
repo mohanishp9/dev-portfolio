@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import { useTheme } from "@/context/ThemeContext";
 
 type Action = {
   id: string;
@@ -13,6 +14,7 @@ export default function CommandPalette() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const { theme, toggleTheme } = useTheme();
 
   const toggleDevMode = () => {
     document.body.classList.toggle("dev-mode-active");
@@ -61,6 +63,15 @@ export default function CommandPalette() {
       title: "Toggle Developer Mode (Bounds)",
       category: "System",
       perform: toggleDevMode,
+    },
+    {
+      id: "toggle-theme",
+      title: theme === "amoled" ? "Switch Theme → [ BRUTALIST (Matte CRT) ]" : "Switch Theme → [ AMOLED (Liquid Obsidian) ]",
+      category: "Appearance",
+      perform: () => {
+        toggleTheme();
+        setIsOpen(false);
+      },
     },
   ];
 

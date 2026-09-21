@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import NavLink from "@/components/NavLink";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { useEffect, useState } from "react";
 
 const navItems = [
@@ -81,11 +82,15 @@ const Navbar = () => {
                     ))}
                 </ul>
 
-                <div className="hidden items-center sm:flex bg-[#ff5500] px-3.5 py-1.5 gap-2 rounded-lg">
-                    <span className="w-1.5 h-1.5 bg-black animate-pulse" />
-                    <span className="font-jetbrains text-xs font-bold uppercase tracking-widest text-black">
-                        Available
-                    </span>
+                <div className="flex items-center gap-3">
+                    <ThemeSwitcher />
+
+                    <div className="hidden items-center sm:flex bg-[#ff5500] px-3.5 py-1.5 gap-2 rounded-lg">
+                        <span className="w-1.5 h-1.5 bg-black animate-pulse" />
+                        <span className="font-jetbrains text-xs font-bold uppercase tracking-widest text-black">
+                            Available
+                        </span>
+                    </div>
                 </div>
             </div>
         </nav>

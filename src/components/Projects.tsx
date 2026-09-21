@@ -13,7 +13,7 @@ const projects = [
     },
     {
         number: "02",
-        title: "Grove Crypto Tracker",
+        title: "Cypher Sight",
         summary:
             "Track your crypto portfolio in one place. Connects to CoinGecko for live prices, shows your holdings and transaction history in a clean dashboard.",
         impact: "First project using a live external API — dealing with CoinGecko rate limits taught me about caching.",

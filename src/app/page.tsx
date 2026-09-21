@@ -20,13 +20,15 @@ import Telemetry from "@/components/Telemetry";
 import CrosshairCursor from "@/components/CrosshairCursor";
 import CommandPalette from "@/components/CommandPalette";
 import { DecompilerProvider, DecompileNode } from "@/components/Decompiler";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 export default function Home() {
   useScrollReveal();
 
   return (
-    <DecompilerProvider>
-      <div className="min-h-screen bg-[#09090b] relative">
+    <ThemeProvider>
+      <DecompilerProvider>
+        <div className="min-h-screen bg-[#09090b] relative">
         <CommandPalette />
         <CrosshairCursor />
         <Oscilloscope />
@@ -46,5 +48,6 @@ export default function Home() {
         </main>
       </div>
     </DecompilerProvider>
+    </ThemeProvider>
   );
 }
