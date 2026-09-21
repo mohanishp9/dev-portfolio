@@ -54,16 +54,16 @@ const Navbar = () => {
     return (
         <nav
             className={`
-                sticky top-6 z-[120] mx-auto w-[calc(100%-2rem)] max-w-5xl transition-all duration-500 rounded-2xl mb-12 liquid-glass
+                sticky top-6 z-[120] mx-auto w-[calc(100%-2rem)] max-w-6xl xl:max-w-7xl transition-all duration-500 rounded-2xl mb-12 liquid-glass
                 ${scrolled
                     ? "backdrop-saturate-150 shadow-[0_8px_32px_rgba(0,0,0,0.8)]"
                     : "shadow-[0_4px_16px_rgba(0,0,0,0.4)]"}
             `}
         >
-            <div className="flex h-16 items-center justify-between px-6 lg:px-8">
+            <div className="flex h-16 items-center justify-between px-6 sm:px-8 lg:px-10">
                 <Link
                     href="/"
-                    className="flex shrink-0 items-center gap-2 no-underline group"
+                    className="flex shrink-0 items-center gap-2.5 no-underline group"
                     aria-label="mohanish — home"
                 >
                     <span className="w-2 h-2 bg-accent group-hover:scale-150 transition-transform"></span>
@@ -72,7 +72,7 @@ const Navbar = () => {
                     </span>
                 </Link>
 
-                <ul className="hidden list-none items-center gap-8 lg:flex">
+                <ul className="hidden list-none items-center gap-8 xl:gap-12 lg:flex">
                     {navItems.map((item) => (
                         <li key={item.id}>
                             <NavLink href={item.href} isActive={activeSection === item.id}>
@@ -82,10 +82,10 @@ const Navbar = () => {
                     ))}
                 </ul>
 
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-4 sm:gap-6">
                     <ThemeSwitcher />
 
-                    <div className="hidden items-center sm:flex bg-[#ff5500] px-3.5 py-1.5 gap-2 rounded-lg">
+                    <div className="hidden items-center sm:flex bg-[#ff5500] px-3.5 py-1.5 gap-2 rounded-lg shrink-0">
                         <span className="w-1.5 h-1.5 bg-black animate-pulse" />
                         <span className="font-jetbrains text-xs font-bold uppercase tracking-widest text-black">
                             Available
