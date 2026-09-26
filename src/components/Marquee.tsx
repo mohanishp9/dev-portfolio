@@ -1,9 +1,9 @@
 const items = [
-    "System Status: Nominal",
-    "Deployment: Localhost",
-    "Current Stack: React // Next.js // Node",
-    "Active Environment: Production",
-    "Open for Connections: Port 8080",
+    "Full Stack Developer — Nashik, India",
+    "Open to full-time roles & internships",
+    "Stack: React // Next.js // Node // MongoDB",
+    "SDE Intern @ Indux Technology",
+    "github.com/mohanishp9",
 ];
 
 const Marquee = () => {

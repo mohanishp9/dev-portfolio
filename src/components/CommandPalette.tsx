@@ -16,11 +16,6 @@ export default function CommandPalette() {
   const inputRef = useRef<HTMLInputElement>(null);
   const { theme, toggleTheme } = useTheme();
 
-  const toggleDevMode = () => {
-    document.body.classList.toggle("dev-mode-active");
-    setIsOpen(false);
-  };
-
   const actions: Action[] = [
     {
       id: "projects",
@@ -57,12 +52,6 @@ export default function CommandPalette() {
         window.open("/Mohanish_Pingale_FullStack_Developer_Resume.pdf", "_blank");
         setIsOpen(false);
       },
-    },
-    {
-      id: "dev-mode",
-      title: "Toggle Developer Mode (Bounds)",
-      category: "System",
-      perform: toggleDevMode,
     },
     {
       id: "toggle-theme",
@@ -117,7 +106,7 @@ export default function CommandPalette() {
 
       {/* Palette Modal */}
       <div 
-        className="relative w-full max-w-2xl bg-[#09090b] border border-white/20 shadow-2xl overflow-hidden flex flex-col"
+        className="relative w-full max-w-2xl plane overflow-hidden flex flex-col"
         role="dialog"
         aria-modal="true"
       >

@@ -114,7 +114,7 @@ export default function Contact() {
                 </div>
 
                 <div className="grid lg:grid-cols-[280px_1fr] gap-16 lg:gap-24">
-                    <div data-reveal="left">
+                    <div data-reveal="left" className="lg:sticky lg:top-32 self-start">
                         <div
                             className="font-inter font-black text-[8rem] leading-none tracking-tight text-white/5 select-none mb-8"
                             aria-hidden="true"
@@ -129,13 +129,28 @@ export default function Contact() {
                     <div data-reveal className="flex flex-col justify-between gap-12">
                         
                         {/* Biometric Decryption Block */}
-                        <div 
+                        <div
+                            role="button"
+                            tabIndex={0}
+                            aria-label="Hold to decrypt email address"
                             className={`relative w-full rounded-lg overflow-hidden py-16 px-6 border bg-[#040405] flex flex-col items-center justify-center text-center transition-colors duration-300 ${isDecrypted ? 'border-accent shadow-[0_0_50px_rgba(255,85,0,0.1)]' : 'border-red-500/20 shadow-[0_0_30px_rgba(255,0,0,0.05)]'} ${isHolding && !isDecrypted ? 'animate-shake' : ''}`}
                             onMouseDown={() => setIsHolding(true)}
                             onMouseUp={() => setIsHolding(false)}
                             onMouseLeave={() => setIsHolding(false)}
                             onTouchStart={(e) => { e.preventDefault(); setIsHolding(true); }}
                             onTouchEnd={() => setIsHolding(false)}
+                            onKeyDown={(e) => {
+                                if ((e.key === "Enter" || e.key === " ") && !isDecrypted) {
+                                    e.preventDefault();
+                                    setIsHolding(true);
+                                }
+                            }}
+                            onKeyUp={(e) => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                    setIsHolding(false);
+                                }
+                            }}
+                            onBlur={() => setIsHolding(false)}
                             style={{ userSelect: "none", touchAction: "none" }}
                         >
                             {/* Scanning Laser */}

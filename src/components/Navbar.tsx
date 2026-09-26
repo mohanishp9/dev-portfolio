@@ -3,6 +3,7 @@
 import Link from "next/link";
 import NavLink from "@/components/NavLink";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import MagneticWrapper from "@/components/MagneticWrapper";
 import { useEffect, useState } from "react";
 
 const navItems = [
@@ -61,36 +62,44 @@ const Navbar = () => {
             `}
         >
             <div className="flex h-16 items-center justify-between px-6 sm:px-8 lg:px-10">
-                <Link
-                    href="/"
-                    className="flex shrink-0 items-center gap-2.5 no-underline group"
-                    aria-label="mohanish — home"
-                >
-                    <span className="w-2 h-2 bg-accent group-hover:scale-150 transition-transform"></span>
-                    <span className="font-jetbrains text-sm font-bold tracking-widest text-slate-50 uppercase">
-                        M.Pingale
-                    </span>
-                </Link>
+                <MagneticWrapper strength={0.15}>
+                    <Link
+                        href="/"
+                        className="flex shrink-0 items-center gap-2.5 no-underline group"
+                        aria-label="mohanish — home"
+                    >
+                        <span className="w-2 h-2 bg-accent group-hover:scale-150 transition-transform"></span>
+                        <span className="font-jetbrains text-sm font-bold tracking-widest text-slate-50 uppercase">
+                            M.Pingale
+                        </span>
+                    </Link>
+                </MagneticWrapper>
 
                 <ul className="hidden list-none items-center gap-8 xl:gap-12 lg:flex">
                     {navItems.map((item) => (
                         <li key={item.id}>
-                            <NavLink href={item.href} isActive={activeSection === item.id}>
-                                {item.label}
-                            </NavLink>
+                            <MagneticWrapper strength={0.25}>
+                                <NavLink href={item.href} isActive={activeSection === item.id}>
+                                    {item.label}
+                                </NavLink>
+                            </MagneticWrapper>
                         </li>
                     ))}
                 </ul>
 
                 <div className="flex items-center gap-4 sm:gap-6">
-                    <ThemeSwitcher />
+                    <MagneticWrapper strength={0.3}>
+                        <ThemeSwitcher />
+                    </MagneticWrapper>
 
-                    <div className="hidden items-center sm:flex bg-[#ff5500] px-3.5 py-1.5 gap-2 rounded-lg shrink-0">
-                        <span className="w-1.5 h-1.5 bg-black animate-pulse" />
-                        <span className="font-jetbrains text-xs font-bold uppercase tracking-widest text-black">
-                            Available
-                        </span>
-                    </div>
+                    <MagneticWrapper strength={0.15}>
+                        <div className="hidden items-center sm:flex bg-[#ff5500] px-3.5 py-1.5 gap-2 rounded-lg shrink-0 cursor-pointer">
+                            <span className="w-1.5 h-1.5 bg-black animate-pulse" />
+                            <span className="font-jetbrains text-xs font-bold uppercase tracking-widest text-black">
+                                Available
+                            </span>
+                        </div>
+                    </MagneticWrapper>
                 </div>
             </div>
         </nav>

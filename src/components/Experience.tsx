@@ -44,7 +44,7 @@ const Experience = () => {
 
                 <div className="grid lg:grid-cols-[280px_1fr] gap-16 lg:gap-24">
                     {/* Left */}
-                    <div data-reveal="left">
+                    <div data-reveal="left" className="lg:sticky lg:top-32 self-start">
                         <div
                             className="font-inter font-black text-[8rem] leading-none tracking-tight text-white/5 select-none mb-8"
                             aria-hidden="true"
@@ -80,7 +80,7 @@ const Experience = () => {
                                 </div>
                             </div>
 
-                            <div className="grid sm:grid-cols-2 gap-12 pt-8 border-t border-white/10">
+                            <div className="grid sm:grid-cols-2 gap-12 pt-8 border-t border-white/10 spotlight-wrapper">
                                 {[
                                     {
                                         label: "Module // MagikPro & NutriNative",
@@ -101,7 +101,7 @@ const Experience = () => {
                                     <div
                                         key={mod.label}
                                         data-stagger={String(i + 2)}
-                                        className="flex flex-col"
+                                        className="flex flex-col spotlight-card"
                                     >
                                         <p className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-accent mb-4">
                                             {mod.label}

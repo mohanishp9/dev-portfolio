@@ -33,6 +33,8 @@ body::after {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   opacity: 0.09;
   mix-blend-mode: overlay;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 ::selection {
@@ -132,30 +134,23 @@ a, button {
     from { transform: translateX(0); }
     to   { transform: translateX(0); }
   }
-}
 
-/* ── Developer Mode ────────────────────────── */
+  .animate-shake,
+  .animate-scan,
+  .barcode-fill {
+    animation: none !important;
+  }
 
-.dev-mode-active * {
-  outline: 1px solid rgba(255, 85, 0, 0.3) !important;
-  background-color: rgba(255, 85, 0, 0.02) !important;
-}
+  /* JS effect layers unmount under reduced motion — restore the system cursor */
+  body {
+    cursor: auto;
+  }
 
-.dev-mode-active::after {
-  content: "DEV_MODE_ACTIVE // COMPONENT BOUNDS VISIBLE";
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  background: var(--accent, #ff5500);
-  color: #000;
-  font-family: var(--font-jetbrains), monospace;
-  font-size: 10px;
-  padding: 6px 12px;
-  z-index: 99999;
-  pointer-events: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  letter-spacing: 0.2em;
+  a,
+  button,
+  [role="button"] {
+    cursor: pointer !important;
+  }
 }
 
 /* ── Liquid Glass Effect ────────────────────────── */
@@ -183,6 +178,43 @@ a, button {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+}
+
+/* ── Raking Light Depth System ────────────────────────── */
+/* One overhead light source: bright top edges, contact + ambient shadows below. */
+.plane {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.005) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-top-color: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 1px 2px rgba(0, 0, 0, 0.4),
+    0 16px 40px -12px rgba(0, 0, 0, 0.5);
+}
+
+.plane-raised {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 2px 4px rgba(0, 0, 0, 0.5),
+    0 24px 48px -12px rgba(0, 0, 0, 0.6);
+}
+
+/* AMOLED variant: polished obsidian speculars, matching .liquid-glass treatment */
+[data-theme="amoled"] .plane {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.9) 100%);
+  border-color: rgba(255, 255, 255, 0.15);
+  border-top-color: rgba(255, 255, 255, 0.35);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+    0 20px 45px -10px rgba(0, 0, 0, 0.98);
+}
+
+/* ── Focus ────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 /* ── AMOLED / Liquid Obsidian Engine ────────────────── */
@@ -286,3 +318,15 @@ a, button {
   ) !important;
 }
 
+/* Spotlight Effect for Project & Experience Cards */
+.spotlight-wrapper:has(.spotlight-card:hover) .spotlight-card:not(:hover) {
+  opacity: 0.25;
+  filter: grayscale(80%);
+}
+
+.spotlight-card {
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+  will-change: opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}

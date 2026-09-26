@@ -21,17 +21,23 @@ import CrosshairCursor from "@/components/CrosshairCursor";
 import CommandPalette from "@/components/CommandPalette";
 import { DecompilerProvider, DecompileNode } from "@/components/Decompiler";
 import { ThemeProvider } from "@/context/ThemeContext";
+import { useDeveloperSignature } from "@/hooks/useDeveloperSignature";
+import { useTabLifecycle } from "@/hooks/useTabLifecycle";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 export default function Home() {
   useScrollReveal();
+  useDeveloperSignature();
+  useTabLifecycle();
+  const reducedMotion = usePrefersReducedMotion();
 
   return (
     <ThemeProvider>
       <DecompilerProvider>
         <div className="min-h-screen bg-[#09090b] relative">
         <CommandPalette />
-        <CrosshairCursor />
-        <Oscilloscope />
+        {!reducedMotion && <CrosshairCursor />}
+        {!reducedMotion && <Oscilloscope />}
         <ReadingProgress />
         <Telemetry />
         <Navbar />

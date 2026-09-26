@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 const CHARS = "01XY!@#$%^&*()_+<>?|{}[]";
 
@@ -22,9 +23,15 @@ export default function DecryptedText({
     const [displayText, setDisplayText] = useState(text);
     const [isHovering, setIsHovering] = useState(false);
     const [iteration, setIteration] = useState(0);
+    const reducedMotion = usePrefersReducedMotion();
 
     useEffect(() => {
         let interval: NodeJS.Timeout;
+
+        if (reducedMotion) {
+            setDisplayText(text);
+            return;
+        }
 
         if (isHovering && iteration < maxIterations) {
             interval = setInterval(() => {
@@ -48,7 +55,7 @@ export default function DecryptedText({
         }
 
         return () => clearInterval(interval);
-    }, [isHovering, iteration, maxIterations, speed, text]);
+    }, [isHovering, iteration, maxIterations, speed, text, reducedMotion]);
 
     return (
         <Component

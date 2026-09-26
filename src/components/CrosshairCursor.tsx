@@ -1,43 +1,39 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, useSpring } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CrosshairCursor() {
-    const [mousePos, setMousePos] = useState({ x: -100, y: -100 });
     const [isHovering, setIsHovering] = useState(false);
+
+    const rawX = useMotionValue(-100);
+    const rawY = useMotionValue(-100);
+
+    const springConfig = { stiffness: 450, damping: 28, mass: 0.1 };
+    const crosshairX = useSpring(rawX, springConfig);
+    const crosshairY = useSpring(rawY, springConfig);
 
     useEffect(() => {
         const updateMousePosition = (e: MouseEvent) => {
-            setMousePos({ x: e.clientX, y: e.clientY });
+            rawX.set(e.clientX);
+            rawY.set(e.clientY);
         };
         
         const handleMouseOver = (e: MouseEvent) => {
-            const target = e.target as HTMLElement;
-            if (target.tagName.toLowerCase() === 'a' || target.tagName.toLowerCase() === 'button' || target.closest('a') || target.closest('button')) {
-                setIsHovering(true);
-            } else {
-                setIsHovering(false);
-            }
+            const target = e.target as HTMLElement | null;
+            if (!target) return;
+            const isInteractive = Boolean(target.closest("a, button, [role='button'], input, select, .cursor-pointer"));
+            setIsHovering((prev) => (prev !== isInteractive ? isInteractive : prev));
         };
 
-        window.addEventListener("mousemove", updateMousePosition);
-        window.addEventListener("mouseover", handleMouseOver);
+        window.addEventListener("mousemove", updateMousePosition, { passive: true });
+        window.addEventListener("mouseover", handleMouseOver, { passive: true });
         
         return () => {
             window.removeEventListener("mousemove", updateMousePosition);
             window.removeEventListener("mouseover", handleMouseOver);
         };
-    }, []);
-
-    const springConfig = { stiffness: 400, damping: 25 };
-    const crosshairX = useSpring(mousePos.x, springConfig);
-    const crosshairY = useSpring(mousePos.y, springConfig);
-
-    useEffect(() => {
-        crosshairX.set(mousePos.x);
-        crosshairY.set(mousePos.y);
-    }, [mousePos, crosshairX, crosshairY]);
+    }, [rawX, rawY]);
 
     const [mounted, setMounted] = useState(false);
     useEffect(() => setMounted(true), []);
@@ -46,7 +42,11 @@ export default function CrosshairCursor() {
     return (
         <motion.div
             className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference hidden md:block"
-            style={{ x: crosshairX, y: crosshairY }}
+            style={{ 
+                x: crosshairX, 
+                y: crosshairY,
+                willChange: "transform",
+            }}
         >
             {/* The literal crosshair lines */}
             <motion.div 

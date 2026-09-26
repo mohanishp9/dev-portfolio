@@ -38,7 +38,7 @@ const Skills = () => {
 
     return (
         <DecompileNode name="Technical_Spec_Sheet" data={decompilerData}>
-        <section id="skills" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 overflow-hidden">
+        <section id="skills" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 overflow-x-clip">
             <div className="max-w-7xl">
 
                 {/* Issue header */}
@@ -53,7 +53,7 @@ const Skills = () => {
                 </div>
 
                 <div className="grid lg:grid-cols-[280px_1fr] gap-16 lg:gap-24 mb-16 relative">
-                    <div data-reveal="left" className="relative z-10 pt-8">
+                    <div data-reveal="left" className="relative z-10 pt-8 lg:sticky lg:top-32 self-start">
                         <div
                             className="font-inter font-black text-[8rem] leading-none tracking-tight text-white/5 select-none mb-8"
                             aria-hidden="true"
@@ -111,7 +111,7 @@ const Skills = () => {
                                 </div>
                             </div>
                             <div className="px-6 py-8 flex items-center">
-                                <span className="font-jetbrains text-[0.6rem] font-bold bg-[#3b82f6] text-white px-2 py-1">{String(cap.items.length).padStart(2, "0")}</span>
+                                <span className="font-jetbrains text-[0.6rem] font-bold bg-accent text-black px-2 py-1">{String(cap.items.length).padStart(2, "0")}</span>
                             </div>
                         </div>
                     ))}

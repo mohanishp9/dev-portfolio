@@ -46,7 +46,7 @@ const About = () => {
     const decompilerData = {
         content_metrics: {
             word_count: totalWordCount,
-            estimated_read_time: "42 seconds",
+            estimated_read_time: `${Math.round((totalWordCount / 200) * 60)} seconds`,
             typography_columns: 2
         },
         viewport_tracker: {
@@ -56,7 +56,7 @@ const About = () => {
 
     return (
         <DecompileNode name="About_Profile" data={decompilerData}>
-        <section ref={sectionRef} id="about" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 overflow-hidden">
+        <section ref={sectionRef} id="about" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 overflow-x-clip">
             <div className="max-w-7xl">
 
                 {/* Issue header */}
@@ -74,7 +74,7 @@ const About = () => {
                 <div className="grid lg:grid-cols-[280px_1fr] gap-16 lg:gap-24">
 
                     {/* Left — masthead column */}
-                    <div data-reveal="left" className="relative z-10 pt-8">
+                    <div data-reveal="left" className="relative z-10 pt-8 lg:sticky lg:top-32 self-start">
                         <div
                             className="font-inter font-black text-[8rem] leading-none tracking-tight text-white/5 select-none mb-8"
                             aria-hidden="true"
@@ -87,7 +87,7 @@ const About = () => {
                         {/* Quick spec table */}
                         <div className="border-t border-white/10">
                             {[
-                                { k: "Based", v: "Pune, India" },
+                                { k: "Based", v: "Nashik, India" },
                                 { k: "Focus", v: "Full Stack" },
                                 { k: "Status", v: "SDE Intern" },
                             ].map((row) => (
@@ -106,7 +106,7 @@ const About = () => {
                             style={{ columnRule: "1px solid rgba(255,255,255,0.1)" }}
                         >
                             <p className="text-xl leading-relaxed mb-6 break-inside-avoid">
-                                I'm a full stack developer based in Pune. I got into web
+                                I'm a full stack developer based in Nashik. I got into web
                                 development because I like making things people can actually use.
                                 Not just see, but click through, submit forms on, come back to.
                             </p>

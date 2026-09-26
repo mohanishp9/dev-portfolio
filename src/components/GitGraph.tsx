@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import DecryptedText from "./DecryptedText";
 import { DecompileNode } from "./Decompiler";
+import { setLastLatency } from "@/lib/latency";
 
 interface ContributionDay {
   contributionCount: number;
@@ -40,7 +40,11 @@ export default function GitGraph() {
         const res = await fetch("/api/github");
         if (!res.ok) throw new Error("Failed to fetch GitHub contribution data");
         const json = await res.json();
-        setApiLatency(Math.round(performance.now() - start));
+        const latency = Math.round(performance.now() - start);
+        setApiLatency(latency);
+        // Cache + broadcast the real measurement so the Telemetry HUD doesn't have to fake it
+        setLastLatency(latency);
+        window.dispatchEvent(new CustomEvent("portfolio:latency", { detail: latency }));
         setData(json);
         
         // Find today or last active day to show by default
@@ -218,7 +222,7 @@ export default function GitGraph() {
                               onClick={() => setActiveDay(day)}
                               onMouseEnter={() => setActiveDay(day)}
                               aria-label={`${day.contributionCount} contributions on ${day.date}`}
-                              className={`transition-all duration-100 outline-none cursor-none ${getColorClass(
+                              className={`transition-all duration-100 cursor-none ${getColorClass(
                                 day.contributionCount
                               )} ${
                                 activeDay?.date === day.date
@@ -248,7 +252,7 @@ export default function GitGraph() {
 
           {/* Interactive HUD status line */}
           {!loading && !error && activeDay && (
-            <div className="mt-8 border border-white/10 p-5 bg-white/[0.01] grid sm:grid-cols-[1fr_auto] gap-4 items-center justify-between">
+            <div className="mt-8 plane p-5 grid sm:grid-cols-[1fr_auto] gap-4 items-center justify-between">
               <div>
                 <span className="block font-jetbrains text-[0.55rem] uppercase tracking-[0.2em] text-slate-600 mb-1">
                   Selected Node Date
@@ -270,7 +274,7 @@ export default function GitGraph() {
         </div>
 
         {/* Right column: Vitals Sidebar */}
-        <div data-reveal="left" className="border-l border-white/10 pl-6 lg:pl-10 h-full lg:py-6">
+        <div data-reveal="left" className="border-l border-white/10 pl-6 lg:pl-10 lg:py-6 lg:sticky lg:top-32 self-start">
           <h3 className="font-jetbrains text-[0.65rem] uppercase tracking-[0.3em] text-slate-500 mb-8 block">
             System Vitals // github
           </h3>

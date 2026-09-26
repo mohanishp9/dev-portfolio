@@ -13,7 +13,7 @@ export default function ThemeSwitcher() {
       type="button"
       aria-label={`Current mode: ${theme}. Click to switch theme.`}
       className={`
-        relative select-none transition-all duration-300 flex items-center gap-2.5 outline-none
+        relative select-none transition-all duration-300 flex items-center gap-2.5
         ${
           isAmoled
             ? /* AMOLED Obsidian Lacquer Style */

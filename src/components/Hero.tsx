@@ -3,12 +3,13 @@
 import Link from "next/link";
 import HeroName from "@/components/HeroName";
 import { useEffect, useState, useRef } from "react";
-import { DecompileNode } from "./Decompiler";
+import { DecompileNode, useDecompilerContext } from "./Decompiler";
 
 const Hero = () => {
     const titleRef = useRef<HTMLHeadingElement>(null);
     const [fontSizePx, setFontSizePx] = useState<string>("0px");
     const [cursorDist, setCursorDist] = useState<number>(0);
+    const { isActive: decompilerActive } = useDecompilerContext();
 
     useEffect(() => {
         const updateSize = () => {
@@ -17,28 +18,31 @@ const Hero = () => {
                 setFontSizePx(style.fontSize);
             }
         };
-        
+
         // Initial calc and resize listener
         updateSize();
         window.addEventListener("resize", updateSize);
 
-        // Pythagorean cursor distance tracker
+        return () => window.removeEventListener("resize", updateSize);
+    }, []);
+
+    // Live Pythagorean cursor distance, but ONLY while the Decompiler HUD is open (Shift+D).
+    // Zero listeners and zero re-renders when the HUD is closed.
+    useEffect(() => {
+        if (!decompilerActive) return;
+
         const handleMouseMove = (e: MouseEvent) => {
-            if (titleRef.current) {
-                const rect = titleRef.current.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                const dist = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
-                setCursorDist(Math.round(dist));
-            }
+            if (!titleRef.current) return;
+            const rect = titleRef.current.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const dist = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
+            setCursorDist(Math.round(dist));
         };
         window.addEventListener("mousemove", handleMouseMove);
 
-        return () => {
-            window.removeEventListener("resize", updateSize);
-            window.removeEventListener("mousemove", handleMouseMove);
-        };
-    }, []);
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+    }, [decompilerActive]);
 
     const decompilerData = {
         viewport_math: {
