@@ -1,26 +1,25 @@
-"use client"
+"use client";
 
 import Link from "next/link";
 import NavLink from "@/components/NavLink";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
-import MagneticWrapper from "@/components/MagneticWrapper";
 import { useEffect, useState } from "react";
 
 const navItems = [
-    { href: "#about", label: "About", id: "about" },
-    { href: "#skills", label: "Skills", id: "skills" },
-    { href: "#projects", label: "Projects", id: "projects" },
-    { href: "#experience", label: "Experience", id: "experience" },
-    { href: "#contact", label: "Contact", id: "contact" },
+    { href: "#about", label: "Page I: Dispatches", id: "about" },
+    { href: "#skills", label: "Page II: Spec Sheet", id: "skills" },
+    { href: "#projects", label: "Page III: Exclusives", id: "projects" },
+    { href: "#experience", label: "Page IV: Archives", id: "experience" },
+    { href: "#contact", label: "Page V: Telegraph", id: "contact" },
 ];
 
-const Navbar = () => {
+export default function Navbar() {
     const [scrolled, setScrolled] = useState<boolean>(false);
     const [activeSection, setActiveSection] = useState<string>("about");
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 20);
+            setScrolled(window.scrollY > 40);
         };
 
         handleScroll();
@@ -53,57 +52,49 @@ const Navbar = () => {
     }, []);
 
     return (
-        <nav
-            className={`
-                sticky top-6 z-[120] mx-auto w-[calc(100%-2rem)] max-w-6xl xl:max-w-7xl transition-all duration-500 rounded-2xl mb-12 liquid-glass
-                ${scrolled
-                    ? "backdrop-saturate-150 shadow-[0_8px_32px_rgba(0,0,0,0.8)]"
-                    : "shadow-[0_4px_16px_rgba(0,0,0,0.4)]"}
-            `}
-        >
-            <div className="flex h-16 items-center justify-between px-6 sm:px-8 lg:px-10">
-                <MagneticWrapper strength={0.15}>
-                    <Link
-                        href="/"
-                        className="flex shrink-0 items-center gap-2.5 no-underline group"
-                        aria-label="mohanish — home"
-                    >
-                        <span className="w-2 h-2 bg-accent group-hover:scale-150 transition-transform"></span>
-                        <span className="font-jetbrains text-sm font-bold tracking-widest text-slate-50 uppercase">
-                            M.Pingale
-                        </span>
-                    </Link>
-                </MagneticWrapper>
+        <header className="sticky top-0 z-[120] w-full bg-[var(--news-bg)] border-b border-[var(--news-rule-strong)] shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-300">
+            {/* Top Micro-Folio Bar */}
+            <div className="hidden md:flex items-center justify-between px-6 py-1 border-b border-[var(--news-rule)] font-telegraph text-[0.65rem] text-[var(--news-muted)] uppercase tracking-wider">
+                <span>The Weather: 24°C • Fair &amp; Mild in Nashik</span>
+                <span className="font-bold text-[var(--news-ink)]">The Daily Gazette of Web Engineering</span>
+                <span>Vol. XXVI • No. 1,950 • Price: Two Pence</span>
+            </div>
 
-                <ul className="hidden list-none items-center gap-8 xl:gap-12 lg:flex">
+            {/* Main Folio Navigation Bar */}
+            <div className="max-w-[1400px] mx-auto px-4 sm:px-8 py-2.5 flex items-center justify-between gap-4">
+                {/* Brand Nameplate Mini */}
+                <Link
+                    href="/"
+                    className="flex items-center gap-2 text-decoration-none group shrink-0"
+                    aria-label="The Pingale Chronicle Home"
+                >
+                    <span className="font-headline font-black text-xl sm:text-2xl tracking-tight text-[var(--news-ink)] uppercase">
+                        The Pingale Chronicle
+                    </span>
+                    <span className="hidden lg:inline-block font-editorial italic text-xs text-[var(--news-muted)]">
+                        — Est. 2024
+                    </span>
+                </Link>
+
+                {/* Folio Section Index */}
+                <nav className="hidden xl:flex items-center gap-6">
                     {navItems.map((item) => (
-                        <li key={item.id}>
-                            <MagneticWrapper strength={0.25}>
-                                <NavLink href={item.href} isActive={activeSection === item.id}>
-                                    {item.label}
-                                </NavLink>
-                            </MagneticWrapper>
-                        </li>
+                        <NavLink key={item.id} href={item.href} isActive={activeSection === item.id}>
+                            {item.label}
+                        </NavLink>
                     ))}
-                </ul>
+                </nav>
 
-                <div className="flex items-center gap-4 sm:gap-6">
-                    <MagneticWrapper strength={0.3}>
-                        <ThemeSwitcher />
-                    </MagneticWrapper>
+                {/* Right Actions: Edition Toggle & Status Stamp */}
+                <div className="flex items-center gap-3 shrink-0">
+                    <ThemeSwitcher />
 
-                    <MagneticWrapper strength={0.15}>
-                        <div className="hidden items-center sm:flex bg-[#ff5500] px-3.5 py-1.5 gap-2 rounded-lg shrink-0 cursor-pointer">
-                            <span className="w-1.5 h-1.5 bg-black animate-pulse" />
-                            <span className="font-jetbrains text-xs font-bold uppercase tracking-widest text-black">
-                                Available
-                            </span>
-                        </div>
-                    </MagneticWrapper>
+                    <div className="hidden sm:inline-flex items-center gap-1.5 border border-[var(--news-accent)] px-2.5 py-1 text-[var(--news-accent)] font-telegraph text-[0.65rem] uppercase font-bold tracking-widest bg-[var(--news-accent)]/5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--news-accent)] animate-pulse" />
+                        <span>Available for Hire</span>
+                    </div>
                 </div>
             </div>
-        </nav>
+        </header>
     );
-};
-
-export default Navbar;
+}

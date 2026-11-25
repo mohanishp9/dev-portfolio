@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-
 import Navbar from "@/components/Navbar";
 import ReadingProgress from "@/components/ReadingProgress";
 import Hero from "@/components/Hero";
@@ -12,48 +10,45 @@ import Skills from "@/components/Skills";
 import Projects from "@/components/Projects";
 import GitGraph from "@/components/GitGraph";
 import Experience from "@/components/Experience";
-
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import Oscilloscope from "@/components/Oscilloscope";
 import Telemetry from "@/components/Telemetry";
-import CrosshairCursor from "@/components/CrosshairCursor";
 import CommandPalette from "@/components/CommandPalette";
-import { DecompilerProvider, DecompileNode } from "@/components/Decompiler";
+import { DecompilerProvider } from "@/components/Decompiler";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { useDeveloperSignature } from "@/hooks/useDeveloperSignature";
 import { useTabLifecycle } from "@/hooks/useTabLifecycle";
-import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 
 export default function Home() {
   useScrollReveal();
   useDeveloperSignature();
   useTabLifecycle();
-  const reducedMotion = usePrefersReducedMotion();
 
   return (
     <ThemeProvider>
       <DecompilerProvider>
-        <div className="min-h-screen bg-[#09090b] relative">
-        <CommandPalette />
-        {!reducedMotion && <CrosshairCursor />}
-        {!reducedMotion && <Oscilloscope />}
-        <ReadingProgress />
-        <Telemetry />
-        <Navbar />
-        <main className="relative selection:bg-accent selection:text-white">
-          <Hero />
-          <Marquee />
-          <About />
-          <Skills />
-          <Projects />
-          <GitGraph />
-          <Experience />
-          <Contact />
-          <Footer />
-        </main>
-      </div>
-    </DecompilerProvider>
+        <div className="min-h-screen bg-[var(--news-bg)] text-[var(--news-ink)] relative selection:bg-[var(--news-accent)] selection:text-white transition-colors duration-300">
+          <CommandPalette />
+          <ReadingProgress />
+          <Telemetry />
+          
+          {/* Physical Broadsheet Sheet Container */}
+          <div className="max-w-[1440px] mx-auto bg-[var(--news-bg)] border-x border-[var(--news-rule-strong)] shadow-[0_4px_35px_rgba(0,0,0,0.07)] min-h-screen">
+            <Navbar />
+            <main>
+              <Hero />
+              <Marquee />
+              <About />
+              <Skills />
+              <Projects />
+              <GitGraph />
+              <Experience />
+              <Contact />
+              <Footer />
+            </main>
+          </div>
+        </div>
+      </DecompilerProvider>
     </ThemeProvider>
   );
 }

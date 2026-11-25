@@ -85,21 +85,20 @@ export function DecompileNode({ name, data, children }: { name: string; data: Re
     <div 
       onMouseEnter={handleMouseEnter} 
       onMouseLeave={handleMouseLeave}
-      className={isActive ? "ring-1 ring-[#ff5500]/50 bg-[#ff5500]/[0.02] transition-all cursor-crosshair relative z-40" : ""}
+      className={isActive ? "ring-2 ring-[var(--news-accent)]/80 bg-[var(--news-accent)]/[0.04] transition-all cursor-help relative z-40" : ""}
     >
       {children}
     </div>
   );
 }
 
-// 3. The Visual HUD Overlay (Optimized for zero-lag 144hz rendering)
+// 3. The Visual HUD Overlay (Typesetter's Proof Inspection Sheet)
 function DecompilerOverlay() {
   const { hoveredNode } = useDecompilerContext();
   const hudRef = useRef<HTMLDivElement>(null);
 
   // Use raw DOM manipulation to follow mouse without React re-renders
   useEffect(() => {
-    // Instantly snap to the cursor the moment Shift+D is pressed
     const pos = (window as any).__decompilerMousePos || { x: 0, y: 0 };
     if (hudRef.current) {
         const x = Math.min(window.innerWidth - 340, pos.x + 24);
@@ -123,39 +122,31 @@ function DecompilerOverlay() {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[9998] pointer-events-none transition-colors duration-500 bg-black/60 backdrop-blur-[2px]">
-      {/* Brutalist Blueprint Grid Overlay */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-20" 
-        style={{ 
-          backgroundImage: "linear-gradient(rgba(255, 85, 0, 0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 85, 0, 0.2) 1px, transparent 1px)", 
-          backgroundSize: "40px 40px" 
-        }} 
-      />
-      
-      {/* Floating HUD Panel */}
+    <div className="fixed inset-0 z-[9998] pointer-events-none transition-colors duration-300 bg-black/25 backdrop-blur-[1px]">
+      {/* Floating Typesetter's Proof Panel */}
       {hoveredNode && (
         <div 
           ref={hudRef}
-          className="fixed top-0 left-0 border border-[#ff5500] bg-[#09090b]/95 shadow-2xl p-5 min-w-[320px] max-w-[400px] pointer-events-none"
+          className="fixed top-0 left-0 border-2 border-[var(--news-rule-strong)] bg-[var(--news-card)] shadow-2xl p-5 min-w-[320px] max-w-[420px] pointer-events-none"
           style={{ willChange: "transform" }}
         >
-          <div className="border-b border-[#ff5500]/30 pb-2 mb-3">
-            <span className="font-jetbrains text-[0.65rem] uppercase tracking-widest text-[#ff5500] font-bold">
-              [SYSTEM_LOG] Mounting &lt;{hoveredNode.name} /&gt;
+          <div className="border-b-2 border-[var(--news-rule-strong)] pb-2 mb-3 flex items-center justify-between">
+            <span className="font-telegraph text-[0.65rem] uppercase tracking-widest text-[var(--news-accent)] font-bold">
+              [TYPESETTER PROOF SHEET] &lt;{hoveredNode.name} /&gt;
             </span>
+            <span className="font-telegraph text-[0.55rem] text-[var(--news-muted)]">PRESS SHIFT+D TO CLOSE</span>
           </div>
           
-          <pre className="font-jetbrains text-[0.65rem] text-slate-300 whitespace-pre-wrap leading-relaxed overflow-x-hidden">
+          <pre className="font-telegraph text-[0.68rem] text-[var(--news-ink)] whitespace-pre-wrap leading-relaxed overflow-x-hidden">
             {JSON.stringify(hoveredNode.data, null, 2)}
           </pre>
           
-          <div className="mt-4 pt-3 border-t border-white/10 flex justify-between">
-            <span className="font-jetbrains text-[0.55rem] uppercase tracking-widest text-slate-500">
-              State: Hydrated
+          <div className="mt-4 pt-3 border-t border-[var(--news-rule)] flex justify-between font-telegraph text-[0.58rem] uppercase tracking-widest">
+            <span className="text-[var(--news-muted)]">
+              Broadsheet Record: Active
             </span>
-            <span className="font-jetbrains text-[0.55rem] uppercase tracking-widest text-[#ccff00] animate-pulse font-bold">
-              Live Sync
+            <span className="text-[var(--news-accent)] font-bold">
+              Audited OK
             </span>
           </div>
         </div>

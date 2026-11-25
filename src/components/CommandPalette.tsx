@@ -3,12 +3,12 @@
 import { useEffect, useState, useRef } from "react";
 import { useTheme } from "@/context/ThemeContext";
 
-type Action = {
+interface Action {
   id: string;
   title: string;
   category: string;
   perform: () => void;
-};
+}
 
 export default function CommandPalette() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +19,7 @@ export default function CommandPalette() {
   const actions: Action[] = [
     {
       id: "projects",
-      title: "Jump to Projects",
+      title: "Jump to Page III: Selected Works & Exclusives",
       category: "Navigation",
       perform: () => {
         document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
@@ -28,7 +28,7 @@ export default function CommandPalette() {
     },
     {
       id: "experience",
-      title: "Jump to Experience",
+      title: "Jump to Page IV: Historical Archives & Dispatches",
       category: "Navigation",
       perform: () => {
         document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" });
@@ -36,47 +36,72 @@ export default function CommandPalette() {
       },
     },
     {
-      id: "activity",
-      title: "View Telemetry Log (Git Graph)",
+      id: "skills",
+      title: "Jump to Page II: Technical Spec Sheet",
       category: "Navigation",
       perform: () => {
-        document.getElementById("activity")?.scrollIntoView({ behavior: "smooth" });
+        document.getElementById("skills")?.scrollIntoView({ behavior: "smooth" });
+        setIsOpen(false);
+      },
+    },
+    {
+      id: "about",
+      title: "Jump to Page I: Editorial Profile",
+      category: "Navigation",
+      perform: () => {
+        document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+        setIsOpen(false);
+      },
+    },
+    {
+      id: "contact",
+      title: "Jump to Page V: The Classifieds & Telegraph",
+      category: "Navigation",
+      perform: () => {
+        document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+        setIsOpen(false);
+      },
+    },
+    {
+      id: "toggle-theme",
+      title: theme === "archive" ? "Switch Edition → [ MORNING PRESS (Crisp Broadsheet) ]" : "Switch Edition → [ ARCHIVAL 1950s (Sepia Newsprint) ]",
+      category: "Press Settings",
+      perform: () => {
+        toggleTheme();
         setIsOpen(false);
       },
     },
     {
       id: "resume",
-      title: "Download Resume",
-      category: "Files",
+      title: "Download Official Curriculum Vitae (PDF)",
+      category: "Documents",
       perform: () => {
         window.open("/Mohanish_Pingale_FullStack_Developer_Resume.pdf", "_blank");
         setIsOpen(false);
       },
     },
     {
-      id: "toggle-theme",
-      title: theme === "amoled" ? "Switch Theme → [ BRUTALIST (Matte CRT) ]" : "Switch Theme → [ AMOLED (Liquid Obsidian) ]",
-      category: "Appearance",
+      id: "github",
+      title: "Inspect Official GitHub Ledger",
+      category: "External Records",
       perform: () => {
-        toggleTheme();
+        window.open("https://github.com/mohanishp9", "_blank");
         setIsOpen(false);
       },
     },
   ];
 
-  // Filter actions based on search query
   const filteredActions = actions.filter((action) =>
-    action.title.toLowerCase().includes(query.toLowerCase())
+    action.title.toLowerCase().includes(query.toLowerCase()) ||
+    action.category.toLowerCase().includes(query.toLowerCase())
   );
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Open with Ctrl+K or Cmd+K
-      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setIsOpen((prev) => !prev);
       }
-      // Close on Escape
       if (e.key === "Escape") {
         setIsOpen(false);
       }
@@ -86,11 +111,10 @@ export default function CommandPalette() {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // Auto-focus input when opened
   useEffect(() => {
     if (isOpen && inputRef.current) {
       inputRef.current.focus();
-      setQuery(""); // clear previous search
+      setQuery("");
     }
   }, [isOpen]);
 
@@ -100,50 +124,50 @@ export default function CommandPalette() {
     <div className="fixed inset-0 z-[9999] flex items-start justify-center pt-[15vh] px-4">
       {/* Backdrop */}
       <div
-        className="absolute inset-0 bg-[#09090b]/80 backdrop-blur-sm transition-opacity"
+        className="absolute inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
         onClick={() => setIsOpen(false)}
       />
 
       {/* Palette Modal */}
       <div 
-        className="relative w-full max-w-2xl plane overflow-hidden flex flex-col"
+        className="relative w-full max-w-2xl border-2 border-[var(--news-rule-strong)] bg-[var(--news-card)] shadow-[0_20px_50px_rgba(0,0,0,0.18)] overflow-hidden flex flex-col"
         role="dialog"
         aria-modal="true"
       >
-        {/* Search Input */}
-        <div className="flex items-center px-4 border-b border-white/10">
-          <span className="text-accent font-jetbrains text-sm">{">"}</span>
+        {/* Search Input Bar */}
+        <div className="flex items-center px-4 border-b-2 border-[var(--news-rule-strong)] bg-[var(--news-bg)]">
+          <span className="text-[var(--news-accent)] font-telegraph text-xs font-bold mr-2">FIND //</span>
           <input
             ref={inputRef}
             type="text"
-            className="w-full bg-transparent border-none text-slate-100 font-jetbrains text-sm p-5 outline-none placeholder:text-slate-600"
-            placeholder="Search commands... (e.g. 'resume', 'projects')"
+            className="w-full bg-transparent border-none text-[var(--news-ink)] font-editorial text-base p-4 outline-none placeholder:text-[var(--news-muted)] placeholder:italic"
+            placeholder="Search chronicle index... (e.g. 'works', 'resume', 'contact')"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <span className="font-jetbrains text-[0.6rem] text-slate-600 uppercase tracking-widest bg-white/5 px-2 py-1">
-            ESC to close
+          <span className="font-telegraph text-[0.62rem] text-[var(--news-muted)] uppercase tracking-widest border border-[var(--news-rule)] px-2 py-0.5">
+            ESC
           </span>
         </div>
 
         {/* Action List */}
-        <div className="max-h-[60vh] overflow-y-auto no-scrollbar p-2">
+        <div className="max-h-[55vh] overflow-y-auto p-2">
           {filteredActions.length === 0 ? (
-            <div className="p-8 text-center font-jetbrains text-xs text-slate-500 uppercase tracking-widest">
-              No matching commands found.
+            <div className="p-8 text-center font-editorial italic text-sm text-[var(--news-muted)]">
+              No matching records discovered in the current edition.
             </div>
           ) : (
             <div className="flex flex-col gap-1">
-              {filteredActions.map((action, index) => (
+              {filteredActions.map((action) => (
                 <button
                   key={action.id}
                   onClick={action.perform}
-                  className="w-full flex flex-col sm:flex-row sm:items-center justify-between text-left p-4 hover:bg-white/5 border border-transparent hover:border-white/10 transition-colors group cursor-none"
+                  className="w-full flex flex-col sm:flex-row sm:items-center justify-between text-left p-3 hover:bg-[var(--news-bg)] border border-transparent hover:border-[var(--news-rule)] transition-colors group cursor-pointer"
                 >
-                  <span className="font-inter font-bold text-sm text-slate-300 group-hover:text-white">
+                  <span className="font-headline font-bold text-sm text-[var(--news-ink)] group-hover:text-[var(--news-accent)]">
                     {action.title}
                   </span>
-                  <span className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-500 mt-2 sm:mt-0">
+                  <span className="font-telegraph text-[0.6rem] uppercase tracking-wider text-[var(--news-muted)] mt-1 sm:mt-0">
                     {action.category}
                   </span>
                 </button>
@@ -153,10 +177,9 @@ export default function CommandPalette() {
         </div>
         
         {/* Footer */}
-        <div className="px-4 py-3 border-t border-white/10 bg-white/[0.02]">
-          <span className="font-jetbrains text-[0.55rem] uppercase tracking-[0.2em] text-slate-500">
-            System Terminal // v1.0.0
-          </span>
+        <div className="px-4 py-2.5 border-t border-[var(--news-rule-strong)] bg-[var(--news-bg)] flex items-center justify-between font-telegraph text-[0.6rem] text-[var(--news-muted)] uppercase tracking-wider">
+          <span>THE PINGALE CHRONICLE // MASTER INDEX</span>
+          <span>PRESS &crarr; TO EXECUTE</span>
         </div>
       </div>
     </div>

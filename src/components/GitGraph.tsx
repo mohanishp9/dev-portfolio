@@ -27,11 +27,8 @@ export default function GitGraph() {
   const [activeDay, setActiveDay] = useState<ContributionDay | null>(null);
   const [apiLatency, setApiLatency] = useState<number>(0);
 
-  // Sizing configurations to make the graph bigger and fully customizable
-  const CELL_SIZE = 14; // in pixels
-  const CELL_GAP = 3;   // in pixels
-  const DAY_LABEL_WIDTH = 40; // in pixels
-  const gridHeight = 7 * CELL_SIZE + 6 * CELL_GAP;
+  const CELL_SIZE = 13;
+  const CELL_GAP = 3;
 
   useEffect(() => {
     async function fetchGitData() {
@@ -42,12 +39,10 @@ export default function GitGraph() {
         const json = await res.json();
         const latency = Math.round(performance.now() - start);
         setApiLatency(latency);
-        // Cache + broadcast the real measurement so the Telemetry HUD doesn't have to fake it
         setLastLatency(latency);
         window.dispatchEvent(new CustomEvent("portfolio:latency", { detail: latency }));
         setData(json);
         
-        // Find today or last active day to show by default
         if (json.weeks && json.weeks.length > 0) {
           const lastWeek = json.weeks[json.weeks.length - 1];
           const lastDay = lastWeek.contributionDays[lastWeek.contributionDays.length - 1];
@@ -63,16 +58,14 @@ export default function GitGraph() {
     fetchGitData();
   }, []);
 
-  // Determine orange intensity level based on commit count
   const getColorClass = (count: number) => {
-    if (count === 0) return "bg-transparent border border-white/5";
-    if (count <= 2) return "bg-[#ff5500]/20 border border-[#ff5500]/15";
-    if (count <= 5) return "bg-[#ff5500]/50 border border-[#ff5500]/30";
-    if (count <= 9) return "bg-[#ff5500]/80 border border-[#ff5500]/50";
-    return "bg-[#ff5500] border border-white/30";
+    if (count === 0) return "bg-[var(--news-bg)] border border-[var(--news-rule)]";
+    if (count <= 2) return "bg-[var(--news-ink)]/20 border border-[var(--news-rule)]";
+    if (count <= 5) return "bg-[var(--news-ink)]/50 border border-[var(--news-ink)]/60";
+    if (count <= 9) return "bg-[var(--news-ink)]/80 border border-[var(--news-ink)]";
+    return "bg-[var(--news-accent)] border border-[var(--news-accent)]";
   };
 
-  // Helper calculations for Git Stats
   const getStats = () => {
     if (!data) return { maxCommits: 0, activeDays: 0, consistency: 0 };
     
@@ -80,8 +73,8 @@ export default function GitGraph() {
     let activeDays = 0;
     let totalDays = 0;
 
-    data.weeks.forEach(week => {
-      week.contributionDays.forEach(day => {
+    data.weeks.forEach((week) => {
+      week.contributionDays.forEach((day) => {
         totalDays++;
         if (day.contributionCount > 0) activeDays++;
         if (day.contributionCount > maxCommits) maxCommits = day.contributionCount;
@@ -89,13 +82,11 @@ export default function GitGraph() {
     });
 
     const consistency = totalDays > 0 ? Math.round((activeDays / totalDays) * 100) : 0;
-
     return { maxCommits, activeDays, consistency };
   };
 
   const { maxCommits, activeDays, consistency } = getStats();
 
-  // Helper to format date nicely
   const formatDateString = (dateStr: string) => {
     if (!dateStr) return "";
     const date = new Date(dateStr);
@@ -115,211 +106,169 @@ export default function GitGraph() {
     },
     graph_engine: {
       cells_rendered: data ? data.weeks.length * 7 : 0,
-      active_hover: activeDay ? { date: activeDay.date, commits: activeDay.contributionCount } : null
+      active_hover: activeDay ? { date: activeDay.date, commits: activeDay.contributionCount } : null,
     },
-    vitals: {
-      max_capacity: maxCommits,
-      consistency_score: consistency + "%",
-    }
   };
 
   return (
-    <DecompileNode name="GitGraph_Telemetry" data={decompilerData}>
-    <section id="activity" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 bg-[#0a0a0c]">
-      <div className="grid lg:grid-cols-[1fr_320px] gap-16 items-start">
-        
-        {/* Left main block: Title, Grid & HUD */}
-        <div>
-          {/* Header */}
-          <div data-reveal className="mb-12">
-            <span className="font-jetbrains text-[0.65rem] uppercase tracking-[0.3em] text-accent block mb-3">
-              Telemetry Log // git_contribution
-            </span>
-            <h2 className="font-playfair italic text-4xl sm:text-5xl text-slate-100 uppercase tracking-tight">
-              Dev Activity Grid
-            </h2>
-          </div>
+    <DecompileNode name="Git_Graph_Telemetry" data={decompilerData}>
+      <section id="activity" className="border-b border-[var(--news-rule-strong)] px-4 sm:px-8 lg:px-12 py-16">
+        {/* Section Folio Header */}
+        <div data-reveal className="flex items-center justify-between border-b border-[var(--news-rule-strong)] pb-3 mb-10 font-telegraph text-[0.68rem] uppercase tracking-[0.22em] text-[var(--news-muted)]">
+          <span className="font-bold text-[var(--news-ink)]">
+            RECORD OF INDUSTRY &bull; ANNUAL CODE CHRONICLE
+          </span>
+          <span className="font-headline italic text-sm text-[var(--news-ink)] normal-case">
+            Meteorological Record of Continuous Software Assembly
+          </span>
+          <span className="hidden sm:inline">OFFICIAL LEDGER</span>
+        </div>
 
-          {/* Grid Container */}
-          {loading ? (
-            // Skeleton loader matching exact size
-            <div className="w-full h-36 bg-white/5 border border-white/10 animate-pulse flex items-center justify-center font-jetbrains text-xs text-slate-500 uppercase tracking-widest">
-              Connecting to Github API...
-            </div>
-          ) : error || !data ? (
-            <div className="w-full h-36 bg-red-950/20 border border-red-500/20 flex items-center justify-center font-jetbrains text-xs text-red-400 uppercase tracking-widest">
-              Failed to load activity log
-            </div>
-          ) : (
-            <div className="relative">
-              {/* Horizontal Scroll wrapper for smaller screens */}
-              <div className="overflow-x-auto no-scrollbar -mx-6 px-6 lg:mx-0 lg:px-0">
-                <div 
-                  className="pb-4"
-                  style={{ minWidth: `${DAY_LABEL_WIDTH + 53 * (CELL_SIZE + CELL_GAP)}px` }}
-                >
-                  
-                  {/* Month headers row */}
-                  <div 
-                    className="flex mb-2 text-[0.6rem] font-jetbrains text-slate-500 uppercase tracking-wider select-none"
-                    style={{ gap: `${CELL_GAP}px` }}
-                  >
-                    <span 
-                      className="shrink-0"
-                      style={{ width: `${DAY_LABEL_WIDTH}px` }}
-                    />
-                    {data.weeks.map((week, wIdx) => {
-                      let monthLabel = "";
-                      if (week.contributionDays[0]) {
-                        const date = new Date(week.contributionDays[0].date);
-                        const isFirstWeekOfMonth = date.getDate() <= 7;
-                        if (isFirstWeekOfMonth) {
-                          monthLabel = date.toLocaleDateString("en-US", { month: "short" });
-                        }
-                      }
-                      return (
-                        <span 
-                          key={wIdx} 
-                          className="shrink-0 text-left overflow-visible whitespace-nowrap" 
-                          style={{ width: `${CELL_SIZE}px` }}
-                        >
-                          {monthLabel}
-                        </span>
-                      );
-                    })}
-                  </div>
-
-                  {/* Calendar Grid proper */}
-                  <div 
-                    className="flex relative select-none"
-                    style={{ gap: `${CELL_GAP}px` }}
-                  >
-                    {/* Day names column */}
-                    <div 
-                      className="flex flex-col text-[0.6rem] font-jetbrains text-slate-600 pr-2 pt-[1px] justify-between uppercase shrink-0"
-                      style={{ 
-                        width: `${DAY_LABEL_WIDTH}px`, 
-                        height: `${gridHeight}px`,
-                      }}
-                    >
-                      <span>Sun</span>
-                      <span>Tue</span>
-                      <span>Thu</span>
-                      <span>Sat</span>
-                    </div>
-
-                    {/* Columns of weeks */}
-                    <div className="flex" style={{ gap: `${CELL_GAP}px` }}>
-                      {data.weeks.map((week, wIdx) => (
-                        <div 
-                          key={wIdx} 
-                          className="flex flex-col" 
-                          style={{ gap: `${CELL_GAP}px` }}
-                        >
-                          {week.contributionDays.map((day, dIdx) => (
-                            <button
-                              key={dIdx}
-                              onClick={() => setActiveDay(day)}
-                              onMouseEnter={() => setActiveDay(day)}
-                              aria-label={`${day.contributionCount} contributions on ${day.date}`}
-                              className={`transition-all duration-100 cursor-none ${getColorClass(
-                                day.contributionCount
-                              )} ${
-                                activeDay?.date === day.date
-                                  ? "ring-1 ring-white scale-110 z-10"
-                                  : "hover:scale-115"
-                              }`}
-                              style={{
-                                width: `${CELL_SIZE}px`,
-                                height: `${CELL_SIZE}px`,
-                              }}
-                            />
-                          ))}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
+          {/* Main Visual Matrix (8 cols) */}
+          <div data-reveal className="lg:col-span-8 flex flex-col justify-between">
+            <div>
+              <div className="flex flex-wrap items-baseline justify-between border-b border-[var(--news-rule)] pb-3 mb-6 gap-2">
+                <div>
+                  <span className="font-telegraph text-[0.6rem] uppercase tracking-[0.25em] text-[var(--news-accent)] font-bold block mb-1">
+                    CHART NO. 14 &bull; 52 WEEKS PRECIPITATION
+                  </span>
+                  <h3 className="font-headline font-black text-2xl uppercase tracking-wide text-[var(--news-ink)]">
+                    Annual GitHub Commit Velocity
+                  </h3>
+                </div>
+                <div className="font-telegraph text-xs text-[var(--news-muted)]">
+                  Subject: <span className="font-bold text-[var(--news-ink)]">github.com/mohanishp9</span>
                 </div>
               </div>
 
-              {/* Scroll Indicator helper for mobile */}
-              <div className="flex justify-between items-center mt-3 text-[0.6rem] font-jetbrains text-slate-500 uppercase tracking-widest lg:hidden">
-                <span>&larr; Swipe to pan history &rarr;</span>
-                {data.isMock && <span className="text-amber-500/80">Demo Mode</span>}
+              {/* Scrollable Ink-Grid Canvas */}
+              <div className="border border-[var(--news-rule-strong)] bg-[var(--news-card)] p-5 overflow-x-auto">
+                {loading ? (
+                  <div className="py-16 text-center font-editorial italic text-sm text-[var(--news-muted)]">
+                    Telegraph line active... Querying GitHub servers for verified activity logs...
+                  </div>
+                ) : error ? (
+                  <div className="py-16 text-center font-editorial italic text-sm text-[var(--news-accent)]">
+                    Telegraphic cable interrupted. Displaying cached archival commit record.
+                  </div>
+                ) : (
+                  <div className="flex gap-[3px] min-w-max pb-2">
+                    {data?.weeks.map((week, wIdx) => (
+                      <div key={wIdx} className="flex flex-col gap-[3px]">
+                        {week.contributionDays.map((day) => (
+                          <button
+                            key={day.date}
+                            type="button"
+                            onClick={() => setActiveDay(day)}
+                            onMouseEnter={() => setActiveDay(day)}
+                            aria-label={`${day.contributionCount} contributions on ${day.date}`}
+                            className={`w-[13px] h-[13px] transition-transform duration-75 cursor-pointer ${getColorClass(
+                              day.contributionCount
+                            )} ${activeDay?.date === day.date ? "scale-125 z-10 ring-2 ring-[var(--news-ink)]" : ""}`}
+                          />
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Legend Row */}
+                <div className="mt-4 pt-3 border-t border-[var(--news-rule)] flex flex-wrap items-center justify-between text-[0.65rem] font-telegraph text-[var(--news-muted)] uppercase tracking-wider">
+                  <div className="flex items-center gap-2">
+                    <span>Low Volume</span>
+                    <span className="inline-block w-3 h-3 bg-[var(--news-bg)] border border-[var(--news-rule)]" />
+                    <span className="inline-block w-3 h-3 bg-[var(--news-ink)]/20 border border-[var(--news-rule)]" />
+                    <span className="inline-block w-3 h-3 bg-[var(--news-ink)]/50 border border-[var(--news-ink)]" />
+                    <span className="inline-block w-3 h-3 bg-[var(--news-ink)]/80 border border-[var(--news-ink)]" />
+                    <span className="inline-block w-3 h-3 bg-[var(--news-accent)] border border-[var(--news-accent)]" />
+                    <span>Heavy Influx</span>
+                  </div>
+                  <span>52 Weeks &bull; {data?.weeks.reduce((acc, w) => acc + w.contributionDays.length, 0) || 365} Days Logged</span>
+                </div>
               </div>
-            </div>
-          )}
 
-          {/* Interactive HUD status line */}
-          {!loading && !error && activeDay && (
-            <div className="mt-8 plane p-5 grid sm:grid-cols-[1fr_auto] gap-4 items-center justify-between">
-              <div>
-                <span className="block font-jetbrains text-[0.55rem] uppercase tracking-[0.2em] text-slate-600 mb-1">
-                  Selected Node Date
-                </span>
-                <span className="font-inter text-sm font-bold text-slate-200 block sm:inline">
-                  {formatDateString(activeDay.date)}
+              {/* Day Inspector Strip */}
+              {activeDay && (
+                <div className="mt-4 p-4 border border-[var(--news-rule-strong)] bg-[var(--news-card)] flex flex-wrap items-center justify-between gap-4 font-editorial">
+                  <div>
+                    <span className="font-telegraph text-[0.6rem] uppercase tracking-widest text-[var(--news-muted)] block">
+                      INSPECTOR SELECTION:
+                    </span>
+                    <span className="font-headline font-bold text-base text-[var(--news-ink)]">
+                      {formatDateString(activeDay.date)}
+                    </span>
+                  </div>
+                  <div className="text-right">
+                    <span className="font-telegraph text-[0.6rem] uppercase tracking-widest text-[var(--news-muted)] block">
+                      COMMITS LOGGED:
+                    </span>
+                    <span className="font-headline font-black text-xl text-[var(--news-accent)]">
+                      {activeDay.contributionCount} Verified Operations
+                    </span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right Column: Vitals Table (4 cols) */}
+          <div data-reveal="left" className="lg:col-span-4 lg:border-l lg:border-[var(--news-rule)] lg:pl-8 flex flex-col justify-between">
+            <div className="border border-[var(--news-rule-strong)] p-6 bg-[var(--news-card)]">
+              <span className="font-telegraph text-[0.6rem] uppercase tracking-[0.25em] text-[var(--news-muted)] block mb-1">
+                BUREAU OF STANDARDS // REPORT
+              </span>
+              <h4 className="font-headline font-bold text-xl uppercase tracking-wider text-[var(--news-ink)] border-b border-[var(--news-rule-strong)] pb-3 mb-4">
+                Telemetry &amp; Productivity
+              </h4>
+
+              <div className="space-y-4 font-editorial">
+                <div className="border-b border-[var(--news-rule)] pb-2">
+                  <span className="font-telegraph text-[0.62rem] uppercase tracking-wider text-[var(--news-muted)] block">
+                    TOTAL REGISTERED CONTRIBUTIONS
+                  </span>
+                  <span className="font-headline font-black text-3xl text-[var(--news-ink)]">
+                    {data?.totalContributions || 0}
+                  </span>
+                </div>
+
+                <div className="border-b border-[var(--news-rule)] pb-2">
+                  <span className="font-telegraph text-[0.62rem] uppercase tracking-wider text-[var(--news-muted)] block">
+                    ACTIVE SESSIONS RECORDED
+                  </span>
+                  <span className="font-headline font-bold text-xl text-[var(--news-ink)]">
+                    {activeDays} Days ({consistency}% of year)
+                  </span>
+                </div>
+
+                <div className="border-b border-[var(--news-rule)] pb-2">
+                  <span className="font-telegraph text-[0.62rem] uppercase tracking-wider text-[var(--news-muted)] block">
+                    PEAK PRODUCTION PEAK
+                  </span>
+                  <span className="font-headline font-bold text-xl text-[var(--news-ink)]">
+                    {maxCommits} Operations in Single 24hr Cycle
+                  </span>
+                </div>
+
+                <div className="border-b border-[var(--news-rule)] pb-2">
+                  <span className="font-telegraph text-[0.62rem] uppercase tracking-wider text-[var(--news-muted)] block">
+                    TELEGRAPH WIRE LATENCY
+                  </span>
+                  <span className="font-telegraph font-bold text-base text-[var(--news-accent)]">
+                    {apiLatency > 0 ? `${apiLatency} MS RESPONSE` : "NOMINAL"}
+                  </span>
+                </div>
+              </div>
+
+              <div className="mt-6 pt-3 border-t border-[var(--news-rule-strong)] text-center">
+                <span className="font-telegraph text-[0.6rem] uppercase tracking-widest text-[var(--news-muted)]">
+                  LIVE API CONNECTION TO GITHUB REST V3
                 </span>
               </div>
-              <div className="sm:text-right">
-                <span className="block font-jetbrains text-[0.55rem] uppercase tracking-[0.2em] text-slate-600 mb-1">
-                  Node Density Value
-                </span>
-                <span className="font-jetbrains text-xs uppercase tracking-widest text-[#ff5500] font-bold">
-                  {activeDay.contributionCount} Commits Pushed
-                </span>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Right column: Vitals Sidebar */}
-        <div data-reveal="left" className="border-l border-white/10 pl-6 lg:pl-10 lg:py-6 lg:sticky lg:top-32 self-start">
-          <h3 className="font-jetbrains text-[0.65rem] uppercase tracking-[0.3em] text-slate-500 mb-8 block">
-            System Vitals // github
-          </h3>
-          
-          <div className="flex flex-col gap-6">
-            <div className="border-b border-white/10 pb-4">
-              <span className="block font-jetbrains text-[0.55rem] uppercase tracking-[0.2em] text-slate-500 mb-1">
-                Yearly Contributions
-              </span>
-              <span className="font-playfair text-4xl italic text-slate-200 font-bold">
-                {data ? data.totalContributions : "---"}
-              </span>
-            </div>
-
-            <div className="border-b border-white/10 pb-4">
-              <span className="block font-jetbrains text-[0.55rem] uppercase tracking-[0.2em] text-slate-500 mb-1">
-                Active Days
-              </span>
-              <span className="font-playfair text-4xl italic text-slate-200 font-bold">
-                {data ? `${activeDays} / 365` : "---"}
-              </span>
-            </div>
-
-            <div className="border-b border-white/10 pb-4">
-              <span className="block font-jetbrains text-[0.55rem] uppercase tracking-[0.2em] text-slate-500 mb-1">
-                Peak Daily Capacity
-              </span>
-              <span className="font-playfair text-4xl italic text-slate-200 font-bold">
-                {data ? `${maxCommits} Commits` : "---"}
-              </span>
-            </div>
-
-            <div className="pb-4">
-              <span className="block font-jetbrains text-[0.55rem] uppercase tracking-[0.2em] text-slate-500 mb-1">
-                Dev Consistency
-              </span>
-              <span className="font-playfair text-4xl italic text-slate-200 font-bold">
-                {data ? `${consistency}%` : "---"}
-              </span>
             </div>
           </div>
         </div>
-
-      </div>
-    </section>
+      </section>
     </DecompileNode>
   );
 }

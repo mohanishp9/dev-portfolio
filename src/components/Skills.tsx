@@ -1,125 +1,128 @@
 "use client";
+import { DecompileNode } from "./Decompiler";
 
 const capabilities = [
     {
-        title: "Frontend",
-        items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux", "Responsive UI"],
-        body: "Build interfaces that handle real state across screen sizes — not just demo state.",
+        section: "LEDGER A",
+        title: "Front-of-House Systems (Frontend)",
+        items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Redux Toolkit", "Responsive Layouts"],
+        body: "Constructing interfaces that effortlessly sustain volatile application state across heterogeneous viewports—engineered for resilience rather than superficial demonstration.",
     },
     {
-        title: "Backend",
-        items: ["Node.js", "Express.js", "REST APIs", "JWT auth", "MongoDB", "Mongoose"],
-        body: "REST APIs, auth flows, database modeling. Backends that are straightforward to reason about.",
+        section: "LEDGER B",
+        title: "Engine Room & Telegraphy (Backend)",
+        items: ["Node.js", "Express", "RESTful APIs", "JWT Authentication", "Custom Middleware", "WebSockets"],
+        body: "Architecting backend gateways that maintain throughput under pressure. Uncompromising route safety, strict error categorization, and disciplined serialization.",
     },
     {
-        title: "Toolchain",
-        items: ["Git", "Docker", "Postman", "CI/CD", "Zod", "Jest"],
-        body: "Day-to-day tools for shipping reliably — version control, containers, testing.",
+        section: "LEDGER C",
+        title: "Ledgers & Warehousing (Database & DevOps)",
+        items: ["MongoDB", "Mongoose ODM", "PostgreSQL", "Git Version Control", "Docker Containers", "Vercel Cloud"],
+        body: "Structuring relational and document schemas strictly aligned with genuine read/write access patterns, ensuring zero unindexed query degradation.",
+    },
+    {
+        section: "LEDGER D",
+        title: "Measuring Instruments (Tools & Methods)",
+        items: ["Postman API Suite", "Jest Testing", "Zod Schema Validation", "Linux CLI", "CI/CD Workflows", "System Design"],
+        body: "Disciplined instrumentation ensuring rapid delivery cycles. Runtime schema validation that intercepts corrupt payloads before database ingestion.",
     },
 ];
 
-import { useState } from "react";
-import { DecompileNode } from "./Decompiler";
-
-const Skills = () => {
-    const [activeSpec, setActiveSpec] = useState<string>("None");
-
-    const totalSkills = capabilities.reduce((acc, cap) => acc + cap.items.length, 0);
-
+export default function Skills() {
     const decompilerData = {
-        array_metrics: {
-            modules: capabilities.length,
-            total_skills_mapped: totalSkills
-        },
-        interaction: {
-            active_hovered_spec: activeSpec
+        catalog_index: {
+            total_proficiencies: capabilities.reduce((acc, c) => acc + c.items.length, 0),
+            primary_domain: "Full-Stack Web Engineering",
+            audit_status: "Verified in Production Deployment"
         }
     };
 
     return (
         <DecompileNode name="Technical_Spec_Sheet" data={decompilerData}>
-        <section id="skills" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 overflow-x-clip">
-            <div className="max-w-7xl">
-
-                {/* Issue header */}
-                <div data-reveal className="flex items-center justify-between border-b border-white/10 pb-6 mb-16">
-                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
-                        Issue 03 &nbsp;/&nbsp; Technical Specification
+            <section id="skills" className="border-b border-[var(--news-rule-strong)] px-4 sm:px-8 lg:px-12 py-16">
+                {/* Section Folio Header */}
+                <div data-reveal className="flex items-center justify-between border-b border-[var(--news-rule-strong)] pb-3 mb-10 font-telegraph text-[0.68rem] uppercase tracking-[0.22em] text-[var(--news-muted)]">
+                    <span className="font-bold text-[var(--news-ink)]">
+                        PAGE II &bull; COMMERCIAL GAZETTE &bull; SPECIFICATIONS
                     </span>
-                    <div data-reveal="line" className="h-[1px] flex-1 mx-8 bg-white/10" />
-                    <span className="font-playfair italic text-3xl tracking-tight text-slate-400">
-                        Spec Sheet
+                    <span className="font-headline italic text-sm text-[var(--news-ink)] normal-case">
+                        The Master Register of Technical Proficiencies
                     </span>
+                    <span className="hidden sm:inline">OFFICIAL SCHEDULE</span>
                 </div>
 
-                <div className="grid lg:grid-cols-[280px_1fr] gap-16 lg:gap-24 mb-16 relative">
-                    <div data-reveal="left" className="relative z-10 pt-8 lg:sticky lg:top-32 self-start">
-                        <div
-                            className="font-inter font-black text-[8rem] leading-none tracking-tight text-white/5 select-none mb-8"
-                            aria-hidden="true"
-                        >
-                            03
+                <div className="grid lg:grid-cols-12 gap-10">
+                    {/* Left Column (4 cols): Sticky Header & Ledger Index */}
+                    <div data-reveal="left" className="lg:col-span-4 lg:sticky lg:top-28 self-start">
+                        <div className="font-headline font-black text-6xl text-[var(--news-ink)] leading-none mb-2">
+                            SECTION II.
                         </div>
-                        <h2 className="font-playfair italic uppercase text-3xl tracking-tight text-slate-50 leading-tight">
-                            Technical<br />Specification
+                        <h2 className="font-headline uppercase text-2xl sm:text-3xl tracking-tight text-[var(--news-ink)] mb-4 font-bold">
+                            Commercial Spec Sheet
                         </h2>
-                    </div>
-                    <div data-reveal className="flex items-end">
-                        <p className="font-inter text-lg leading-relaxed text-slate-400 max-w-2xl">
-                            Grouped by what I actually do, not by buzzword. The stack I reach
-                            for when building full stack web applications.
+                        <p className="font-editorial text-sm leading-relaxed text-[var(--news-muted)] mb-6">
+                            Categorized strictly by genuine operational utility rather than commercial buzzwords. The exact machinery mobilized when architecting modern web platforms.
                         </p>
-                    </div>
-                </div>
 
-                {/* Spec table — rows stagger in */}
-                <div data-reveal className="border-t border-white/10">
-                    {/* Table header */}
-                    <div className="grid grid-cols-3 lg:grid-cols-[1fr_2fr_auto] border-b border-white/10">
-                        {["Module", "Specification", "Components"].map((h) => (
-                            <div key={h} className="px-6 py-3">
-                                <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-slate-600">{h}</span>
+                        {/* Summary Certificate Box */}
+                        <div className="border border-[var(--news-rule-strong)] p-5 bg-[var(--news-card)]">
+                            <span className="font-telegraph text-[0.6rem] uppercase tracking-[0.25em] text-[var(--news-muted)] block mb-1">
+                                AUDIT SCHEDULE // 2026
+                            </span>
+                            <div className="font-headline font-bold text-lg text-[var(--news-ink)] uppercase mb-2">
+                                24 Verified Competencies
                             </div>
-                        ))}
-                    </div>
-
-                    {/* Rows */}
-                    {capabilities.map((cap, i) => (
-                        <div
-                            key={cap.title}
-                            data-stagger={String(i + 1)}
-                            onMouseEnter={() => setActiveSpec(cap.title)}
-                            onMouseLeave={() => setActiveSpec("None")}
-                            className="grid lg:grid-cols-[1fr_2fr_auto] border-b border-white/10 group"
-                        >
-                            <div className="px-6 py-8 border-b lg:border-b-0 lg:border-r border-white/10">
-                                <h3 className="font-playfair italic text-2xl text-slate-50">
-                                    {cap.title}
-                                </h3>
-                            </div>
-                            <div className="px-6 py-8 border-b lg:border-b-0 lg:border-r border-white/10">
-                                <p className="font-inter text-sm leading-relaxed text-slate-400 mb-5">{cap.body}</p>
-                                <div className="flex flex-wrap gap-2">
-                                    {cap.items.map((item) => (
-                                        <span
-                                            key={item}
-                                            className="font-jetbrains text-[0.65rem] uppercase tracking-widest text-slate-400 border border-white/10 px-3 py-1.5 group-hover:border-white/20 transition-colors"
-                                        >
-                                            {item}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="px-6 py-8 flex items-center">
-                                <span className="font-jetbrains text-[0.6rem] font-bold bg-accent text-black px-2 py-1">{String(cap.items.length).padStart(2, "0")}</span>
-                            </div>
+                            <p className="font-editorial text-xs italic text-[var(--news-muted)] leading-relaxed">
+                                Every item listed represents daily hands-on implementation across commercial repositories and active applications.
+                            </p>
                         </div>
-                    ))}
+                    </div>
+
+                    {/* Right Column (8 cols): The 4 Ledger Tables */}
+                    <div data-reveal className="lg:col-span-8 lg:border-l lg:border-[var(--news-rule)] lg:pl-10">
+                        <div className="space-y-8">
+                            {capabilities.map((cap) => (
+                                <div
+                                    key={cap.section}
+                                    className="border border-[var(--news-rule-strong)] bg-[var(--news-card)] p-6"
+                                >
+                                    {/* Table Header Row */}
+                                    <div className="flex flex-wrap items-baseline justify-between border-b-2 border-[var(--news-rule-strong)] pb-3 mb-4 gap-2">
+                                        <div>
+                                            <span className="font-telegraph text-[0.62rem] font-bold text-[var(--news-accent)] uppercase tracking-[0.2em] block">
+                                                {cap.section}
+                                            </span>
+                                            <h3 className="font-headline font-bold text-xl text-[var(--news-ink)] uppercase tracking-wide">
+                                                {cap.title}
+                                            </h3>
+                                        </div>
+                                        <span className="font-telegraph text-[0.65rem] font-bold bg-[var(--news-ink)] text-[var(--news-bg)] px-2.5 py-0.5 uppercase tracking-widest">
+                                            {String(cap.items.length).padStart(2, "0")} Instruments
+                                        </span>
+                                    </div>
+
+                                    {/* Capabilities Pill Grid */}
+                                    <div className="flex flex-wrap gap-2 mb-4">
+                                        {cap.items.map((item) => (
+                                            <span
+                                                key={item}
+                                                className="border border-[var(--news-rule)] bg-[var(--news-bg)] px-3 py-1 font-telegraph text-xs text-[var(--news-ink)] uppercase tracking-wider font-semibold shadow-xs"
+                                            >
+                                                {item}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    {/* Commentary Prose */}
+                                    <p className="font-editorial text-xs italic text-[var(--news-muted)] leading-relaxed border-t border-[var(--news-rule)] pt-3">
+                                        {cap.body}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
         </DecompileNode>
     );
-};
-
-export default Skills;
+}

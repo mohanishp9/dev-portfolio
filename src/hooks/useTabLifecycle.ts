@@ -12,9 +12,9 @@ export function useTabLifecycle() {
 
         const handleVisibilityChange = () => {
             if (document.hidden) {
-                document.title = "cd ../";
+                document.title = "The Chronicle: Continued on Page 1...";
             } else {
-                document.title = originalTitle.current || "Mohanish Pingale | Portfolio";
+                document.title = originalTitle.current || "The Pingale Chronicle | Mohanish Pingale";
             }
         };
 

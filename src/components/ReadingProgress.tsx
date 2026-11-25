@@ -34,7 +34,7 @@ export default function ReadingProgress() {
     <div
       ref={barRef}
       aria-hidden="true"
-      className="fixed top-0 left-0 z-[200] h-[2px] w-full bg-accent pointer-events-none"
+      className="fixed top-0 left-0 z-[200] h-[3px] w-full bg-[var(--news-accent)] pointer-events-none"
       style={{
         transform: "scaleX(0)",
         transformOrigin: "left",

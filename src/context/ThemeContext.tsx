@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 
-export type Theme = "brutalist" | "amoled";
+export type Theme = "morning" | "archive";
 
 interface ThemeContextType {
   theme: Theme;
@@ -13,19 +13,20 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("brutalist");
+  const [theme, setThemeState] = useState<Theme>("morning");
 
   useEffect(() => {
     try {
       const saved = localStorage.getItem("theme_preference") as Theme | null;
-      if (saved === "amoled" || saved === "brutalist") {
+      if (saved === "morning" || saved === "archive") {
         setThemeState(saved);
         document.documentElement.setAttribute("data-theme", saved);
       } else {
-        document.documentElement.setAttribute("data-theme", "brutalist");
+        setThemeState("morning");
+        document.documentElement.setAttribute("data-theme", "morning");
       }
     } catch {
-      document.documentElement.setAttribute("data-theme", "brutalist");
+      document.documentElement.setAttribute("data-theme", "morning");
     }
   }, []);
 
@@ -38,7 +39,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   };
 
   const toggleTheme = () => {
-    const nextTheme = theme === "brutalist" ? "amoled" : "brutalist";
+    const nextTheme = theme === "morning" ? "archive" : "morning";
     setTheme(nextTheme);
   };
 

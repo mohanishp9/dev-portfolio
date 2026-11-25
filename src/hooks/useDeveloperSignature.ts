@@ -4,25 +4,24 @@ import { useEffect } from "react";
 
 export function useDeveloperSignature() {
     useEffect(() => {
-        // Run only once on the client
         if (typeof window === "undefined") return;
 
         const isSignaturePrinted = sessionStorage.getItem("dev_signature_printed");
         if (isSignaturePrinted) return;
 
         console.log(
-            "%cMohanish Pingale | Portfolio",
-            "font-size: 24px; font-weight: bold; color: #ff5500; text-shadow: 0 0 10px rgba(255,85,0,0.5);"
+            "%cTHE PINGALE CHRONICLE • 1950s BROADSHEET EDITION",
+            "font-size: 20px; font-weight: 900; font-family: serif; color: #1a1815; border-bottom: 2px solid #1a1815; padding-bottom: 4px;"
         );
         
         console.log(
-            "%c[SYS] Initializing Main-Thread Zero Architecture...\n[SYS] DOM Content Loaded\n[SYS] Vercel Edge Cache Validated", 
-            "color: #00ff00; font-family: monospace;"
+            "%c[IMPERIAL GAZETTE] Published by Mohanish Pingale in Nashik, Maharashtra.\n[TYPESETTING] Next.js App Router • Tailwind CSS • Zero-Fatigue Editorial Design", 
+            "color: #9e2a2b; font-family: monospace;"
         );
 
         console.log(
-            "%cHey there. Looking at the source? You'll notice the heavy canvas effects (like the Oscilloscope) are offloaded to an OffscreenCanvas Web Worker to guarantee 120FPS scroll performance without blocking React's main thread.\n\nLet's build something great together: https://www.linkedin.com/in/mohanish-pingale-507339261/",
-            "font-size: 14px; color: #a1a1aa; line-height: 1.6;"
+            "%cLooking under the hood? The typography, Oxford rules, and responsive multi-column layouts are hand-tuned for authentic historical broadsheet fidelity while maintaining 100/100 Lighthouse performance.\n\nLet's connect: https://www.linkedin.com/in/mohanish-pingale-507339261/",
+            "font-size: 13px; color: #575249; line-height: 1.6;"
         );
 
         sessionStorage.setItem("dev_signature_printed", "true");

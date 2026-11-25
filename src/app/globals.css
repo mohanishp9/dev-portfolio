@@ -4,77 +4,176 @@
   --font-inter: var(--font-inter);
   --font-jetbrains: var(--font-jetbrains);
   --font-playfair: var(--font-playfair);
-  --color-accent: #ff5500;
+  --font-newsreader: var(--font-newsreader);
+  --font-libre: var(--font-libre);
+
+  --color-news-bg: var(--news-bg);
+  --color-news-card: var(--news-card);
+  --color-news-ink: var(--news-ink);
+  --color-news-muted: var(--news-muted);
+  --color-news-rule: var(--news-rule);
+  --color-news-accent: var(--news-accent);
 }
 
 :root {
-  --accent: #ff5500;
+  /* Morning Edition — Crisp British Newsprint */
+  --news-bg: #f4efe6;
+  --news-card: #faf6ed;
+  --news-ink: #181613;
+  --news-muted: #575249;
+  --news-rule: rgba(24, 22, 19, 0.22);
+  --news-rule-strong: #181613;
+  --news-accent: #9e2a2b; /* Vintage printer's lead stamp crimson */
+  --accent: #9e2a2b;
+}
+
+[data-theme="archive"] {
+  /* Archival Edition — Aged 1950s Sepia Newsprint */
+  --news-bg: #eae0cb;
+  --news-card: #f2e9d6;
+  --news-ink: #191612;
+  --news-muted: #5d5648;
+  --news-rule: rgba(25, 22, 18, 0.28);
+  --news-rule-strong: #191612;
+  --news-accent: #872121;
+  --accent: #872121;
 }
 
 html {
   scroll-behavior: smooth;
+  background-color: var(--news-bg);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #09090b;
-  color: #f8fafc;
-  font-family: var(--font-inter), sans-serif;
-  cursor: none;
+  background-color: var(--news-bg);
+  color: var(--news-ink);
+  font-family: var(--font-newsreader), "Newsreader", "Times New Roman", Georgia, serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Authentic porous wood-pulp paper texture */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   z-index: 9999;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.09;
-  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperGrain)'/%3E%3C/svg%3E");
+  opacity: 0.055;
+  mix-blend-mode: multiply;
   transform: translateZ(0);
   backface-visibility: hidden;
 }
 
 ::selection {
-  background: var(--accent);
-  color: #fff;
+  background: var(--news-accent);
+  color: #ffffff;
 }
 
-/* Hide scrollbar utility */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-a, button {
-  color: inherit;
-  cursor: none !important;
-}
-
-.font-inter {
-  font-family: var(--font-inter), sans-serif;
-}
-
-.font-jetbrains {
-  font-family: var(--font-jetbrains), monospace;
-}
-
-.font-playfair {
+/* Typography shortcuts */
+.font-masthead {
   font-family: var(--font-playfair), serif;
+  font-feature-settings: "liga" 1, "dlig" 1;
+}
+
+.font-headline {
+  font-family: var(--font-playfair), "Times New Roman", serif;
+}
+
+.font-editorial {
+  font-family: var(--font-newsreader), "Times New Roman", Georgia, serif;
+}
+
+.font-body-serif {
+  font-family: var(--font-libre), Georgia, serif;
+}
+
+.font-telegraph {
+  font-family: var(--font-jetbrains), "Courier New", monospace;
+}
+
+/* ── Broadsheet Structural Rules ────────────────────────── */
+
+/* Oxford Rules: The hallmark of historic British broadsheets (thick + thin pairing) */
+.oxford-rule {
+  border-top: 3px solid var(--news-rule-strong);
+  border-bottom: 1px solid var(--news-rule-strong);
+  height: 6px;
+  width: 100%;
+}
+
+.oxford-rule-reversed {
+  border-top: 1px solid var(--news-rule-strong);
+  border-bottom: 3px solid var(--news-rule-strong);
+  height: 6px;
+  width: 100%;
+}
+
+.hairline-b {
+  border-bottom: 1px solid var(--news-rule);
+}
+
+.hairline-t {
+  border-top: 1px solid var(--news-rule);
+}
+
+.hairline-r {
+  border-right: 1px solid var(--news-rule);
+}
+
+.hairline-l {
+  border-left: 1px solid var(--news-rule);
+}
+
+/* 3-line initial drop-cap for opening editorial articles */
+.drop-cap::first-letter {
+  float: left;
+  font-family: var(--font-playfair), serif;
+  font-size: 4rem;
+  line-height: 0.78;
+  padding-top: 6px;
+  padding-right: 12px;
+  padding-bottom: 2px;
+  font-weight: 900;
+  color: var(--news-ink);
+}
+
+.drop-cap-accent::first-letter {
+  float: left;
+  font-family: var(--font-playfair), serif;
+  font-size: 4rem;
+  line-height: 0.78;
+  padding-top: 6px;
+  padding-right: 12px;
+  padding-bottom: 2px;
+  font-weight: 900;
+  color: var(--news-accent);
+}
+
+/* Authentic newsprint justified text */
+.justified-text {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+/* Halftone stipple photo effect (vintage newsprint press look) */
+.halftone-engraving {
+  filter: contrast(120%) grayscale(100%);
+  position: relative;
 }
 
 /* ── Scroll Reveal System ───────────────────────────── */
 
 [data-reveal] {
   opacity: 0;
-  transform: translateY(36px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-reveal].revealed {
@@ -82,41 +181,40 @@ a, button {
   transform: translateY(0);
 }
 
-/* Stagger children that carry data-stagger */
-[data-reveal].revealed [data-stagger="1"] { transition-delay: 80ms; }
-[data-reveal].revealed [data-stagger="2"] { transition-delay: 160ms; }
-[data-reveal].revealed [data-stagger="3"] { transition-delay: 240ms; }
-[data-reveal].revealed [data-stagger="4"] { transition-delay: 320ms; }
-[data-reveal].revealed [data-stagger="5"] { transition-delay: 400ms; }
-[data-reveal].revealed [data-stagger="6"] { transition-delay: 480ms; }
-
-/* Slide-from-left variant */
 [data-reveal="left"] {
   opacity: 0;
-  transform: translateX(-32px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateX(-24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 [data-reveal="left"].revealed {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* Line-draw variant for horizontal rules */
 [data-reveal="line"] {
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 [data-reveal="line"].revealed {
   transform: scaleX(1);
 }
 
-/* ── Marquee keyframe ───────────────────────────────── */
+/* ── Marquee / Wire Dispatch Teletype Keyframe ────────────────── */
 
 @keyframes marquee {
   from { transform: translateX(0); }
   to   { transform: translateX(-33.333%); }
+}
+
+/* ── Focus ────────────────────────── */
+
+:focus-visible {
+  outline: 2px solid var(--news-accent);
+  outline-offset: 3px;
 }
 
 /* ── Reduced motion override ────────────────────────── */
@@ -134,199 +232,4 @@ a, button {
     from { transform: translateX(0); }
     to   { transform: translateX(0); }
   }
-
-  .animate-shake,
-  .animate-scan,
-  .barcode-fill {
-    animation: none !important;
-  }
-
-  /* JS effect layers unmount under reduced motion — restore the system cursor */
-  body {
-    cursor: auto;
-  }
-
-  a,
-  button,
-  [role="button"] {
-    cursor: pointer !important;
-  }
-}
-
-/* ── Liquid Glass Effect ────────────────────────── */
-
-.liquid-glass {
-  border: none;
-}
-
-.liquid-glass::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.4px;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.45) 0%,
-    rgba(255, 255, 255, 0.15) 20%,
-    rgba(255, 255, 255, 0) 40%,
-    rgba(255, 255, 255, 0) 60%,
-    rgba(255, 255, 255, 0.15) 80%,
-    rgba(255, 255, 255, 0.45) 100%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-/* ── Raking Light Depth System ────────────────────────── */
-/* One overhead light source: bright top edges, contact + ambient shadows below. */
-.plane {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.005) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-top-color: rgba(255, 255, 255, 0.14);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 1px 2px rgba(0, 0, 0, 0.4),
-    0 16px 40px -12px rgba(0, 0, 0, 0.5);
-}
-
-.plane-raised {
-  transform: translateY(-2px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 2px 4px rgba(0, 0, 0, 0.5),
-    0 24px 48px -12px rgba(0, 0, 0, 0.6);
-}
-
-/* AMOLED variant: polished obsidian speculars, matching .liquid-glass treatment */
-[data-theme="amoled"] .plane {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(0, 0, 0, 0.9) 100%);
-  border-color: rgba(255, 255, 255, 0.15);
-  border-top-color: rgba(255, 255, 255, 0.35);
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
-    0 20px 45px -10px rgba(0, 0, 0, 0.98);
-}
-
-/* ── Focus ────────────────────────── */
-
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
-}
-
-/* ── AMOLED / Liquid Obsidian Engine ────────────────── */
-
-[data-theme="amoled"] {
-  color-scheme: dark;
-}
-
-[data-theme="amoled"] body {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-}
-
-/* Turn off CRT noise so OLED pixels turn off completely */
-[data-theme="amoled"] body::after {
-  opacity: 0 !important;
-  display: none !important;
-}
-
-/* Base background overrides to pure pitch black */
-[data-theme="amoled"] .min-h-screen.bg-\[\#09090b\],
-[data-theme="amoled"] .bg-\[\#09090b\],
-[data-theme="amoled"] .bg-\[\#0a0a0c\],
-[data-theme="amoled"] .bg-\[\#040405\] {
-  background-color: #000000 !important;
-}
-
-/* Ensure Marquee stays vibrant orange in AMOLED mode */
-[data-theme="amoled"] section.bg-accent {
-  background-color: #ff5500 !important;
-  color: #000000 !important;
-}
-
-[data-theme="amoled"] section.bg-accent * {
-  color: #000000 !important;
-}
-
-/* Specular razor-thin divider lines */
-[data-theme="amoled"] .border-white\/10 {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-}
-
-[data-theme="amoled"] [data-reveal="line"] {
-  background-color: rgba(255, 255, 255, 0.22) !important;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.18) !important;
-}
-
-/* AMOLED Liquid Glass Navbar: Polished piano black with specular top highlight */
-[data-theme="amoled"] .liquid-glass {
-  background: linear-gradient(180deg, rgba(16, 16, 20, 0.88) 0%, rgba(0, 0, 0, 0.96) 100%) !important;
-  border: 1px solid rgba(255, 255, 255, 0.16) !important;
-  box-shadow: 
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.35),
-    0 16px 40px rgba(0, 0, 0, 0.98),
-    0 0 25px rgba(255, 85, 0, 0.08) !important;
-}
-
-[data-theme="amoled"] .liquid-glass::before {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.7) 0%,
-    rgba(255, 255, 255, 0.2) 20%,
-    rgba(255, 255, 255, 0) 45%,
-    rgba(255, 255, 255, 0.15) 75%,
-    rgba(255, 255, 255, 0.5) 100%
-  ) !important;
-}
-
-/* Polished obsidian card luster on active containers */
-[data-theme="amoled"] .sticky.top-32,
-[data-theme="amoled"] #activity .border.border-white\/10,
-[data-theme="amoled"] #contact .border {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, rgba(0, 0, 0, 0.85) 100%) !important;
-  border-color: rgba(255, 255, 255, 0.15) !important;
-  box-shadow: 
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
-    0 20px 45px -10px rgba(0, 0, 0, 0.98) !important;
-}
-
-/* Projects row hover: subtle piano-lacquer sheen */
-[data-theme="amoled"] #projects .group:hover {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%) !important;
-  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.3) !important;
-}
-
-/* Luminous high-contrast text */
-[data-theme="amoled"] .text-slate-50,
-[data-theme="amoled"] .text-slate-100 {
-  color: #ffffff !important;
-  text-shadow: 0 0 1px rgba(255, 255, 255, 0.3);
-}
-
-/* Hero barcode pure black gradient */
-[data-theme="amoled"] .barcode-fill {
-  background-image: repeating-linear-gradient(
-    -45deg,
-    #ff5500 0px,
-    #ff5500 8px,
-    #000000 8px,
-    #000000 16px
-  ) !important;
-}
-
-/* Spotlight Effect for Project & Experience Cards */
-.spotlight-wrapper:has(.spotlight-card:hover) .spotlight-card:not(:hover) {
-  opacity: 0.25;
-  filter: grayscale(80%);
-}
-
-.spotlight-card {
-  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
-  will-change: opacity;
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }

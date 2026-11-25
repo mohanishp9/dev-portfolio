@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Playfair_Display } from "next/font/google";
+import { Inter, JetBrains_Mono, Playfair_Display, Newsreader, Libre_Baskerville } from "next/font/google";
 import "./globals.css";
-
-
-
 
 const inter = Inter({
     subsets: ["latin"],
@@ -21,6 +18,21 @@ const playfair = Playfair_Display({
     subsets: ["latin"],
     variable: "--font-playfair",
     display: "swap",
+});
+
+const newsreader = Newsreader({
+    subsets: ["latin"],
+    variable: "--font-newsreader",
+    display: "swap",
+    style: ["normal", "italic"],
+});
+
+const libreBaskerville = Libre_Baskerville({
+    subsets: ["latin"],
+    variable: "--font-libre",
+    weight: ["400", "700"],
+    display: "swap",
+    style: ["normal", "italic"],
 });
 
 
@@ -69,7 +81,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable} font-inter antialiased`}>
+      <body className={`${inter.variable} ${jetbrainsMono.variable} ${playfair.variable} ${newsreader.variable} ${libreBaskerville.variable} font-newspaper-body antialiased`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

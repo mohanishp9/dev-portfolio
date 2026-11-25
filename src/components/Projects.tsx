@@ -1,10 +1,17 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { DecompileNode } from "./Decompiler";
+
 const projects = [
     {
-        number: "01",
+        number: "EXHIBIT I",
         title: "Petty Revenge Note",
+        headline: "Journaling Platform Introduces Threaded Reactions & Runtime Validation",
         summary:
-            "A journaling app where you can write notes, post them, and let people comment and react. Full auth with JWT, Redux for state management, threaded comments, emoji reactions, and paginated feeds.",
-        impact: "Learned a lot about managing complex state with Redux Toolkit and using Zod for runtime validation.",
+            "A comprehensive journaling and social application allowing users to compose notes, publish dispatches, and engage through threaded comments and reaction metrics. Engineered with JWT authentication, Redux Toolkit state coordination, and paginated feed delivery.",
+        impact: "Architected complex asynchronous state with Redux Toolkit and enforced runtime payload safety via Zod validation schemas.",
         stack: ["Next.js", "React", "Redux Toolkit", "TypeScript", "Node.js", "Express", "MongoDB", "JWT", "Zod"],
         github: "https://github.com/mohanishp9/petty-revenge-note",
         live: "https://petty-revenge-note.vercel.app/",
@@ -12,11 +19,12 @@ const projects = [
         featured: true,
     },
     {
-        number: "02",
+        number: "EXHIBIT II",
         title: "Cypher Sight",
+        headline: "Cryptocurrency Ledger Ingests Live CoinGecko Market Quotes",
         summary:
-            "Track your crypto portfolio in one place. Connects to CoinGecko for live prices, shows your holdings and transaction history in a clean dashboard.",
-        impact: "First project using a live external API — dealing with CoinGecko rate limits taught me about caching.",
+            "A unified cryptocurrency asset tracker connecting to live CoinGecko streaming endpoints, rendering holdings, profit/loss indices, and transaction histories in an editorial dashboard.",
+        impact: "Engineered rate-limit caching mechanisms against third-party financial APIs to preserve responsiveness under quota ceilings.",
         stack: ["React", "TypeScript", "Node.js", "Express", "MongoDB", "CoinGecko API"],
         github: "https://github.com/mohanishp9/crypto_portfolio_tracker",
         live: "https://cypher-sight.vercel.app/",
@@ -24,35 +32,38 @@ const projects = [
         featured: false,
     },
     {
-        number: "03",
-        title: "QKart",
+        number: "EXHIBIT III",
+        title: "QKart Commercial Suite",
+        headline: "Digital Commerce Platform Completes Full Checkout & Order Cycle",
         summary:
-            "An ecommerce app with the full flow: browse products, add to cart, checkout, order management.",
-        impact: "First complete ecommerce build. Cart management and checkout logic — getting state right when items change mid-session.",
-        stack: ["React", "Node.js", "Express", "MongoDB", "REST APIs", "Testing"],
+            "An e-commerce suite executing the entire commercial lifecycle: catalog indexing, dynamic cart calculation, user authentication, checkout workflows, and order record persistence.",
+        impact: "Built resilient cart synchronization logic ensuring mid-session inventory and pricing changes reconcile without corruption.",
+        stack: ["React", "Node.js", "Express", "MongoDB", "REST APIs", "Automated Testing"],
         github: "https://github.com/mohanishp9/QKart_Backend",
         live: "https://qkart-mohanish-pingales-projects.vercel.app/",
         year: "2025",
         featured: false,
     },
     {
-        number: "04",
+        number: "EXHIBIT IV",
         title: "MP News Feed",
+        headline: "Syndicated Telegraph Reader Renders Dynamic Broadsheet RSS",
         summary:
-            "A Flipboard-style news reader that pulls from RSS feeds and renders them in a scrollable card layout.",
-        impact: "Taught me component architecture — when to split things up, when to keep them together.",
-        stack: ["JavaScript", "HTML", "CSS", "Bootstrap", "RSS feeds"],
+            "A curated broadsheet news reader parsing live syndicated RSS feeds into an ergonomic multi-column card layout inspired by classic periodicals and Flipboard.",
+        impact: "Refined modular component architecture, establishing clean boundaries between feed ingestors and layout renderers.",
+        stack: ["JavaScript", "HTML5", "CSS3", "Bootstrap", "RSS Feeds"],
         github: "https://github.com/mohanishp9/News-Board",
         live: "https://mboard-mohanish-pingales-projects.vercel.app/",
         year: "2025",
         featured: false,
     },
     {
-        number: "05",
+        number: "EXHIBIT V",
         title: "MTripDynamic",
+        headline: "Travel Logistics Engine Automates Reservation Scheduling",
         summary:
-            "A travel booking app with search, availability checking, cost calculation, and reservation logic.",
-        impact: "First time connecting frontend rendering to non-trivial backend logic.",
+            "A dynamic expedition booking application providing interactive destination queries, real-time availability checking, tariff computation, and reservation confirmation.",
+        impact: "Pioneered early full-stack integration, synchronizing stateful frontend view controllers with custom backend routing logic.",
         stack: ["JavaScript", "Express", "LowDB", "REST APIs"],
         github: "https://github.com/mohanishp9/MTripDynamic",
         live: "https://mtripdynamic-mohanish-pingales-projects.vercel.app/",
@@ -61,177 +72,205 @@ const projects = [
     },
 ];
 
-const featuredProject = projects.find((p) => p.featured)!;
-const secondaryProjects = projects.filter((p) => !p.featured).slice(0, 2);
-const stripProjects = projects.filter((p) => !p.featured).slice(2);
+const featuredProject = projects[0];
+const secondaryProjects = projects.slice(1);
 
-import { useEffect, useState, useRef } from "react";
-import { DecompileNode } from "./Decompiler";
-
-const Projects = () => {
-    const [activeProject, setActiveProject] = useState<string>("None");
+export default function Projects() {
     const [renderTime, setRenderTime] = useState<number>(0);
 
     useEffect(() => {
-        // Real metric: ms from navigation start to this effect firing
         setRenderTime(Math.round(performance.now()));
     }, []);
 
     const decompilerData = {
-        array_metrics: {
-            total: projects.length,
-            featured: 1,
-            secondary: secondaryProjects.length,
-            strip: stripProjects.length
-        },
-        dom_metrics: {
+        exhibit_metrics: {
+            total_projects: projects.length,
+            featured_headline: featuredProject.title,
+            catalog_year_span: "2025 – 2026",
             mount_ms_since_navigation: renderTime,
-            estimated_nodes: projects.length * 14 + projects.reduce((acc, p) => acc + p.stack.length, 0),
-        },
-        viewport: {
-            active_intersecting_node: activeProject
         }
     };
 
     return (
         <DecompileNode name="Projects_Showcase" data={decompilerData}>
-        <section id="projects" className="border-b border-white/10 px-6 sm:px-12 lg:px-24 py-24 relative">
-            <div className="max-w-7xl spotlight-wrapper">
-
-                {/* Issue header */}
-                <div data-reveal className="flex items-center justify-between border-b border-white/10 pb-6 mb-16">
-                    <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.3em] text-slate-600">
-                        Issue 04 &nbsp;/&nbsp; Selected Work
+            <section id="projects" className="border-b border-[var(--news-rule-strong)] px-4 sm:px-8 lg:px-12 py-16">
+                {/* Section Folio Header */}
+                <div data-reveal className="flex items-center justify-between border-b border-[var(--news-rule-strong)] pb-3 mb-10 font-telegraph text-[0.68rem] uppercase tracking-[0.22em] text-[var(--news-muted)]">
+                    <span className="font-bold text-[var(--news-ink)]">
+                        PAGE III &bull; SPECIAL FEATURE EXHIBITS &bull; SELECTED WORKS
                     </span>
-                    <div data-reveal="line" className="h-[1px] flex-1 mx-8 bg-white/10" />
-                    <span className="font-playfair italic text-3xl tracking-tight text-slate-400">
-                        Selected Works
+                    <span className="font-headline italic text-sm text-[var(--news-ink)] normal-case">
+                        Field Inquiries &amp; Deployed Software Artifacts
                     </span>
+                    <span className="hidden sm:inline">FIVE MONOGRAPHS</span>
                 </div>
 
-                {/* Hero project + secondary — magazine spread */}
-                <div className="grid lg:grid-cols-[3fr_2fr] border-b border-white/10">
+                {/* 1. Lead Featured Project Spread (Front Page Exclusive) */}
+                <div data-reveal className="border-2 border-[var(--news-rule-strong)] bg-[var(--news-card)] p-6 sm:p-10 mb-12">
+                    <div className="flex flex-wrap items-center justify-between border-b border-[var(--news-rule)] pb-3 mb-6 gap-2">
+                        <div className="flex items-center gap-3">
+                            <span className="bg-[var(--news-accent)] text-white font-telegraph text-[0.65rem] font-bold px-2.5 py-0.5 uppercase tracking-widest">
+                                SPECIAL FEATURE EXCLUSIVE
+                            </span>
+                            <span className="font-telegraph text-xs font-bold text-[var(--news-ink)] uppercase tracking-wider">
+                                {featuredProject.number}
+                            </span>
+                        </div>
+                        <span className="font-telegraph text-xs text-[var(--news-muted)]">
+                            ANNO DOMINI {featuredProject.year}
+                        </span>
+                    </div>
 
-                    {/* LEAD STORY */}
-                    <div 
-                        data-reveal 
-                        onMouseEnter={() => setActiveProject(featuredProject.title)}
-                        className="p-8 sm:p-12 lg:pl-0 flex flex-col justify-between min-h-[480px] border-b lg:border-b-0 lg:border-r border-white/10 group spotlight-card"
-                    >
-                        <div>
-                            <div className="flex items-center justify-between mb-8">
-                                <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-black bg-[#ccff00] px-3 py-1 font-bold">
-                                    Featured &nbsp;/&nbsp; {featuredProject.year}
+                    <h3 className="font-headline font-black text-2xl sm:text-4xl text-[var(--news-ink)] uppercase mb-3 leading-tight">
+                        {featuredProject.headline}
+                    </h3>
+
+                    <h4 className="font-editorial italic text-lg sm:text-xl text-[var(--news-muted)] mb-6">
+                        System Monograph: {featuredProject.title}
+                    </h4>
+
+                    {/* 2-Column Story Spread */}
+                    <div className="grid md:grid-cols-2 gap-8 font-editorial text-[1.05rem] leading-relaxed text-[var(--news-ink)] mb-8">
+                        <div className="justified-text drop-cap">
+                            {featuredProject.summary}
+                        </div>
+                        <div className="justified-text md:border-l md:border-[var(--news-rule)] md:pl-8 flex flex-col justify-between">
+                            <div>
+                                <span className="font-telegraph text-[0.65rem] font-bold text-[var(--news-accent)] uppercase tracking-widest block mb-2">
+                                    ARCHITECTURAL RETROSPECTIVE:
                                 </span>
-                                <span
-                                    className="font-inter font-black text-[5rem] leading-none text-white/5 select-none"
-                                    aria-hidden="true"
-                                >
-                                    {featuredProject.number}
-                                </span>
+                                <p className="italic text-sm text-[var(--news-muted)]">
+                                    {featuredProject.impact}
+                                </p>
                             </div>
-                            <h3 className="font-inter font-black uppercase text-3xl sm:text-4xl tracking-tight text-slate-50 mb-5 leading-tight group-hover:text-white transition-colors">
-                                {featuredProject.title}
-                            </h3>
-                            <p className="font-inter text-base leading-relaxed text-slate-400 max-w-lg mb-6">
-                                {featuredProject.summary}
-                            </p>
-                            <div className="flex flex-wrap gap-2 mb-8">
-                                {featuredProject.stack.map((tech) => (
-                                    <span key={tech} className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-500 border border-white/10 px-3 py-1.5 bg-white/[0.02]">
-                                        {tech}
-                                    </span>
-                                ))}
+
+                            {/* Stack Badges */}
+                            <div className="mt-6 pt-4 border-t border-[var(--news-rule)]">
+                                <span className="font-telegraph text-[0.6rem] text-[var(--news-muted)] uppercase tracking-wider block mb-2">
+                                    COMPILED WITH MACHINERY:
+                                </span>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {featuredProject.stack.map((tech) => (
+                                        <span
+                                            key={tech}
+                                            className="border border-[var(--news-rule)] bg-[var(--news-bg)] px-2.5 py-0.5 font-telegraph text-[0.68rem] text-[var(--news-ink)] uppercase"
+                                        >
+                                            {tech}
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                        <div className="flex gap-4 border-t border-white/10 pt-6">
-                            <a
-                                href={featuredProject.github}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="font-jetbrains text-[0.65rem] uppercase tracking-widest text-slate-300 border border-white/20 px-5 py-2.5 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all"
-                            >
-                                Source Code &#8594;
-                            </a>
+                    </div>
+
+                    {/* Action Links Bar */}
+                    <div className="pt-6 border-t-2 border-[var(--news-rule-strong)] flex flex-wrap items-center justify-between gap-4">
+                        <div className="flex flex-wrap gap-4">
                             <a
                                 href={featuredProject.live}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="font-jetbrains text-[0.65rem] uppercase tracking-widest border border-[#ccff00] bg-[#ccff00] px-5 py-2.5 hover:bg-[#ff5500] hover:border-[#ff5500] transition-all font-bold"
-                                style={{ color: "#000000" }}
+                                className="font-telegraph text-xs font-bold uppercase tracking-[0.18em] bg-[var(--news-ink)] text-[var(--news-bg)] px-5 py-2.5 hover:bg-[var(--news-accent)] transition-colors inline-flex items-center gap-2"
                             >
-                                Live View &#8594;
+                                <span>Inspect Live Exhibit</span>
+                                <span>&#x2197;</span>
+                            </a>
+                            <a
+                                href={featuredProject.github}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-telegraph text-xs font-bold uppercase tracking-[0.18em] border border-[var(--news-ink)] text-[var(--news-ink)] px-5 py-2.5 hover:bg-[var(--news-ink)] hover:text-[var(--news-bg)] transition-colors inline-flex items-center gap-2"
+                            >
+                                <span>Review Repository</span>
+                                <span>&rarr;</span>
                             </a>
                         </div>
+                        <span className="font-editorial italic text-xs text-[var(--news-muted)]">
+                            Continued in Production Deployment on Vercel
+                        </span>
+                    </div>
+                </div>
+
+                {/* 2. Secondary Feature Articles (4-Story Broadsheet Grid) */}
+                <div className="border-t border-[var(--news-rule-strong)] pt-8">
+                    <div className="flex items-center justify-between mb-8">
+                        <h4 className="font-headline font-bold uppercase text-xl text-[var(--news-ink)] tracking-wider">
+                            Further Field Inquiries &amp; Specialized Applications
+                        </h4>
+                        <span className="font-telegraph text-[0.65rem] uppercase tracking-widest text-[var(--news-muted)]">
+                            PAGE III &bull; CONTINUED
+                        </span>
                     </div>
 
-                    {/* Secondary stories column */}
-                    <div className="flex flex-col">
-                        {secondaryProjects.map((project, i) => (
-                            <div
-                                key={project.title}
-                                data-reveal
-                                data-stagger={String(i + 1)}
-                                onMouseEnter={() => setActiveProject(project.title)}
-                                className={`p-8 sm:p-12 lg:pr-0 flex flex-col justify-between flex-1 group spotlight-card ${i === 0 ? "border-b border-white/10" : ""}`}
+                    <div className="grid md:grid-cols-2 gap-8">
+                        {secondaryProjects.map((p) => (
+                            <article
+                                key={p.title}
+                                className="border border-[var(--news-rule-strong)] bg-[var(--news-card)] p-6 flex flex-col justify-between"
                             >
                                 <div>
-                                    <div className="flex items-center justify-between mb-5">
-                                        <span className="font-jetbrains text-[0.6rem] uppercase tracking-[0.28em] text-slate-600">
-                                            {project.year}
+                                    <div className="flex items-center justify-between border-b border-[var(--news-rule)] pb-2 mb-4">
+                                        <span className="font-telegraph text-[0.62rem] font-bold text-[var(--news-accent)] uppercase tracking-wider">
+                                            {p.number} &bull; ANNO {p.year}
                                         </span>
-                                        <span className="font-inter font-black text-[3rem] leading-none text-white/5 select-none" aria-hidden="true">
-                                            {project.number}
+                                        <span className="font-headline italic text-xs text-[var(--news-muted)]">
+                                            {p.title}
                                         </span>
                                     </div>
-                                    <h3 className="font-inter font-bold uppercase text-xl text-slate-50 mb-3 leading-tight group-hover:text-accent transition-colors">
-                                        {project.title}
-                                    </h3>
-                                    <p className="font-inter text-sm leading-relaxed text-slate-400 mb-4">
-                                        {project.summary}
+
+                                    <h5 className="font-headline font-bold text-xl text-[var(--news-ink)] uppercase mb-3 leading-snug">
+                                        {p.headline}
+                                    </h5>
+
+                                    <p className="font-editorial text-sm leading-relaxed text-[var(--news-ink)] mb-4 justified-text">
+                                        {p.summary}
                                     </p>
+
+                                    <div className="border-l-2 border-[var(--news-accent)] pl-3 mb-6 font-editorial italic text-xs text-[var(--news-muted)]">
+                                        {p.impact}
+                                    </div>
                                 </div>
-                                <div className="flex gap-3 border-t border-white/10 pt-5 mt-auto">
-                                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-400 border border-white/20 px-4 py-2 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all">
-                                        Source &#8594;
-                                    </a>
-                                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-300 border border-white/20 px-4 py-2 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all">
-                                        Live &#8594;
-                                    </a>
+
+                                <div>
+                                    {/* Tech Stack */}
+                                    <div className="flex flex-wrap gap-1.5 mb-6 pt-3 border-t border-[var(--news-rule)]">
+                                        {p.stack.map((t) => (
+                                            <span
+                                                key={t}
+                                                className="border border-[var(--news-rule)] bg-[var(--news-bg)] px-2 py-0.5 font-telegraph text-[0.62rem] text-[var(--news-ink)] uppercase"
+                                            >
+                                                {t}
+                                            </span>
+                                        ))}
+                                    </div>
+
+                                    {/* Links */}
+                                    <div className="flex items-center justify-between pt-3 border-t border-[var(--news-rule)]">
+                                        <a
+                                            href={p.live}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="font-telegraph text-[0.68rem] font-bold uppercase tracking-widest text-[var(--news-ink)] hover:text-[var(--news-accent)] transition-colors inline-flex items-center gap-1"
+                                        >
+                                            <span>Inspect Live</span>
+                                            <span>&#x2197;</span>
+                                        </a>
+                                        <a
+                                            href={p.github}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="font-telegraph text-[0.68rem] font-bold uppercase tracking-widest text-[var(--news-muted)] hover:text-[var(--news-ink)] transition-colors inline-flex items-center gap-1"
+                                        >
+                                            <span>Source Code</span>
+                                            <span>&rarr;</span>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            </article>
                         ))}
                     </div>
                 </div>
-
-                {/* Strip — remaining projects */}
-                <div data-reveal className="grid sm:grid-cols-2 lg:grid-cols-3">
-                    {stripProjects.map((project, i) => (
-                        <div
-                            key={project.title}
-                            data-stagger={String(i + 1)}
-                            onMouseEnter={() => setActiveProject(project.title)}
-                            className="p-8 sm:p-12 border-r border-b border-white/10 group spotlight-card [&:nth-child(3n)]:border-r-0 [&:nth-child(3n+1)]:lg:pl-0"
-                        >
-                            <div className="flex items-start justify-between mb-4">
-                                <span className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-600">{project.year}</span>
-                                <span className="font-inter font-black text-[2.5rem] leading-none text-white/5 select-none" aria-hidden="true">{project.number}</span>
-                            </div>
-                            <h3 className="font-inter font-bold text-base text-slate-50 mb-2 leading-tight group-hover:text-accent transition-colors">
-                                {project.title}
-                            </h3>
-                            <p className="font-inter text-xs leading-relaxed text-slate-500 mb-5">{project.impact}</p>
-                            <div className="flex gap-3 mt-auto pt-4 border-t border-white/10">
-                                <a href={project.github} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-400 border border-white/20 px-3 py-1.5 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all">Source &#8594;</a>
-                                <a href={project.live} target="_blank" rel="noopener noreferrer" className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-300 border border-white/20 px-3 py-1.5 hover:bg-[#ff5500] hover:text-[#000000] hover:border-[#ff5500] transition-all">Live &#8594;</a>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </section>
+            </section>
         </DecompileNode>
     );
-};
-
-export default Projects;
+}

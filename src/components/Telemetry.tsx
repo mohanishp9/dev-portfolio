@@ -11,7 +11,6 @@ export default function Telemetry() {
     useEffect(() => {
         setMounted(true);
 
-        // High frequency clock updater using direct DOM mutation (Zero React re-renders)
         const clockInterval = setInterval(() => {
             if (!timeRef.current) return;
             const now = new Date();
@@ -22,7 +21,6 @@ export default function Telemetry() {
             timeRef.current.textContent = `${hrs}:${mins}:${secs}.${ms}`;
         }, 50);
 
-        // Real latency: listens for the GitGraph API measurement instead of inventing a number
         const onLatency = (e: Event) => {
             if (!pingRef.current) return;
             pingRef.current.textContent = `${(e as CustomEvent).detail}MS`;
@@ -35,7 +33,6 @@ export default function Telemetry() {
         };
     }, []);
 
-    // If the measurement landed before this HUD mounted, read the cache instead of waiting on the event
     useEffect(() => {
         if (!mounted) return;
         const cached = getLastLatency();
@@ -47,16 +44,21 @@ export default function Telemetry() {
     if (!mounted) return null;
 
     return (
-        <div 
-            className="fixed bottom-6 right-6 z-50 pointer-events-none flex flex-col items-end gap-1 opacity-70"
+        <aside
+            aria-label="Telegraph Desk Telemetry"
+            className="fixed bottom-4 right-4 z-40 pointer-events-none hidden sm:flex flex-col gap-0.5 border border-[var(--news-rule-strong)] bg-[var(--news-card)] px-3 py-1.5 shadow-[0_2px_8px_rgba(0,0,0,0.06)] font-telegraph text-[0.6rem] text-[var(--news-muted)] uppercase tracking-wider"
             style={{ transform: "translateZ(0)" }}
         >
-            <div className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-500">
-                SYS_T: <span ref={timeRef} className="text-white">00:00:00.000</span>
+            <div className="flex items-center justify-between gap-4 border-b border-[var(--news-rule)] pb-0.5 mb-0.5">
+                <span className="font-bold text-[var(--news-ink)]">WIRE DESK</span>
+                <span className="text-[0.55rem] text-[var(--news-accent)]">NASHIK BUREAU</span>
             </div>
-            <div className="font-jetbrains text-[0.6rem] uppercase tracking-widest text-slate-500">
-                LATENCY: <span ref={pingRef} className="text-[#ccff00]">--MS</span>
+            <div>
+                SYS_CLOCK: <span ref={timeRef} className="font-bold text-[var(--news-ink)]">00:00:00.000</span>
             </div>
-        </div>
+            <div>
+                WIRE_PING: <span ref={pingRef} className="font-bold text-[var(--news-accent)]">--MS</span>
+            </div>
+        </aside>
     );
 }
